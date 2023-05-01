@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+  </head>
+  <body>
+    <h1>Menu</h1>
+    <h2>Drinks</h2>
+    <ul>
+      {% for drink in menu.drinks %}
+      <li>
+        <h3>{{ drink.name }}</h3>
+        <p>{{ drink.description }}</p>
+        <p>Price: ${{ drink.price }}</p>
+        <p>Ingredients:</p>
+        <ul>
+          {% for ingredient in drink.ingredients %}
+          <li>{{ ingredient.name }} - {{ ingredient.amount }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+    <h2>Snacks</h2>
+    <ul>
+      {% for snack in menu.snacks %}
+      <li>
+        <h3>{{ snack.name }}</h3>
+        <p>{{ snack.description }}</p>
+        <p>Price: ${{ snack.price }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
