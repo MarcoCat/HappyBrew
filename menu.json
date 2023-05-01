@@ -1,0 +1,38 @@
+{
+    "drinks": [
+      {
+        "name": "Milk Tea",
+        "description": "Just a normal milk tea",
+        "price": 4.50,
+        "ingredients": [
+            {"name": "Black Tea", "amount": 1},
+            {"name": "Milk", "amount": 1}
+        ]
+      },
+      {
+        "name": "Green Tea",
+        "description": "Just a normal green tea",
+        "price": 4.00,
+        "ingredients": [
+            {"name": "Green Tea", "amount": 1}
+        ]
+      },
+      {
+        "name": "Bubble Tea",
+        "description": "Milk tea but it has pearls this time",
+        "price": 5.00,
+        "ingredients": [
+            {"name": "Black Tea", "amount": 0.5},
+            {"name": "Milk", "amount": 0.3},
+            {"name": "Tapioca Pearls", "amount": 0.2}
+        ]
+      }
+    ],
+    "snacks": [
+      {
+        "name": "Apple",
+        "description": "Nice and refreshing apple",
+        "price": 2.00
+      }
+    ]
+}
