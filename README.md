@@ -25,3 +25,5 @@ To run the application, please follow these steps:
 - Marco Poon
 
 - Chiao-Jhu(Katy) Chan
+
+- Carmen Su
