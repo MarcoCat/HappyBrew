@@ -3,6 +3,10 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+header{
+    display: flex;
+    justify-content: space-between;
+}
 .topnavbar{
     text-align: center;
     overflow: hidden;
@@ -28,7 +32,7 @@ h2 {
     text-align: center;
 }
 
-img {
+.backpic {
     display: block;
     opacity: 0.35;
 }
