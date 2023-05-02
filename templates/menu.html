@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="home">
+            <img class="logo" src="{{ url_for('static', filename='image/logo.png') }}" alt="logo" width="120" height="70"></a>
+            <nav class="topnavbar">
+                <ul class="navList">
+                    <li><a href="about" title="about"> ABOUT US </a></li>
+                    <li><a href="instructions"> INSTRUCTIONS </a></li>
+                    <li><a href="menu"> MENU </a></li>
+                    <li><a href="customize"> CUSTOMIZE </a></li>
+                    <li><a href="login"> LOGIN/SIGN UP </a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="menuItem">
+            <h1>Menu</h1>
+            {% for section, items in menu.items() %}
+            <h2>{{ section|capitalize }}</h2>
+                <ul class="itemType">
+                {% for item in items %}
+                    <li>
+                        <h3>{{ item["name"] }}</h3>
+                        <p>{{ item["description"] }}</p>
+                        <p>Price: {{ item["price"] }}</p>
+                        {% if "ingredients" in item %}
+                            <ul class="ingredientInfo">
+                            {% for ingredient in item["ingredients"] %}
+                                <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endfor %}
+        </section>
+ 
+        <footer>
+            <h3>Follow Up</h3>
+            
+        </footer>
+</body>
+</html>

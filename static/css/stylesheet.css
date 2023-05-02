@@ -1,0 +1,75 @@
+body{
+    background-color: #CFC2B7;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    /* justify-content: space-between; */
+}
+.topnavbar{
+    text-align: center;
+    overflow: hidden;
+}
+
+.navList{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+}
+
+.navList li{
+    background-color:#58624B;
+    border-radius: 0.6em;
+    padding: 0.6em;
+}
+#font{
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: left; 
+}
+h1 {
+    text-align: center;
+    color: #22223B;
+    font-family: 'Montserrat', sans-serif;
+}
+h2 {
+    text-align: center;
+}
+
+.backpic {
+    display: block;
+    opacity: 0.35;
+}
+
+
+a {
+    color: white;
+}
+
+
+footer{
+    text-align: center;
+}
+
+/* menu page */
+.menuItem{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.itemType{
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    text-align: center;
+}
+
+.ingredientInfo{
+    list-style-type: none;
+   padding: 0;
+   text-align: center;
+
+}
+
+
+
