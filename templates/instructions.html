@@ -10,23 +10,23 @@
 </head>
 <body>
     <header>
-        <a href="home.html">
-            <img class="logo" src="../images/homePage/logo.png" alt="logo" width="120" height="70"></a>
+        <a href="home">
+            <img class="logo" src="{{ url_for('static', filename='image/logo.png') }}" alt="logo" width="120" height="70"></a>
         <nav class="topnavbar">
-            <ul>
+            <ul class="navList">
                 <li>
                     <button class= "about" type="button"> 
-                        <a href="about.html" title="about"> ABOUT US </a>
+                        <a href="about" title="about"> ABOUT US </a>
                     </button>
                 </li>
                 <li>
                     <button type="button">
-                        <a href="instructions.html"> INSTRUCTIONS </a>
+                        <a href="instructions"> INSTRUCTIONS </a>
                     </button>
                 </li>
                 <li>
                     <button type="button">
-                        <a href="menu.html"> MENU </a>
+                        <a href="menu"> MENU </a>
                     </button>
                 </li>
                 <li>
@@ -37,7 +37,7 @@
               
                 <li>
                     <button type="button">
-                        <a href="loginsignup.html"> LOGIN/SIGN UP </a>
+                        <a href="loginsignup"> LOGIN/SIGN UP </a>
                     </button>
                 </li>
             </ul>
