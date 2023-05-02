@@ -21,8 +21,8 @@ header{
 
 .navList li{
     background-color:#58624B;
-    border-radius: 10px;
-    padding:10px;
+    border-radius: 0.6em;
+    padding: 0.6em;
 }
 #font{
     font-family: 'IBM Plex Sans', sans-serif;
