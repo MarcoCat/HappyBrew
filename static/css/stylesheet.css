@@ -1,6 +1,9 @@
 body{
     background-color: #F2E9DB;
     font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header{
@@ -66,11 +69,8 @@ h2 {
 
 
 footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
     text-align: center;
+    margin-top: auto;
 }
 
 /* menu page */
