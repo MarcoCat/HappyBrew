@@ -80,16 +80,48 @@ footer{
 }
 .itemType{
     display: flex;
-    justify-content: space-evenly;
     list-style-type: none;
     text-align: center;
+    padding: 0px;
+    flex-wrap: wrap;
 }
+
+.itemType li {
+    flex: 1 0 calc(33.33% - 10px);
+}
+
 
 .ingredientInfo{
     list-style-type: none;
-   padding: 0;
-   text-align: center;
+    padding: 0;
+    text-align: center;
 }
 
+.menuTitile{
+    text-align: left;
+    margin-left: 20px;
+}
 
+.menuPage{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 50px 1fr ;
+   
+}
+
+.menuNavBar{
+    grid-column: 1/2;
+    grid-row: 1/3;
+    margin-left: 20px;
+}
+
+.menuItem{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.menuItem h2{
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
 

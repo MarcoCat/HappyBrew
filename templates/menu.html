@@ -16,8 +16,15 @@
     </head>
     <body>
         {% extends "base.html" %} {% block content %}
+        <div class="menuPage">
+        <section class="menuNavBar" >
+            <h1 class="menuTitile">Menu</h1>
+            {% for section, items in menu.items() %}
+            <h3>| {{ section|capitalize }}</h3>
+            {% endfor %}
+        </section>
         <section class="menuItem">
-            <h1>Menu</h1>
+            
             {% for section, items in menu.items() %}
             <h2>{{ section|capitalize }}</h2>
             <ul class="itemType">
@@ -40,6 +47,7 @@
             </ul>
             {% endfor %}
         </section>
+        </div>
 
         {% endblock %}
     </body>
