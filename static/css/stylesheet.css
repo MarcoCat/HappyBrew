@@ -1,12 +1,12 @@
 body{
     background-color: #CFC2B7;
     font-family: 'Montserrat', sans-serif;
-
 }
 
 header{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    /* justify-content: space-between; */
 }
 .topnavbar{
     text-align: center;
@@ -14,17 +14,21 @@ header{
 }
 
 .navList{
+    display: flex;
     list-style-type: none;
-    float: right;
-    display: inline-flex;
+    justify-content: space-evenly;
 }
 
+.navList li{
+    background-color:#58624B;
+    border-radius: 10px;
+    padding:10px;
+}
 #font{
     font-family: 'IBM Plex Sans', sans-serif;
     text-align: left; 
 }
 h1 {
-
     text-align: center;
     color: #22223B;
     font-family: 'Montserrat', sans-serif;
@@ -38,20 +42,6 @@ h2 {
     opacity: 0.35;
 }
 
-button {
-    background-color: #58624b;
-    font-family: 'IBM Plex Sans', sans-serif;
-    width: fit-content;
-    height: fit-content;
-    border: 1px;
-    line-height: 2.5;
-    padding: 0 20px;
-    margin: 10px 5px;
-    font-size: 1rem;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
 a {
     color: white;
@@ -60,7 +50,6 @@ a {
 
 footer{
     text-align: center;
-   
 }
 
 /* menu page */
