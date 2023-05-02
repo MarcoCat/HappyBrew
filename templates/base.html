@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Checkout</title>
+        <link
+            href="{{ url_for('static', filename='css/stylesheet.css') }}"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header>
+            <a href="home">
+                <img
+                    class="logo"
+                    src="{{ url_for('static', filename='image/homePage/logo.png') }}"
+                    alt="logo"
+                    width="120"
+                    height="70"
+            /></a>
+            <nav class="topnavbar">
+                <ul class="navList">
+                    <li><a href="about" title="about"> ABOUT US </a></li>
+                    <li><a href="instructions"> INSTRUCTIONS </a></li>
+                    <li><a href="menu"> MENU </a></li>
+                    <li><a href="customize"> CUSTOMIZE </a></li>
+                    <li><a href="login"> LOGIN/SIGN UP </a></li>
+                </ul>
+            </nav>
+        </header>
+        {% block content %} 
+        {% endblock %}
+        <footer>
+            <h3>Follow Up</h3>
+            <div>
+                <img
+                    src="{{ url_for('static', filename='image/followUP/fbLogo.jpg') }}"
+                    alt="fbLogo"
+                    width="40"
+                    height="40"
+                />
+                <img
+                    src="{{ url_for('static', filename='image/followUP/instagramLogo.png') }}"
+                    alt="instagramLogo"
+                    width="40"
+                    height="40"
+                />
+                <img
+                    src="{{ url_for('static', filename='image/followUP/twitterLogo.png') }}"
+                    alt="twitterLogo"
+                    width="40"
+                    height="40"
+                />
+            </div>
+        </footer>
+    </body>
+</html>
