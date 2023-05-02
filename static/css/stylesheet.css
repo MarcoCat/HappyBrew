@@ -93,4 +93,46 @@ footer{
 }
 
 
+/*instruction page */
 
+.Steps{
+    display: grid;
+    grid-template-columns: 450px 600px;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.topping {
+    grid-column: 1/2;
+    justify-self: right;
+    padding-right: 15px;
+}
+
+.Syrup{
+    grid-column: 1/2;
+    justify-self: right;
+    padding-right: 15px;
+}
+
+.Milk{
+    grid-column: 1/2;
+    justify-self: right;
+    padding-right: 15px;
+
+}
+
+.Tea{
+    grid-column: 1/2;
+    justify-self: right;
+    padding-right: 15px;
+}
+
+h2{
+    text-align: center;
+    grid-column: 1/3;
+}
+
+p{
+    grid-column: 2/3;
+    justify-self: baseline;
+}
