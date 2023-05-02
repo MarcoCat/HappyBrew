@@ -47,14 +47,14 @@
             <h1>Menu</h1>
             {% for section, items in menu.items() %}
             <h2>{{ section|capitalize }}</h2>
-                <ul>
+                <ul class="itemType">
                 {% for item in items %}
                     <li>
                         <h3>{{ item["name"] }}</h3>
                         <p>{{ item["description"] }}</p>
                         <p>Price: {{ item["price"] }}</p>
                         {% if "ingredients" in item %}
-                            <ul>
+                            <ul class="ingredientInfo">
                             {% for ingredient in item["ingredients"] %}
                                 <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
                             {% endfor %}

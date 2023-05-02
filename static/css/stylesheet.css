@@ -68,7 +68,19 @@ footer{
     display: grid;
     grid-template-columns: 1fr;
 }
+.itemType{
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    text-align: center;
+}
 
-/* .menuItem h1{
+.ingredientInfo{
+    list-style-type: none;
+   padding: 0;
+   text-align: center;
 
-} */
+}
+
+
+
