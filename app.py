@@ -6,10 +6,15 @@ app = Flask(__name__)
 
 
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+
+@app.route("/menu")
 def index():
     with open("menu.json") as f:
         menu = json.load(f)
-    return render_template("index.html", menu=menu)
+    return render_template("menu.html", menu=menu)
 
 
 if __name__ == "__main__":
