@@ -14,11 +14,10 @@ header{
     position:fixed;
     background: #F2E9DB;
     width: 100%;
-
 }
 
 main{
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .topnavbar{
@@ -79,13 +78,43 @@ footer{
 }
 
 /* menu page */
+
+.menuPage{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 50px 1fr ;
+   
+}
+
+.menuNavBar{
+    grid-column: 1/2;
+    grid-row: 1/3;
+    margin-left: 20px;
+    position: fixed;
+}
+
+.menuNavBar h3 a{
+    text-decoration: none;
+    color: #58624B;
+}
+
+.menuTitile{
+    text-align: left;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+
 .menuItem{
     display: grid;
     grid-template-columns: 1fr;
+    grid-column: 2/3;
+    grid-row: 2/3;
 }
 
+
 .menuItem h2{
-    margin-top: 30px;
+    padding-top: 100px;
     margin-bottom: 0px;
     text-align: center;
 }
@@ -108,35 +137,6 @@ footer{
     list-style-type: none;
     padding: 0;
     text-align: center;
-}
-
-.menuTitile{
-    text-align: left;
-    font-size: 50px;
-    margin-top: 20px;
-}
-
-.menuPage{
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    grid-template-rows: 50px 1fr ;
-   
-}
-
-.menuNavBar{
-    grid-column: 1/2;
-    grid-row: 1/3;
-    margin-left: 20px;
-    position: fixed;
-}
-
-.menuNavBar h3 a{
-    text-decoration: none;
-    color: #58624B;
-}
-.menuItem{
-    grid-column: 2/3;
-    grid-row: 2/3;
 }
 
 
