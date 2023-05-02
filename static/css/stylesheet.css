@@ -22,8 +22,13 @@ header{
 .navList li{
     background-color:#58624B;
     border-radius: 0.6em;
-    padding: 0.6em;
+    padding: 0.6em;  
 }
+
+a{
+    color: white;
+}
+
 #font{
     font-family: 'IBM Plex Sans', sans-serif;
     text-align: left; 
@@ -37,18 +42,34 @@ h2 {
     text-align: center;
 }
 
-.backpic {
-    display: block;
-    opacity: 0.35;
+.backpic{
+    padding: 100px 20px;
+    text-align: center;
+    border-radius: 20%;
+}
+.backpic img{
+    border-radius: 10%;
+}
+.backpic2{
+    margin-bottom: 60px;
+
 }
 
+.backpic3{
+    margin-bottom: 30px;
 
-a {
-    color: white;
+}
+
+.backpic4{
+    margin-bottom: 80px;
 }
 
 
 footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
 }
 
