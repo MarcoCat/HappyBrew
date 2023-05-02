@@ -20,13 +20,15 @@
         <section class="menuNavBar" >
             <h1 class="menuTitile">Menu</h1>
             {% for section, items in menu.items() %}
-            <h3>| {{ section|capitalize }}</h3>
+            <!-- <h3>| {{ section|capitalize }}</h3> -->
+            <h3><a href="#{{ section|lower }}">| {{ section|capitalize }}</a></h3>
+
             {% endfor %}
         </section>
         <section class="menuItem">
             
             {% for section, items in menu.items() %}
-            <h2>{{ section|capitalize }}</h2>
+            <h2 id="{{ section|lower }}">{{ section|capitalize }}</h2>
             <ul class="itemType">
                 {% for item in items %}
                 <li>
