@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReaTea</title>
-    <link href="../css/stylesheet.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <a href="home.html">
-            <img class="logo" src="../images/homePage/logo.png" alt="logo" width="120" height="70"></a>
+            <img class="logo" src="{{ url_for('static', filename='image/logo.png') }}" alt="logo" width="120" height="70">
         <nav class="topnavbar">
             <ul>
                 <li>
@@ -50,7 +50,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 </p>
-                <img class="backpic" src="../images/homepage/teabackground.jpg" alt="tea leaves images">
+                <img class="backpic" src="{{ url_for('static', filename='image/teabackground.jpg') }}" alt="tea leaves images">
                 </div>
             </div>
         </section>
