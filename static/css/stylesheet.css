@@ -129,9 +129,13 @@ footer{
 }
 
 .itemType li {
-    flex: 1 0 calc(33.33% - 10px);
+    flex: 1 0 calc(25% - 10px);
 }
 
+.itemType img {
+    border-radius: 10%;
+    border: 10px solid #C1BC92;
+}
 
 .ingredientInfo{
     list-style-type: none;

@@ -15,11 +15,17 @@
       <ul class="itemType">
         {% for item in items %}
         <li>
-          <h3>{{ item["name"] }}</h3>
-          <p>{{ item["description"] }}</p>
-          <p>Price: {{ item["price"] }}</p>
-          {% if "ingredients" in item %}
-          <ul class="ingredientInfo">
+            <img 
+            src="{{ url_for('static', filename='image/menuPage/' + item['name'] + '.png') }}"
+            alt="{{ item['name'] }} images"
+            width="200"
+            height="250"             
+            />
+            <h3>{{ item["name"] }}</h3>
+            <p>{{ item["description"] }}</p>
+            <p>Price: {{ item["price"] }}</p>
+            {% if "ingredients" in item %}
+            <ul class="ingredientInfo">
             {% for ingredient in item["ingredients"] %}
             <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
             {% endfor %}
