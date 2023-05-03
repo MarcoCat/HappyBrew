@@ -45,7 +45,10 @@ def customize():
 
 @app.route("/cart")
 def cart():
-    return render_template("cart.html")
+    if orders:
+        return render_template("cart.html", orders=orders)
+    else:
+        return "Your cart is empty."
 
 
 @app.route("/checkout")
