@@ -63,8 +63,16 @@ def order():
 
 @app.route("/order", methods=["POST"])
 def process_order():
-    data = request.form
-    orders.append(data)
+    data = request.form.to_dict()
+    print(data)
+    print(orders)
+    is_item_in_cart = False
+    for item in orders:
+        if item["item"] == data["item"]:
+            item["quantity"] = int(item["quantity"]) + int(data["quantity"])
+            is_item_in_cart = True
+    if not is_item_in_cart:
+        orders.append(data)
     return redirect(url_for("cart"))
 
 
