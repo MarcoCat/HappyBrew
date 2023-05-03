@@ -1,136 +1,91 @@
 {
     "ingredients": [
         {
-            "tea": [
+            "Black Tea": [
                 {
-                    "Black Tea": "1.50",
-                    "Green Tea": "1.75",
-                    "Jasmine Tea": "1.60",
-                    "Oolong Tea": "1.80",
-                    "Chai Tea": "1.70",
-                    "Hibiscus Tea": "1.65",
-                    "Matcha Tea": "2.10",
-                    "Earl Grey Tea": "1.90"
+                    "Assam": 3.00,
+                    "Black Blend": 2.75,
+                    "Ceylon": 2.85,
+                    "Earl Grey": 3.00,
+                    "Rose": 3.65,
+                    "Thai": 3.25
                 }
             ]
         },
         {
-            "fruit": [
+            "Green Tea": [
                 {
-                    "Mango": "0.75",
-                    "Strawberry": "1.00",
-                    "Peach": "0.80",
-                    "Lychee": "0.90",
-                    "Passion Fruit": "0.80",
-                    "Blueberry": "0.85",
-                    "Raspberry": "0.75",
-                    "Watermelon": "0.95",
-                    "Orange": "0.70",
-                    "Lemon": "0.85",
-                    "Kiwi": "0.75",
-                    "Melon": "0.95",
-                    "Pineapple": "0.4",
-                    "Grapefruit": "0.55",
-                    "Dragonfruit": "0.8"
+                    "Genmaicha": 3.50,
+                    "Green Blend": 2.75,
+                    "Gyokuro": 3.50,
+                    "Hojicha": 3.00,
+                    "Jasmine": 3.30,
+                    "Matcha": 3.95,
+                    "Sencha": 3.80
+                }
+            ]
+        },
+        {
+            "Oolong Tea": [
+                {
+                    "Oolong": 2.75,
+                    "Roasted Oolong": 3.50,
+                    "Peach Oolong": 3.85,
+                    "Tieguanyin": 4.25
                 }
             ]
         },
         {
             "milk_type": [
                 {
-                    "Regular Milk": "0.50",
-                    "Coconut Milk": "0.75",
-                    "Almond Milk": "0.90",
-                    "Soy Milk": "0.80",
-                    "Oat Milk": "0.75",
-                    "Rice Milk": "0.80",
-                    "Condensed Milk": "0.90",
-                    "Skim Milk": "0.75"
+                    "Almond Milk": 2.75,
+                    "Condensed Milk": 2.00,
+                    "Coconut Milk": 1.85,
+                    "Oat Milk": 3.50,
+                    "Powder Milk": 3.25,
+                    "Skim Milk": 3.50,
+                    "Soy Milk": 2.75,
+                    "Whole Milk": 3.00
                 }
             ]
-        },
+        }, 
         {
-            "sugar_type": [
+            "Sweetner/Syrup": [
                 {
-                    "Cane Sugar": "0.10",
-                    "Agave Nectar": "0.20",
-                    "Honey": "0.15",
-                    "Stevia": "0.10",
-                    "Splenda": "0.05",
-                    "Sugar Free Sweetener": "0.10",
-                    "Coconut Sugar": "0.15",
-                    "Raw Sugar": "0.10"
+                    "Brown Sugar Syrup": 0.50,
+                    "Cane Sugar Sweetner": 0.50,
+                    "Caramel Syrup": 0.50,
+                    "Coconut Syrup": 0.50,
+                    "Coffee Syrup": 0.50,
+                    "Hazelnut Syrup": 0.50,
+                    "Honey": 0.50,
+                    "Lavender Syrup": 0.50,
+                    "Peach Syrup": 0.50,
+                    "Rose Syrup": 0.50,
+                    "Sugar Free Sweetener": 0.50,
+                    "Strawberry Syrup": 0.50,
+                    "Vanilla Syrup": 0.50
                 }
             ]
         },
         {
             "toppings": [
                 {
-                    "Pudding": "0.30",
-                    "Whipped Cream": "0.60",
-                    "Chocolate Chips": "0.40",
-                    "Brownie Bites": "0.50",
-                    "Marshmallows": "0.30",
-                    "Coconut Flakes": "0.35",
-                    "Pistachios": "0.60",
-                    "Mochi": "0.40",
-                    "Pocky Sticks": "0.30",
-                    "Granola": "0.35",
-                    "Red Beans": "0.50",
-                    "M&M's": "0.65",
-                    "Kit-Kat": "0.80",
-                    "Almonds": "0.30",
-                    "Boba Waffles": "0.50",
-                    "Icecream": "0.45",
-                    "Reese's Pieces": "0.75",
-                    "Graham Cracker Crumbs": "0.25"
-                }
-            ]
-        },
-        {
-            "syrup": [
-                {
-                    "Strawberry Syrup": "0.25",
-                    "Vanilla Syrup": "0.55",
-                    "Caramel Syrup": "0.45",
-                    "Butterscotch Syrup": "0.35",
-                    "Maple Syrup": "0.4",
-                    "Coconut Syrup": "0.4",
-                    "Peach Syrup": "0.5",
-                    "Pineapple Syrup": "0.45",
-                    "Rose Syrup": "0.45",
-                    "Hazelnut Syrup": "0.6",
-                    "Coffee Syrup": "0.9",
-                    "Cinnamon Syrup": "0.75",
-                    "Butter Rum Syrup": "0.8",
-                    "Chocolate Syrup": "0.4",
-                    "Fruit Punch Syrup": "0.7",
-                    "Taro Syrup": "0.4",
-                    "Lavender Syrup": "0.8"
-                }
-            ]
-        },
-        {
-            "bubbles": [
-                {
-                    "Tapioca Pearls": "0.35",
-                    "Honeydew Popping Boba": "0.65",
-                    "Passionfruit Jelly": "0.3",
-                    "Berry Popping Boba": "0.4",
-                    "Taro Pearls": "0.5",
-                    "Tapioca Jellies": "0.35",
-                    "Mango Popping Boba": "0.65",
-                    "Green Apple Popping Boba": "0.55",
-                    "Blueberry Popping Boba": "0.55",
-                    "Strawberry Popping Boba": "0.6",
-                    "Lychee Jelly": "1.0",
-                    "Mango Jellies": "0.5",
-                    "Peach Popping Boba": "1.1",
-                    "Lychee Popping Boba": "1.25",
-                    "Passionfruit Popping Boba": "0.95",
-                    "Orange Popping Boba": "0.85",
-                    "Green Apple Jellies": "0.6",
-                    "Rainbow Jellies": "1.0"
+                    "Aloe Vera": 0.75,
+                    "Cheese Foam": 1.75,
+                    "Coconut Jelly": 0.70,
+                    "Fresh Taro": 1.00,
+                    "Honey Jelly": 0.70,
+                    "Ice-Cream": 1.00,
+                    "Mochi": 1.50,
+                    "Pudding": 0.70,
+                    "Grass Jelly": 0.70,
+                    "Red Bean": 1.25,
+                    "Tapioca Pearls": 0.70,
+                    "Taro Pearls": 0.70,
+                    "Lychee Popping Boba": 0.70,
+                    "Mango Popping Boba": 0.70,
+                    "Strawberry Popping Boba": 0.70
                 }
             ]
         }
