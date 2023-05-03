@@ -1,62 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ReaTea</title>
-        <link
-            href="{{ url_for('static', filename='css/stylesheet.css') }}"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        {% extends "base.html" %} {% block content %}
-        <section>
-            <h1 id="font">REATEA FOR YOU</h1>
+{% extends "base.html" %} {% block content %}
+<main>
+  <section>
+    <h1 id="font">REATEA FOR YOU</h1>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-            </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
 
-            <div class="backpic">
-                <img
-                    class="backpic1"
-                    src="{{ url_for('static', filename='image/homePage/teabackground.jpg') }}"
-                    alt="tea leaves images"
-                    width="400"
-                    height="300"
-                />
-                <img
-                    class="backpic2"
-                    src="{{ url_for('static', filename='image/homePage/bubbleTeaIngredient.jpg') }}"
-                    alt="bubble tea ingredient images"
-                    width="400"
-                    height="300"
-                />
-                <img
-                    class="backpic3"
-                    src="{{ url_for('static', filename='image/homePage/bubbleTeaOnHand.jpg') }}"
-                    alt="bubble tea on hand images"
-                    width="400"
-                    height="300"
-                />
-                <img
-                    class="backpic4"
-                    src="{{ url_for('static', filename='image/homePage/twoBubbleTea.jpg') }}"
-                    alt="two bubble tea images"
-                    width="400"
-                    height="300"
-                />
-            </div>
-        </section>
-        {% endblock %}
-    </body>
-</html>
+    <div class="backpic">
+      <img
+        class="backpic1"
+        src="{{ url_for('static', filename='image/homePage/teabackground.jpg') }}"
+        alt="tea leaves images"
+        width="400"
+        height="300"
+      />
+      <img
+        class="backpic2"
+        src="{{ url_for('static', filename='image/homePage/bubbleTeaIngredient.jpg') }}"
+        alt="bubble tea ingredient images"
+        width="400"
+        height="300"
+      />
+      <img
+        class="backpic3"
+        src="{{ url_for('static', filename='image/homePage/bubbleTeaOnHand.jpg') }}"
+        alt="bubble tea on hand images"
+        width="400"
+        height="300"
+      />
+      <img
+        class="backpic4"
+        src="{{ url_for('static', filename='image/homePage/twoBubbleTea.jpg') }}"
+        alt="two bubble tea images"
+        width="400"
+        height="300"
+      />
+    </div>
+  </section>
+</main>
+{% endblock %}

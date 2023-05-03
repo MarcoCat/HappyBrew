@@ -1,46 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Menu</title>
-        <link
-            href="{{ url_for('static', filename='css/stylesheet.css') }}"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        {% extends "base.html" %} {% block content %}
-        <section class="menuItem">
-            <h1>Menu</h1>
-            {% for section, items in menu.items() %}
-            <h2>{{ section|capitalize }}</h2>
-            <ul class="itemType">
-                {% for item in items %}
-                <li>
-                    <h3>{{ item["name"] }}</h3>
-                    <p>{{ item["description"] }}</p>
-                    <p>Price: {{ item["price"] }}</p>
-                    {% if "ingredients" in item %}
-                    <ul class="ingredientInfo">
-                        {% for ingredient in item["ingredients"] %}
-                        <li>
-                            {{ ingredient["name"] }}: {{ ingredient["amount"] }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endfor %}
-        </section>
+{% extends "base.html" %} {% block content %}
+<main>
+  <div class="menuPage">
+    <section class="menuNavBar">
+      <h1 class="menuTitile">Menu</h1>
+      {% for section, items in menu.items() %}
+      <!-- <h3>| {{ section|capitalize }}</h3> -->
+      <h3><a href="#{{ section|lower }}">| {{ section|capitalize }}</a></h3>
 
-        {% endblock %}
-    </body>
-</html>
+      {% endfor %}
+    </section>
+    <section class="menuItem">
+      {% for section, items in menu.items() %}
+      <h2 id="{{ section|lower }}">{{ section|capitalize }}</h2>
+      <ul class="itemType">
+        {% for item in items %}
+        <li>
+          <h3>{{ item["name"] }}</h3>
+          <p>{{ item["description"] }}</p>
+          <p>Price: {{ item["price"] }}</p>
+          {% if "ingredients" in item %}
+          <ul class="ingredientInfo">
+            {% for ingredient in item["ingredients"] %}
+            <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </section>
+  </div>
+</main>
+{% endblock %}
