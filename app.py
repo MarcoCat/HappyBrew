@@ -68,6 +68,8 @@ def process_order():
 @app.route("/order/<int:order_id>", methods=["GET"])
 def get_order(order_id):
     try:
+        if order_id - 1 < 0:
+            return "Order not found", 404
         return jsonify(orders[order_id - 1])
     except IndexError:
         return "Order not found", 404
