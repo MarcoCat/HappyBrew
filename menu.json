@@ -1,14 +1,77 @@
 {
-    "drinks": [
+
+  "Seasonal Only": [
+    {
+      "name": "Mango Smoothie",
+      "description": "Special seasonal fruit",
+      "price": 6.50,
+      "ingredients": [
+          {"name": "Mango", "amount": 0.3},
+          {"name": "Coconut Milk", "amount": 0.4},
+          {"name": "Grapefruit", "amount": 0.3}
+      ]
+    },
+    
+    {
+      "name": "Grape Smoothie",
+      "description": "Special seasonal fruit with bubble",
+      "price": 6.50,
+      "ingredients": [
+          {"name": "Grape", "amount": 0.3},
+          {"name": "Jasmine", "amount": 0.4},
+          {"name": "Tapioca Pearls", "amount": 0.3}
+      ]
+    }
+  ],
+  
+    "Milk Tea Series": [
       {
         "name": "Milk Tea",
         "description": "Just a normal milk tea",
         "price": 4.50,
         "ingredients": [
-            {"name": "Black Tea", "amount": 1},
-            {"name": "Milk", "amount": 1}
+            {"name": "Green Blend", "amount": 0.4},
+            {"name": "Whole Milk", "amount": 0.3},
+            {"name": "Cane Sugar Sweetner", "amount": 0.3}
         ]
       },
+
+      {
+        "name": "Bubble Tea",
+        "description": "Milk tea but it has pearls this time",
+        "price": 5.00,
+        "ingredients": [
+            {"name": "Green Blend", "amount": 0.4},
+            {"name": "Whole Milk", "amount": 0.2},
+            {"name": "Tapioca Pearls", "amount": 0.2},
+            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+        ]
+      },
+
+      {
+        "name": "Black Tea Latte",
+        "description": "A delicious milk tea with more black tea base",
+        "price": 4.50,
+        "ingredients": [
+            {"name": "Ceylon", "amount": 0.5},
+            {"name": "Whole Milk", "amount": 0.3},
+            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+        ]
+      },
+
+      {
+        "name": "Bubble Tea Latte",
+        "description": "A creamy milk tea with chewy pearls",
+        "price": 4.50,
+        "ingredients": [
+            {"name": "Ceylon", "amount": 0.5},
+            {"name": "Whole Milk", "amount": 0.3},
+            {"name": "Tapioca Pearls", "amount": 0.1},
+            {"name": "Cane Sugar Sweetner", "amount": 0.1}
+        ]
+      }
+    ],
+    "Tea": [
       {
         "name": "Green Tea",
         "description": "Just a normal green tea",
@@ -16,23 +79,6 @@
         "ingredients": [
             {"name": "Green Tea", "amount": 1}
         ]
-      },
-      {
-        "name": "Bubble Tea",
-        "description": "Milk tea but it has pearls this time",
-        "price": 5.00,
-        "ingredients": [
-            {"name": "Black Tea", "amount": 0.5},
-            {"name": "Milk", "amount": 0.3},
-            {"name": "Tapioca Pearls", "amount": 0.2}
-        ]
-      }
-    ],
-    "snacks": [
-      {
-        "name": "Apple",
-        "description": "Nice and refreshing apple",
-        "price": 2.00
       }
     ]
 }
