@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -56,6 +56,13 @@ def checkout():
 @app.route("/order")
 def order():
     return render_template("order.html", menu=menu)
+
+
+@app.route("/order", methods=["POST"])
+def process_order():
+    data = request.form
+    orders.append(data)
+    return data
 
 
 if __name__ == "__main__":
