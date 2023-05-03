@@ -6,9 +6,9 @@
       "description": "Special seasonal fruit",
       "price": 6.50,
       "ingredients": [
-          {"name": "Mango", "amount": 0.3},
-          {"name": "Coconut Milk", "amount": 0.4},
-          {"name": "Grapefruit", "amount": 0.3}
+          {"name": "Mango", "amount": "30%"},
+          {"name": "Coconut Milk", "amount": "40%"},
+          {"name": "Grapefruit", "amount": "30%"}
       ]
     },
     
@@ -17,9 +17,9 @@
       "description": "Special seasonal fruit with bubble",
       "price": 6.50,
       "ingredients": [
-          {"name": "Grape", "amount": 0.3},
-          {"name": "Jasmine", "amount": 0.4},
-          {"name": "Tapioca Pearls", "amount": 0.3}
+          {"name": "Grape", "amount": "40%"},
+          {"name": "Jasmine", "amount": "40%"},
+          {"name": "Tapioca Pearls", "amount": "20%"}
       ]
     }
   ],
@@ -30,9 +30,9 @@
         "description": "Just a normal milk tea",
         "price": 4.50,
         "ingredients": [
-            {"name": "Green Blend", "amount": 0.4},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Cane Sugar Sweetner", "amount": 0.3}
+            {"name": "Black Blend", "amount": "40%"},
+            {"name": "Whole Milk", "amount": "45%"},
+            {"name": "Cane Sugar Sweetner", "amount": "15%"}
         ]
       },
 
@@ -41,10 +41,10 @@
         "description": "Milk tea but it has pearls this time",
         "price": 5.00,
         "ingredients": [
-            {"name": "Green Blend", "amount": 0.4},
-            {"name": "Whole Milk", "amount": 0.2},
-            {"name": "Tapioca Pearls", "amount": 0.2},
-            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+            {"name": "Black Blend", "amount": "30%"},
+            {"name": "Whole Milk", "amount": "35%"},
+            {"name": "Tapioca Pearls", "amount": "20%"},
+            {"name": "Cane Sugar Sweetner", "amount": "15%"}
         ]
       },
 
@@ -53,9 +53,9 @@
         "description": "A delicious milk tea with more black tea base",
         "price": 4.50,
         "ingredients": [
-            {"name": "Ceylon", "amount": 0.5},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+            {"name": "Ceylon", "amount": "40%"},
+            {"name": "Whole Milk", "amount": "45%"},
+            {"name": "Cane Sugar Sweetner", "amount": "15%"}
         ]
       },
 
@@ -64,10 +64,10 @@
         "description": "A creamy milk tea with chewy pearls",
         "price": 4.50,
         "ingredients": [
-            {"name": "Ceylon", "amount": 0.5},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Tapioca Pearls", "amount": 0.1},
-            {"name": "Cane Sugar Sweetner", "amount": 0.1}
+            {"name": "Ceylon", "amount": "30%"},
+            {"name": "Whole Milk", "amount": "35%"},
+            {"name": "Tapioca Pearls", "amount": "20%"},
+            {"name": "Cane Sugar Sweetner", "amount": "15%"}
         ]
       }
     ],
@@ -77,7 +77,7 @@
         "description": "Just a normal green tea",
         "price": 4.00,
         "ingredients": [
-            {"name": "Green Tea", "amount": 1}
+            {"name": "Green Tea", "amount": "100%"}
         ]
       }
     ]
