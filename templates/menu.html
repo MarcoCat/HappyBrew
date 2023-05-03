@@ -31,7 +31,13 @@
             {% endfor %}
           </ul>
           {% endif %}
+          <div class="quantity">
+            <button class="removeButton" type="button">-</button>
+            <input class="count" type="number" value="1">
+            <button class="addButton" type="button">+</button>
+        </div>
         </li>
+
         {% endfor %}
       </ul>
       {% endfor %}

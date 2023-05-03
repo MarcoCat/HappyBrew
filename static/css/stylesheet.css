@@ -143,7 +143,33 @@ footer{
     text-align: center;
 }
 
-
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+  
+.removeButton, .addButton {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #58624B;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .count {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 5px solid #58624B;
+    border-radius: 30%;
+    margin: 0 5px;
+  }
 
 
 
