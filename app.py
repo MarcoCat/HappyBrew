@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 
 app = Flask(__name__)
 
@@ -63,9 +63,15 @@ def order():
 
 @app.route("/order", methods=["POST"])
 def process_order():
-    data = request.form
-    orders.append(data)
-    return data
+    data = request.form.to_dict()
+    is_item_in_cart = False
+    for item in orders:
+        if item["item"] == data["item"]:
+            item["quantity"] = int(item["quantity"]) + int(data["quantity"])
+            is_item_in_cart = True
+    if not is_item_in_cart:
+        orders.append(data)
+    return redirect(url_for("cart"))
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])
