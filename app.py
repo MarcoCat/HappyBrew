@@ -64,8 +64,6 @@ def order():
 @app.route("/order", methods=["POST"])
 def process_order():
     data = request.form.to_dict()
-    print(data)
-    print(orders)
     is_item_in_cart = False
     for item in orders:
         if item["item"] == data["item"]:
