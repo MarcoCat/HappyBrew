@@ -1,40 +1,35 @@
+{% extends "base.html" %} {% block content %}
+<main>
+  <div class="menuPage">
+    <section class="menuNavBar">
+      <h1 class="menuTitile">Menu</h1>
+      {% for section, items in menu.items() %}
+      <!-- <h3>| {{ section|capitalize }}</h3> -->
+      <h3><a href="#{{ section|lower }}">| {{ section|capitalize }}</a></h3>
 
-        {% extends "base.html" %} {% block content %}
-        <main>
-        <div class="menuPage">
-        <section class="menuNavBar" >
-            <h1 class="menuTitile">Menu</h1>
-            {% for section, items in menu.items() %}
-            <!-- <h3>| {{ section|capitalize }}</h3> -->
-            <h3><a href="#{{ section|lower }}">| {{ section|capitalize }}</a></h3>
-
+      {% endfor %}
+    </section>
+    <section class="menuItem">
+      {% for section, items in menu.items() %}
+      <h2 id="{{ section|lower }}">{{ section|capitalize }}</h2>
+      <ul class="itemType">
+        {% for item in items %}
+        <li>
+          <h3>{{ item["name"] }}</h3>
+          <p>{{ item["description"] }}</p>
+          <p>Price: {{ item["price"] }}</p>
+          {% if "ingredients" in item %}
+          <ul class="ingredientInfo">
+            {% for ingredient in item["ingredients"] %}
+            <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
             {% endfor %}
-        </section>
-        <section class="menuItem">
-            {% for section, items in menu.items() %}
-            <h2 id="{{ section|lower }}">{{ section|capitalize }}</h2>
-            <ul class="itemType">
-                {% for item in items %}
-                <li>
-                    <h3>{{ item["name"] }}</h3>
-                    <p>{{ item["description"] }}</p>
-                    <p>Price: {{ item["price"] }}</p>
-                    {% if "ingredients" in item %}
-                    <ul class="ingredientInfo">
-                        {% for ingredient in item["ingredients"] %}
-                        <li>
-                            {{ ingredient["name"] }}: {{ ingredient["amount"] }}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% endfor %}
-        </section>
-    
-        </div>
-        </main>
-        {% endblock %}
-
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </section>
+  </div>
+</main>
+{% endblock %}
