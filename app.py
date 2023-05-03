@@ -4,6 +4,11 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+with open("menu.json") as f:
+    menu = json.load(f)
+
+orders = []
+
 
 @app.route("/")
 @app.route("/home")
@@ -46,6 +51,11 @@ def cart():
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
+
+
+@app.route("/order")
+def order():
+    return render_template("order.html", menu=menu)
 
 
 if __name__ == "__main__":
