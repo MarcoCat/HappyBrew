@@ -232,47 +232,64 @@ footer{
 .cartTable{
     text-align: center;
     border-collapse: collapse;
-
 }
-
-.cartTable th{
-    height: 20px;
-}
-
-.cartTable td{
-    height: 35px;
-    border-top:2px solid #C1BC92
-}
-
 
 .cartTable th, .cartTable td{
-    padding-bottom: 20px;
-    width: 100px;
+    height: 6vh;
+    width: 10vw;
+    border-bottom: 2px solid #e3d6c1;
 }
 
-
-.cartTable th:first-child, .cartTable td:first-child {
-    width: 200px;
+.cartTable th:first-child, .cartTable td:first-child{
+    width: 15vw;
 }
 
+.sumArea {
+    background-color: #e3d6c1;
+    width: 25%;
+    height: 50%;
+    padding: 0px 0px 40px;
+    /* border-radius: 3%;
+    border: 5px solid #58624B; */
+
+}
 
 .sumArea h3{
-    font-size: 40px;
-    margin-top:0px;
+    font-size: 20px;
+    margin:0px 0px 0px 10px;
+    text-align: left;
+    color: #58624B;
+    
+}
+
+.sumArea img{
+    background-color: #F2E9DB;
+    padding-left: 70%;
+    padding-right: 30%;
+
+    
 }
 
 .sumPrice{
     padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+    color:#58624B;
 }
 
 .checkoutLink, .backMenuLink{
-    background-color:#C1BC92;
+    background-color:#58624B;
     color: white;
     text-align: center;
+    margin: 0px 40px 10px;
+    padding: 5px 0px;
+    text-decoration: none;
+    
 }
 
 .backMenuLink{
-    background-color:lightgrey;
+    background-color:#f5f0e8;
     color: #22223B;
 }
 
@@ -281,3 +298,4 @@ footer{
     flex-direction: column;
     justify-content: center;
 }
+
