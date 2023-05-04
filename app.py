@@ -1,8 +1,14 @@
 import json
+from pathlib import Path
 
+from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+from models import Product
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
+app.instance_path = str(Path(".").resolve())
+db.init_app(app)
 
 with open("menu.json") as f:
     menu = json.load(f)
