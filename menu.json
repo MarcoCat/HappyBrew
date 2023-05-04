@@ -6,20 +6,36 @@
       "description": "Special seasonal fruit",
       "price": 6.50,
       "ingredients": [
-          {"name": "Mango", "amount": 0.3},
-          {"name": "Coconut Milk", "amount": 0.4},
-          {"name": "Grapefruit", "amount": 0.3}
+          {"name": "Mango", "amount": 0.25},
+          {"name": "Coconut Milk", "amount": 0.2},
+          {"name": "Grapefruit", "amount": 0.25},
+          {"name": "Regular Sweetner", "amount": 0.1},
+          {"name": "Ice", "amount": 0.2}
       ]
     },
-    
+
     {
       "name": "Grape Smoothie",
       "description": "Special seasonal fruit with bubble",
       "price": 6.50,
       "ingredients": [
           {"name": "Grape", "amount": 0.3},
-          {"name": "Jasmine", "amount": 0.4},
-          {"name": "Tapioca Pearls", "amount": 0.3}
+          {"name": "Jasmine", "amount": 0.25},
+          {"name": "Lychee Popping Boba", "amount": 0.15},
+          {"name": "Regular Sweetner", "amount": 0.1},
+          {"name": "Ice", "amount": 0.2}
+      ]
+    },
+
+    {
+      "name": "Watermelon and Coconut Slush",
+      "description": "Special seasonal fruit with Sago",
+      "price": 7.50,
+      "ingredients": [
+          {"name": "Watermelon", "amount": 0.3},
+          {"name": "Coconut Milk", "amount": 0.35},
+          {"name": "Sago", "amount": 0.15},
+          {"name": "Ice", "amount": 0.2}
       ]
     }
   ],
@@ -30,9 +46,9 @@
         "description": "Just a normal milk tea",
         "price": 4.50,
         "ingredients": [
-            {"name": "Green Blend", "amount": 0.4},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Cane Sugar Sweetner", "amount": 0.3}
+            {"name": "Black Blend", "amount": 0.4},
+            {"name": "Powder Milk", "amount": 0.45},
+            {"name": "Regular Sweetner", "amount": 0.15}
         ]
       },
 
@@ -41,10 +57,10 @@
         "description": "Milk tea but it has pearls this time",
         "price": 5.00,
         "ingredients": [
-            {"name": "Green Blend", "amount": 0.4},
-            {"name": "Whole Milk", "amount": 0.2},
+            {"name": "Black Blend", "amount": 0.3},
+            {"name": "Powder Milk", "amount": 0.35},
             {"name": "Tapioca Pearls", "amount": 0.2},
-            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+            {"name": "Regular Sweetner", "amount": 0.15}
         ]
       },
 
@@ -53,9 +69,9 @@
         "description": "A delicious milk tea with more black tea base",
         "price": 4.50,
         "ingredients": [
-            {"name": "Ceylon", "amount": 0.5},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Cane Sugar Sweetner", "amount": 0.2}
+            {"name": "Ceylon", "amount": 0.4},
+            {"name": "Whole Milk", "amount": 0.45},
+            {"name": "Regular Sweetner", "amount": 0.15}
         ]
       },
 
@@ -64,10 +80,10 @@
         "description": "A creamy milk tea with chewy pearls",
         "price": 4.50,
         "ingredients": [
-            {"name": "Ceylon", "amount": 0.5},
-            {"name": "Whole Milk", "amount": 0.3},
-            {"name": "Tapioca Pearls", "amount": 0.1},
-            {"name": "Cane Sugar Sweetner", "amount": 0.1}
+            {"name": "Ceylon", "amount": 0.3},
+            {"name": "Whole Milk", "amount": 0.35},
+            {"name": "Tapioca Pearls", "amount": 0.2},
+            {"name": "Regular Sweetner", "amount": 0.15}
         ]
       }
     ],

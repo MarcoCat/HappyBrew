@@ -36,7 +36,7 @@
             ]
         },
         {
-            "milk_type": [
+            "Milk_type": [
                 {
                     "Almond Milk": 2.75,
                     "Condensed Milk": 2.00,
@@ -62,6 +62,7 @@
                     "Lavender Syrup": 0.50,
                     "Peach Syrup": 0.50,
                     "Rose Syrup": 0.50,
+                    "Regular Sweetner": 0.50,
                     "Sugar Free Sweetener": 0.50,
                     "Strawberry Syrup": 0.50,
                     "Vanilla Syrup": 0.50
@@ -69,7 +70,7 @@
             ]
         },
         {
-            "toppings": [
+            "Toppings": [
                 {
                     "Aloe Vera": 0.75,
                     "Cheese Foam": 1.75,
@@ -81,6 +82,7 @@
                     "Pudding": 0.70,
                     "Grass Jelly": 0.70,
                     "Red Bean": 1.25,
+                    "Sago": 0.70,
                     "Tapioca Pearls": 0.70,
                     "Taro Pearls": 0.70,
                     "Lychee Popping Boba": 0.70,
