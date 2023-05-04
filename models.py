@@ -14,4 +14,5 @@ class Product(db.Model):
             "price": self.price,
             "category": self.category,
             "description": self.description,
+            "quantity": self.quantity,
         }
