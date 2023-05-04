@@ -25,6 +25,18 @@
           {"name": "Regular Sweetner", "amount": "10%"},
           {"name": "Ice", "amount": "20%"}
       ]
+    },
+
+    {
+      "name": "Watermelon and Coconut Slush",
+      "description": "Special seasonal fruit with Sago",
+      "price": 6.50,
+      "ingredients": [
+          {"name": "Watermelon", "amount": "30%"},
+          {"name": "Coconut Milk", "amount": "35%"},
+          {"name": "Sago", "amount": "15%"}
+          {"name": "Ice", "amount": "20%"}
+      ]
     }
   ],
   
