@@ -45,7 +45,13 @@ products = [
 
 with app.app_context():
     for product in products:
-        obj = Product(**product)
+        obj = Product(
+            name=product[0],
+            price=product[1],
+            category=product[2],
+            description=product[3],
+            quantity=product[4],
+        )
         db.session.add(obj)
     db.session.commit()
     print("Successfully created all products.")
