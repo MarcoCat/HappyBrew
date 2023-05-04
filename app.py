@@ -3,7 +3,7 @@ from pathlib import Path
 
 from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
-from models import Product
+from models import Order, Product
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
@@ -67,17 +67,46 @@ def order():
     return render_template("order.html", menu=menu)
 
 
-@app.route("/order", methods=["POST"])
-def process_order():
+# @app.route("/order", methods=["POST"])
+# def process_order():
+#     data = request.form.to_dict()
+#     is_item_in_cart = False
+#     for item in orders:
+#         if item["item"] == data["item"]:
+#             item["quantity"] = int(item["quantity"]) + int(data["quantity"])
+#             is_item_in_cart = True
+#     if not is_item_in_cart:
+#         orders.append(data)
+#     return redirect(url_for("cart"))
+
+
+@app.route("/api/order", methods=["POST"])
+def api_create_order():
     data = request.form.to_dict()
-    is_item_in_cart = False
-    for item in orders:
-        if item["item"] == data["item"]:
-            item["quantity"] = int(item["quantity"]) + int(data["quantity"])
-            is_item_in_cart = True
-    if not is_item_in_cart:
-        orders.append(data)
-    return redirect(url_for("cart"))
+    for key in ("name", "address", "products"):
+        if key not in data:
+            return f"The JSON is missing: {key}", 400
+
+    for product in data["products"]:
+        if not db.session.get(Product, product["name"]):
+            return f"The product {product['name']} does not exist", 400
+
+    order = Order(
+        name=data["name"],
+        address=data["address"],
+    )
+
+    for product in data["products"]:
+        association = ProductsOrder(
+            product=db.session.get(Product, product["name"]),
+            order=order,
+            quantity=product["quantity"],
+        )
+        db.session.add(association)
+    db.session.add(order)
+    db.session.commit()
+
+    return jsonify(order.to_dict())
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])
