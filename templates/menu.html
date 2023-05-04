@@ -27,7 +27,7 @@
             {% if "ingredients" in item %}
             <ul class="ingredientInfo">
             {% for ingredient in item["ingredients"] %}
-            <li>{{ ingredient["name"] }}: {{ ingredient["amount"] }}</li>
+            <li>{{ ingredient["name"] }}: {{ ingredient["amount"] * 100 }}% </li>
             {% endfor %}
           </ul>
           {% endif %}
