@@ -6,12 +6,14 @@
       "description": "Special seasonal fruit",
       "price": 6.50,
       "ingredients": [
-          {"name": "Mango", "amount": "30%"},
-          {"name": "Coconut Milk", "amount": "40%"},
-          {"name": "Grapefruit", "amount": "30%"}
+          {"name": "Mango", "amount": "25%"},
+          {"name": "Coconut Milk", "amount": "20%"},
+          {"name": "Grapefruit", "amount": "25%"},
+          {"name": "Regular Sweetner", "amount": "10%"},
+          {"name": "Ice", "amount": "20%"}
       ]
     },
-    
+
     {
       "name": "Grape Smoothie",
       "description": "Special seasonal fruit with bubble",
