@@ -31,13 +31,16 @@ class Order(db.Model):
             "customer_address": self.address,
             "products": [
                 {
-                    "name": product.name,
+                    "name": product.product_name,
                     "quantity": product.quantity,
                 }
                 for product in self.products
             ],
             "price": round(
-                sum(product.price * product.quantity for product in self.products),
+                sum(
+                    product.product.price * product.quantity
+                    for product in self.products
+                ),
                 2,
             ),
         }
