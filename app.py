@@ -3,7 +3,7 @@ from pathlib import Path
 
 from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
-from models import Order, Product
+from models import Order, Product, ProductsOrder
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
@@ -82,7 +82,17 @@ def order():
 
 @app.route("/order", methods=["POST"])
 def api_create_order():
-    data = request.form.to_dict()
+    form_data = request.form.to_dict()
+    print(form_data)
+    data = {"name": form_data["name"], "address": form_data["address"], "products": []}
+    for i in range(len(form_data) // 2 - 1):
+        product = {
+            "name": form_data[f"products[{i}][name]"],
+            "quantity": int(form_data[f"products[{i}][quantity]"]),
+        }
+        data["products"].append(product)
+    print(data)
+
     for key in ("name", "address", "products"):
         if key not in data:
             return f"The JSON is missing: {key}", 400
@@ -106,7 +116,7 @@ def api_create_order():
     db.session.add(order)
     db.session.commit()
 
-    return jsonify(order.to_dict())
+    return redirect(url_for("cart"))
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])
