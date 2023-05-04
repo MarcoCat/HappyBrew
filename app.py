@@ -80,7 +80,7 @@ def order():
 #     return redirect(url_for("cart"))
 
 
-@app.route("/api/order", methods=["POST"])
+@app.route("/order", methods=["POST"])
 def api_create_order():
     data = request.form.to_dict()
     for key in ("name", "address", "products"):
