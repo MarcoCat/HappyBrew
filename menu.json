@@ -19,9 +19,11 @@
       "description": "Special seasonal fruit with bubble",
       "price": 6.50,
       "ingredients": [
-          {"name": "Grape", "amount": "40%"},
-          {"name": "Jasmine", "amount": "40%"},
-          {"name": "Tapioca Pearls", "amount": "20%"}
+          {"name": "Grape", "amount": "30%"},
+          {"name": "Jasmine", "amount": "25%"},
+          {"name": "Lychee Popping Boba", "amount": "15%"},
+          {"name": "Regular Sweetner", "amount": "10%"},
+          {"name": "Ice", "amount": "20%"}
       ]
     }
   ],
