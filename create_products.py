@@ -2,9 +2,9 @@ from app import app, db
 from models import Product
 
 products = [
-    ("Mango smoothie", 6.50, "Seasonal only", "Special seasonal fruit", 100),
+    ("Mango Smoothie", 6.50, "Seasonal only", "Special seasonal fruit", 100),
     (
-        "Grape smoothie",
+        "Grape Smoothie",
         6.50,
         "Seasonal only",
         "Special seasonal fruit with bubble",
