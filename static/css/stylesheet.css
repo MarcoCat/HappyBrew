@@ -1,6 +1,7 @@
 body{
-    background-color: #F2E9DB;
-    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #F5EBE0;
+    /* font-family: 'IBM Plex Sans', sans-serif; */
+    font-family: 'Josefin Sans', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -10,18 +11,27 @@ body{
 
 header{
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr 3fr 1fr;
     position:fixed;
-    background: #F2E9DB;
+    background: #F5EBE0;
     width: 100%;
     align-items: center;
 }
+
+.ourName{
+    font-family: 'Pacifico', cursive;
+    color:#22223B;
+    font-size: 3vw;
+   
+}
+
 
 main{
     margin-top: 150px;
 }
 
-.topnavbar, .accountButton{
+
+.navList, .accountButton, ourName{
     text-align: center;
     overflow: hidden;
 }
@@ -32,24 +42,39 @@ main{
     justify-content: center;
 }
 
-.navList li{
-    background-color:#58624B;
-    border-radius: 0.6em;
+.navList a{
+    /* background-color:#58624B; */
+    /* border-radius: 0.6em; */
     padding: 10px 10px;
-    color: white;
+    /* color: white; */
     margin: 5px 10px;
+    color: #58624B;
+    font-size: 20px;
+    font-weight:bold;
+}
 
+.logoButton{
+    display: flex;
+    justify-self:center;
+}
+
+.logoButton > a{
+    margin-top:10px;
+}
+
+.acctCartButton{
+    display: flex;
+    justify-self: right;
 }
 
 .accountButton{
-    width: 180px;
+    width: 150px;
     height: 35px;
     background-color:#C1BC92;
-    padding-top: 15px;
-    border: 1px solid C1BC92;
+    padding-top: 20px;
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
-
+    color:white;
 }
 .cartIcon{
     grid-column: 3/4;
@@ -58,9 +83,11 @@ main{
 }
 
 header a{
-    color: white;
     text-decoration: none;
 }
+
+
+
 
 
 
@@ -153,7 +180,7 @@ footer{
     margin: 0px;
 }
 .menuItem h2{
-    padding-top: 22vh;
+    padding-top: 20vh;
     margin: 0px;
     text-align: center;
 }
@@ -298,7 +325,7 @@ footer{
 }
 
 .sumArea img{
-    background-color: #F2E9DB;
+    background-color: #F5EBE0;
     padding-left: 70%;
     padding-right: 30%;
 
