@@ -30,11 +30,18 @@
           <li><a href="instructions"> INSTRUCTIONS </a></li>
           <li><a href="menu"> MENU </a></li>
           <li><a href="customize"> CUSTOMIZE </a></li>
-          <li><a href="cart"> CART </a></li>
+          <!-- <li><a href="cart"> CART </a></li> -->
           <li><a href="order"> temp_order </a></li>
           <li><a href="login"> LOGIN/SIGN UP </a></li>
         </ul>
       </nav>
+      <a  class="cartIcon" href="cart">
+        <img
+          src="{{ url_for('static', filename='image/cartPage/cartImage.png') }}"
+          alt="cart image"
+          width="70"
+          height="70"
+      /></a>
     </header>
     {% block content %} {% endblock %}
     <footer>
