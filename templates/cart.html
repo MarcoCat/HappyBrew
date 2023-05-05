@@ -1,27 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <h1>Cart</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders %}
-            {% for product_order in order.products %}
-            <tr>
-                <td>{{ product_order.product.name }}</td>
-                <td>{{ product_order.quantity }}</td>
-                <td>{{ product_order.product.price }}</td>
-            </tr>
-            {% endfor %}
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="/">Back to menu</a>
+    <h1 class="cartTitle">Cart</h1>
+    <p class="processWord"> You are almost done! </p>
+  
+        <div class="cartPageLU">
+        <section>
+            <table class="cartTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    {% for product_order in order.products %}
+                    <tr>
+                        <td>{{ product_order.product.name }}</td>
+                        <td>{{ product_order.quantity }}</td>
+                        <td>{{ product_order.product.price }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="sumArea">
+            <img
+            src="{{ url_for('static', filename='image/cartPage/cuteBubbleTeaCart.png') }}"
+            alt="4 bubble tea images"
+            width="85"
+            height="45"
+            />
+            <h3>Total price:</h3>
+            <p class="sumPrice">"ie. $ 100 CAD"</p>
+            <div class="cartButton">
+                <a class = "checkoutLink" href="checkout">Ready to Checkout!</a>
+                <a class = "backMenuLink" href="menu">Back to menu</a>
+            </div>
+        </section>
+        
+    </div>
+
 </main>
 {% endblock %}

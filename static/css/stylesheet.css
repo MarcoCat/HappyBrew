@@ -10,17 +10,18 @@ body{
 
 header{
     display: grid;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 2fr 4fr 1fr;
     position:fixed;
     background: #F2E9DB;
     width: 100%;
+    align-items: center;
 }
 
 main{
-    margin-top: 80px;
+    margin-top: 150px;
 }
 
-.topnavbar{
+.topnavbar, .accountButton{
     text-align: center;
     overflow: hidden;
 }
@@ -28,15 +29,32 @@ main{
 .navList{
     display: flex;
     list-style-type: none;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .navList li{
     background-color:#58624B;
     border-radius: 0.6em;
-    padding: 0.6em;  
+    padding: 10px 10px;
     color: white;
+    margin: 5px 10px;
 
+}
+
+.accountButton{
+    width: 180px;
+    height: 35px;
+    background-color:#C1BC92;
+    padding-top: 15px;
+    border: 1px solid C1BC92;
+    border-radius: 50px 0px 0px 50px;
+    justify-self: right;
+
+}
+.cartIcon{
+    grid-column: 3/4;
+    justify-self: right;
+    padding-right: 20px;
 }
 
 header a{
@@ -44,9 +62,31 @@ header a{
     text-decoration: none;
 }
 
-#font{
-    text-align: left; 
+
+
+h1{
+    text-align: left;
+    font-size: 50px;
+    margin-top: 0px;
 }
+
+footer{
+    text-align: center;
+    margin-top: auto;
+    padding-top: 60px;
+}
+
+
+
+
+
+/* home page */
+
+.homeSlogan{
+    font-size: 30px;
+    padding-left: 50px;
+}
+
 
 
 .backpic{
@@ -72,10 +112,7 @@ header a{
 }
 
 
-footer{
-    text-align: center;
-    margin-top: auto;
-}
+
 
 /* menu page */
 
@@ -98,11 +135,6 @@ footer{
     color: #58624B;
 }
 
-.menuTitile{
-    text-align: left;
-    font-size: 50px;
-    margin-top: 20px;
-}
 
 
 .menuItem{
@@ -112,10 +144,17 @@ footer{
     grid-row: 2/3;
 }
 
-
-.menuItem h2{
-    padding-top: 100px;
+.menuItem >p{
     margin-bottom: 0px;
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
+    color:#C1BC92;
+    margin: 0px;
+}
+.menuItem h2{
+    padding-top: 22vh;
+    margin: 0px;
     text-align: center;
 }
 
@@ -190,12 +229,6 @@ footer{
     position: fixed;
 }
 
-.customizeNavBar h1{
-    text-align: left;
-    font-size: 50px;
-    margin-top: 20px;
-}
-
 
 .customizeNavBar h3{
     list-style-type: none;
@@ -210,4 +243,95 @@ footer{
     grid-row: 2/3;
 }
 
+
+
+
+/* cart page */
+
+.cartPageLU{
+    display: flex;
+    justify-content: space-evenly;
+}
+.cartTitle{
+    padding-left: 20px;
+}
+
+.processWord{
+    font-size: 25px;
+    font-style: italic;
+    color: #C1BC92;
+    text-align: center;
+    margin: 0px 0px 60px;
+ 
+}
+
+
+.cartTable{
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.cartTable th, .cartTable td{
+    height: 6vh;
+    width: 10vw;
+    border-bottom: 2px solid #e3d6c1;
+}
+
+.cartTable th:first-child, .cartTable td:first-child{
+    width: 15vw;
+}
+
+.sumArea {
+    background-color: #e3d6c1;
+    width: 25%;
+    height: 50%;
+    padding: 0px 0px 40px;
+
+}
+
+.sumArea h3{
+    font-size: 20px;
+    margin:0px 0px 0px 10px;
+    text-align: left;
+    color: #58624B;
+    
+}
+
+.sumArea img{
+    background-color: #F2E9DB;
+    padding-left: 70%;
+    padding-right: 30%;
+
+    
+}
+
+
+.sumPrice{
+    padding: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+    color:#58624B;
+}
+
+.checkoutLink, .backMenuLink{
+    background-color:#58624B;
+    color: white;
+    text-align: center;
+    margin: 0px 40px 10px;
+    padding: 5px 0px;
+    text-decoration: none;
+    
+}
+
+.backMenuLink{
+    background-color:#f5f0e8;
+    color: #22223B;
+}
+
+.cartButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
