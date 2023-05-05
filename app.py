@@ -106,5 +106,24 @@ def create_order():
     return redirect(url_for("cart"))
 
 
+@app.route("/order/<int:order_id>", methods=["GET"])
+def get_order(order_id):
+    order = db.session.get(Order, order_id)
+    if not order:
+        return "Order not found", 404
+    order_json = order.to_dict()
+    return jsonify(order_json)
+
+
+@staticmethod
+def get_categories():
+    return db.session.query(Product.category).distinct().all()
+
+
+@staticmethod
+def get_products():
+    return Product.query.all()
+
+
 if __name__ == "__main__":
     app.run()
