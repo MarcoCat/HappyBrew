@@ -10,11 +10,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
 app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
-with open("menu.json") as f:
-    menu = json.load(f)
-
-orders = []
-
 
 @app.route("/")
 @app.route("/home")
@@ -67,21 +62,27 @@ def checkout():
 
 @app.route("/order")
 def order():
+    menu = Product.query.all()
     return render_template("order.html", menu=menu)
 
 
 @app.route("/order", methods=["POST"])
 def create_order():
     form_data = request.form.to_dict()
-    print(form_data)
     data = {"name": form_data["name"], "address": form_data["address"], "products": []}
     for i in range(len(form_data) // 2 - 1):
-        product = {
-            "name": form_data[f"products[{i}][name]"],
-            "quantity": int(form_data[f"products[{i}][quantity]"]),
-        }
-        data["products"].append(product)
-    print(data)
+        is_used = False
+        for product in data["products"]:
+            if product["name"] == form_data[f"products[{i}][name]"]:
+                product["quantity"] += int(form_data[f"products[{i}][quantity]"])
+                is_used = True
+                break
+        if not is_used:
+            product = {
+                "name": form_data[f"products[{i}][name]"],
+                "quantity": int(form_data[f"products[{i}][quantity]"]),
+            }
+            data["products"].append(product)
 
     for key in ("name", "address", "products"):
         if key not in data:
