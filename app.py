@@ -1,13 +1,14 @@
 import json
+from pathlib import Path
 
+from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+from models import Order, Product, ProductsOrder
 
 app = Flask(__name__)
-
-with open("menu.json") as f:
-    menu = json.load(f)
-
-orders = []
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
+app.instance_path = str(Path(".").resolve())
+db.init_app(app)
 
 
 @app.route("/")
@@ -18,9 +19,14 @@ def home():
 
 @app.route("/menu")
 def index():
-    with open("menu.json") as f:
-        menu = json.load(f)
-    return render_template("menu.html", menu=menu)
+    products = Product.query.all()
+    categories = list(set([product.category for product in products]))
+    product_dict = {}
+    for category in categories:
+        product_dict[category] = [
+            product for product in products if product.category == category
+        ]
+    return render_template("menu.html", products=product_dict, categories=categories)
 
 
 @app.route("/about")
@@ -45,10 +51,8 @@ def customize():
 
 @app.route("/cart")
 def cart():
-    if orders:
-        return render_template("cart.html", orders=orders)
-    else:
-        return "Your cart is empty."
+    orders = Order.query.all()
+    return render_template("cart.html", orders=orders)
 
 
 @app.route("/checkout")
@@ -58,30 +62,61 @@ def checkout():
 
 @app.route("/order")
 def order():
+    menu = Product.query.all()
     return render_template("order.html", menu=menu)
 
 
 @app.route("/order", methods=["POST"])
-def process_order():
-    data = request.form.to_dict()
-    is_item_in_cart = False
-    for item in orders:
-        if item["item"] == data["item"]:
-            item["quantity"] = int(item["quantity"]) + int(data["quantity"])
-            is_item_in_cart = True
-    if not is_item_in_cart:
-        orders.append(data)
+def create_order():
+    form_data = request.form.to_dict()
+    data = {"name": form_data["name"], "address": form_data["address"], "products": []}
+    for i in range(len(form_data) // 2 - 1):
+        is_used = False
+        for product in data["products"]:
+            if product["name"] == form_data[f"products[{i}][name]"]:
+                product["quantity"] += int(form_data[f"products[{i}][quantity]"])
+                is_used = True
+                break
+        if not is_used:
+            product = {
+                "name": form_data[f"products[{i}][name]"],
+                "quantity": int(form_data[f"products[{i}][quantity]"]),
+            }
+            data["products"].append(product)
+
+    for key in ("name", "address", "products"):
+        if key not in data:
+            return f"The JSON is missing: {key}", 400
+
+    for product in data["products"]:
+        if not db.session.get(Product, product["name"]):
+            return f"The product {product['name']} does not exist", 400
+
+    order = Order(
+        name=data["name"],
+        address=data["address"],
+    )
+
+    for product in data["products"]:
+        association = ProductsOrder(
+            product=db.session.get(Product, product["name"]),
+            order=order,
+            quantity=product["quantity"],
+        )
+        db.session.add(association)
+    db.session.add(order)
+    db.session.commit()
+
     return redirect(url_for("cart"))
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])
 def get_order(order_id):
-    try:
-        if order_id - 1 < 0:
-            return "Order not found", 404
-        return jsonify(orders[order_id - 1])
-    except IndexError:
+    order = db.session.get(Order, order_id)
+    if not order:
         return "Order not found", 404
+    order_json = order.to_dict()
+    return jsonify(order_json)
 
 
 if __name__ == "__main__":
