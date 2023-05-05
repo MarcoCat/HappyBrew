@@ -56,10 +56,8 @@ def customize():
 
 @app.route("/cart")
 def cart():
-    if orders:
-        return render_template("cart.html", orders=orders)
-    else:
-        return "Your cart is empty."
+    orders = Order.query.all()
+    return render_template("cart.html", orders=orders)
 
 
 @app.route("/checkout")
