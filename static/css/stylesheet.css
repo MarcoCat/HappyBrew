@@ -1,12 +1,11 @@
 body{
     background-color: #F5EBE0;
-    /* font-family: 'IBM Plex Sans', sans-serif; */
     font-family: 'Josefin Sans', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     margin-top: 0px;
-    color: #22223B;
+    color: #58624B;
 }
 
 header{
@@ -20,7 +19,7 @@ header{
 
 .ourName{
     font-family: 'Pacifico', cursive;
-    color:#22223B;
+    color:#58624B;
     font-size: 3vw;
    
 }
@@ -29,7 +28,6 @@ header{
 main{
     margin-top: 150px;
 }
-
 
 .navList, .accountButton, ourName{
     text-align: center;
@@ -46,9 +44,8 @@ main{
     /* background-color:#58624B; */
     /* border-radius: 0.6em; */
     padding: 10px 10px;
-    /* color: white; */
     margin: 5px 10px;
-    color: #58624B;
+    color: #859174;
     font-size: 20px;
     font-weight:bold;
 }
@@ -87,10 +84,6 @@ header a{
 }
 
 
-
-
-
-
 h1{
     text-align: left;
     font-size: 50px;
@@ -107,36 +100,58 @@ footer{
 
 
 
+
+
+
+
+
 /* home page */
 
-.homeSlogan{
-    font-size: 30px;
-    padding-left: 50px;
+.homeContent{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
+.homeContent > section:first-child{
+    padding-left: 150px;
+}
+.homeSlogan{
+    font-size: 40px;
+    padding-top: 150px;
+    color: #C1A390;
+}
 
+.contentWord{
+    color: #a1988f;
+    font-size: 25px;
+}
 
+.contentWord3{
+    text-align: right;
+}
 .backpic{
-    padding: 100px 20px;
-    text-align: center;
-    border-radius: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 50px 0px 0px 0px;
+    
 }
 .backpic img{
-    border-radius: 10%;
+    border: 10px solid #D5BDAF;
 }
-.backpic2{
-    margin-bottom: 60px;
-
-}
-
-.backpic3{
-    margin-bottom: 30px;
-
+.backpic1, .backpic3{
+    justify-self: right;
 }
 
-.backpic4{
-    margin-bottom: 80px;
+.backpic2, .backpic4{
+    justify-self: left;
 }
+
+
+
+
+
+
+
 
 
 
@@ -176,7 +191,7 @@ footer{
     text-align: center;
     font-size: 40px;
     font-style: italic;
-    color:#C1BC92;
+    color:#C1A390;
     margin: 0px;
 }
 .menuItem h2{
@@ -284,9 +299,9 @@ footer{
 }
 
 .processWord{
-    font-size: 25px;
+    font-size: 35px;
     font-style: italic;
-    color: #C1BC92;
+    color: #C1A390;
     text-align: center;
     margin: 0px 0px 60px;
  
