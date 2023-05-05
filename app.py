@@ -114,12 +114,10 @@ def get_order(order_id):
     return jsonify(order_json)
 
 
-@staticmethod
 def get_categories():
     return db.session.query(Product.category).distinct().all()
 
 
-@staticmethod
 def get_products():
     return Product.query.all()
 
