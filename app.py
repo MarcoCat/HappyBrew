@@ -67,19 +67,6 @@ def order():
     return render_template("order.html", menu=menu)
 
 
-# @app.route("/order", methods=["POST"])
-# def process_order():
-#     data = request.form.to_dict()
-#     is_item_in_cart = False
-#     for item in orders:
-#         if item["item"] == data["item"]:
-#             item["quantity"] = int(item["quantity"]) + int(data["quantity"])
-#             is_item_in_cart = True
-#     if not is_item_in_cart:
-#         orders.append(data)
-#     return redirect(url_for("cart"))
-
-
 @app.route("/order", methods=["POST"])
 def create_order():
     form_data = request.form.to_dict()
