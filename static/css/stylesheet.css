@@ -10,17 +10,18 @@ body{
 
 header{
     display: grid;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 2fr 4fr 1fr;
     position:fixed;
     background: #F2E9DB;
     width: 100%;
+    align-items: center;
 }
 
 main{
-    margin-top: 80px;
+    margin-top: 150px;
 }
 
-.topnavbar{
+.topnavbar, .accountButton{
     text-align: center;
     overflow: hidden;
 }
@@ -28,18 +29,30 @@ main{
 .navList{
     display: flex;
     list-style-type: none;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .navList li{
     background-color:#58624B;
     border-radius: 0.6em;
-    padding: 10px;  
+    padding: 10px 10px;
     color: white;
+    margin: 5px 10px;
+
+}
+
+.accountButton{
+    width: 180px;
+    height: 35px;
+    background-color:#C1BC92;
+    padding-top: 15px;
+    border: 1px solid C1BC92;
+    border-radius: 50px 0px 0px 50px;
+    justify-self: right;
 
 }
 .cartIcon{
-    grid-column: 2/3;
+    grid-column: 3/4;
     justify-self: right;
     padding-right: 20px;
 }
@@ -54,7 +67,7 @@ header a{
 h1{
     text-align: left;
     font-size: 50px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 footer{
@@ -131,10 +144,17 @@ footer{
     grid-row: 2/3;
 }
 
-
-.menuItem h2{
-    padding-top: 100px;
+.menuItem >p{
     margin-bottom: 0px;
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
+    color:#C1BC92;
+    margin: 0px;
+}
+.menuItem h2{
+    padding-top: 22vh;
+    margin: 0px;
     text-align: center;
 }
 
@@ -239,9 +259,10 @@ footer{
 .processWord{
     font-size: 25px;
     font-style: italic;
-    color: #58624B;
+    color: #C1BC92;
     text-align: center;
-    margin-bottom: 60px;;
+    margin: 0px 0px 60px;
+ 
 }
 
 
