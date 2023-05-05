@@ -81,7 +81,7 @@ def order():
 
 
 @app.route("/order", methods=["POST"])
-def api_create_order():
+def create_order():
     form_data = request.form.to_dict()
     print(form_data)
     data = {"name": form_data["name"], "address": form_data["address"], "products": []}
@@ -117,16 +117,6 @@ def api_create_order():
     db.session.commit()
 
     return redirect(url_for("cart"))
-
-
-@app.route("/order/<int:order_id>", methods=["GET"])
-def get_order(order_id):
-    try:
-        if order_id - 1 < 0:
-            return "Order not found", 404
-        return jsonify(orders[order_id - 1])
-    except IndexError:
-        return "Order not found", 404
 
 
 if __name__ == "__main__":
