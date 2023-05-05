@@ -14,10 +14,8 @@
             <div class="order-item">
                 <label for="item-0">Item:</label>
                 <select id="item-0" name="products[0][name]">
-                    {% for category, items in menu.items() %}
-                        {% for item in items %}
-                            <option value="{{ item['name'] }}">{{ item['name'] }} - ${{ item['price'] }}</option>
-                        {% endfor %}
+                    {% for item in menu %}
+                        <option value="{{ item.name }}">{{ item.name }} - ${{ item.price }}</option>
                     {% endfor %}
                 </select>
                 <br /><br />
@@ -42,10 +40,8 @@
         orderItem.innerHTML = `
             <label for="item-${orderItemsCount}">Item:</label>
             <select id="item-${orderItemsCount}" name="products[${orderItemsCount}][name]">
-                {% for category, items in menu.items() %}
-                    {% for item in items %}
-                        <option value="{{ item['name'] }}">{{ item['name'] }} - &#36;{{ item['price'] }}</option>
-                    {% endfor %}
+                {% for item in menu %}
+                    <option value="{{ item.name }}">{{ item.name }} - &#36;{{ item.price }}</option>
                 {% endfor %}
             </select>
             <br /><br />
