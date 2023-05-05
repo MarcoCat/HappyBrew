@@ -24,9 +24,8 @@ def home():
 
 @app.route("/menu")
 def index():
-    with open("menu.json") as f:
-        menu = json.load(f)
-    return render_template("menu.html", menu=menu)
+    products = get_products()
+    return render_template("menu.html", products=products)
 
 
 @app.route("/about")
