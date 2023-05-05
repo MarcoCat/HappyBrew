@@ -7,14 +7,18 @@
             <tr>
                 <th>Item</th>
                 <th>Quantity</th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
+            {% for product_order in order.products %}
             <tr>
-                <td>{{ order["item"] }}</td>
-                <td>{{ order["quantity"] }}</td>
+                <td>{{ product_order.product.name }}</td>
+                <td>{{ product_order.quantity }}</td>
+                <td>{{ product_order.product.price }}</td>
             </tr>
+            {% endfor %}
             {% endfor %}
         </tbody>
     </table>
