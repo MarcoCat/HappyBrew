@@ -20,7 +20,7 @@ def home():
 @app.route("/menu")
 def index():
     products = Product.query.all()
-    categories = list(set([product.category for product in products]))
+    categories = sorted(list(set([product.category for product in products])))
     product_dict = {}
     for category in categories:
         product_dict[category] = [
