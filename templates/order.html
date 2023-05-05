@@ -44,7 +44,7 @@
             <select id="item-${orderItemsCount}" name="products[${orderItemsCount}][name]">
                 {% for category, items in menu.items() %}
                     {% for item in items %}
-                        <option value="{{ item['name'] }}">{{ item['name'] }} - ${{ item['price'] }}</option>
+                        <option value="{{ item['name'] }}">{{ item['name'] }} - &#36;{{ item['price'] }}</option>
                     {% endfor %}
                 {% endfor %}
             </select>
