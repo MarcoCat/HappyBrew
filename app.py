@@ -24,8 +24,14 @@ def home():
 
 @app.route("/menu")
 def index():
-    products = get_products()
-    return render_template("menu.html", products=products)
+    products = Product.query.all()
+    categories = list(set([product.category for product in products]))
+    product_dict = {}
+    for category in categories:
+        product_dict[category] = [
+            product for product in products if product.category == category
+        ]
+    return render_template("menu.html", products=product_dict, categories=categories)
 
 
 @app.route("/about")
@@ -112,14 +118,6 @@ def get_order(order_id):
         return "Order not found", 404
     order_json = order.to_dict()
     return jsonify(order_json)
-
-
-def get_categories():
-    return db.session.query(Product.category).distinct().all()
-
-
-def get_products():
-    return Product.query.all()
 
 
 if __name__ == "__main__":
