@@ -16,6 +16,9 @@
                 </thead>
                 <tbody>
                     {% for order in orders %}
+                    <p>{{ order.id }}</p>
+                    <p>{{ order.name }}</p>
+                    <p>{{ order.address }}</p>
                     {% for product_order in order.products %}
                     <tr>
                         <td>{{ product_order.product.name }}</td>
