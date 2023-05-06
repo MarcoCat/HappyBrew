@@ -45,13 +45,7 @@ class Order(db.Model):
                 }
                 for product in self.products
             ],
-            "price": round(
-                sum(
-                    product.product.price * product.quantity
-                    for product in self.products
-                ),
-                2,
-            ),
+            "price": self.total_price,
         }
 
     def process(self):
