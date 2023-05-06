@@ -13,27 +13,40 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- test -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
-      <a href="home">
-        <img
-          class="logo"
-          src="{{ url_for('static', filename='image/homePage/logo.png') }}"
-          alt="logo"
-          width="120"
-          height="70"
-      /></a>
-      <nav class="topnavbar">
-        <ul class="navList">
-          <li><a href="about" title="about"> ABOUT US </a></li>
-          <li><a href="instructions"> INSTRUCTIONS </a></li>
-          <li><a href="menu"> MENU </a></li>
-          <li><a href="customize"> CUSTOMIZE </a></li>
-          <li><a href="order"> temp_order </a></li>
-        </ul>
-      </nav>
-      <a class="accountButton" href="login"> LOGIN/SIGN UP </a>
+      <div class="navList">
+        <a href="about" title="about"> ABOUT US </a>
+        <a href="instructions"> INSTRUCTIONS </a>
+      </div>
+
+      <div class="logoButton">
+        <a href="home" title="home">
+          <img
+            class="logo"
+            src="{{ url_for('static', filename='image/homePage/logo.png') }}"
+            alt="logo"
+            width="50"
+            height="50"
+        /></a>
+        <a class="ourName" href="home" title="home">  ReaTea </a>
+      </div>
+
+      <div class="navList">
+        <a href="menu"> MENU </a></li>
+        <a href="customize"> CUSTOMIZE </a>
+        <a href="order"> temp_order </a>
+      </div>
+
+      <div class="acctCartButton">
+      
       <a  class="cartIcon" href="cart">
         <img
           src="{{ url_for('static', filename='image/cartPage/cartImage.png') }}"
@@ -41,13 +54,26 @@
           width="50"
           height="50"
       /></a>
+      <a class="accountButton" href="login"> LOGIN/SIGN UP </a>
+    </div>
     </header>
+
+
+
+
+
+
+
+
+
+
+
     {% block content %} {% endblock %}
     <footer>
       <h3>Follow Up</h3>
       <div>
         <img
-          src="{{ url_for('static', filename='image/followUP/fbLogo.jpg') }}"
+          src="{{ url_for('static', filename='image/followUP/fbLogo.png') }}"
           alt="fbLogo"
           width="40"
           height="40"

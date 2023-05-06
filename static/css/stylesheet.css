@@ -1,27 +1,35 @@
 body{
-    background-color: #F2E9DB;
-    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #F5EBE0;
+    font-family: 'Josefin Sans', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     margin-top: 0px;
-    color: #22223B;
+    color: #58624B;
 }
 
 header{
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr 3fr 1fr;
     position:fixed;
-    background: #F2E9DB;
+    background: #F5EBE0;
     width: 100%;
     align-items: center;
 }
+
+.ourName{
+    font-family: 'Pacifico', cursive;
+    color:#58624B;
+    font-size: 3vw;
+   
+}
+
 
 main{
     margin-top: 150px;
 }
 
-.topnavbar, .accountButton{
+.navList, .accountButton, ourName{
     text-align: center;
     overflow: hidden;
 }
@@ -32,25 +40,58 @@ main{
     justify-content: center;
 }
 
-.navList li{
-    background-color:#58624B;
+.navList a{
+    /* background-color:#58624B; */
     border-radius: 0.6em;
     padding: 10px 10px;
-    color: white;
     margin: 5px 10px;
+    color: #859174;
+    font-size: 20px;
+    font-weight:bold;
+    letter-spacing: 2px;
+   
+}
 
+.navList a:hover, .navList a:focus{
+    box-shadow: 0px 0px 10px #B69394;
+    background-color: #B69394;
+    color:white;
+}
+
+
+.logoButton{
+    display: flex;
+    justify-self:center;
+}
+
+.logoButton > a{
+    margin-top:10px;
+}
+
+.acctCartButton{
+    display: flex;
+    justify-self: right;
 }
 
 .accountButton{
-    width: 180px;
+    width: 150px;
     height: 35px;
     background-color:#C1BC92;
-    padding-top: 15px;
-    border: 1px solid C1BC92;
+    padding-top: 20px;
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
-
+    color:white;
+    font-weight:bold;
+    letter-spacing: 1px;
+    font-size: 15px;
 }
+
+.accountButton:hover{
+    box-shadow: 0px 0px 10px #808E68;
+    background-color: #808E68;
+}
+
+
 .cartIcon{
     grid-column: 3/4;
     justify-self: right;
@@ -58,10 +99,8 @@ main{
 }
 
 header a{
-    color: white;
     text-decoration: none;
 }
-
 
 
 h1{
@@ -80,36 +119,58 @@ footer{
 
 
 
+
+
+
+
+
 /* home page */
 
-.homeSlogan{
-    font-size: 30px;
-    padding-left: 50px;
+.homeContent{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
+.homeContent > section:first-child{
+    padding-left: 150px;
+}
+.homeSlogan{
+    font-size: 40px;
+    padding-top: 150px;
+    color: #C1A390;
+}
 
+.contentWord{
+    color: #a1988f;
+    font-size: 25px;
+}
 
+.contentWord3{
+    text-align: right;
+}
 .backpic{
-    padding: 100px 20px;
-    text-align: center;
-    border-radius: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 50px 0px 0px 0px;
+    
 }
 .backpic img{
-    border-radius: 10%;
+    border: 10px solid #D5BDAF;
 }
-.backpic2{
-    margin-bottom: 60px;
-
-}
-
-.backpic3{
-    margin-bottom: 30px;
-
+.backpic1, .backpic3{
+    justify-self: right;
 }
 
-.backpic4{
-    margin-bottom: 80px;
+.backpic2, .backpic4{
+    justify-self: left;
 }
+
+
+
+
+
+
+
 
 
 
@@ -149,11 +210,11 @@ footer{
     text-align: center;
     font-size: 40px;
     font-style: italic;
-    color:#C1BC92;
+    color:#C1A390;
     margin: 0px;
 }
 .menuItem h2{
-    padding-top: 22vh;
+    padding-top: 20vh;
     margin: 0px;
     text-align: center;
 }
@@ -246,7 +307,7 @@ footer{
 
 
 
-/* cart page */
+/* cart  page */
 
 .cartPageLU{
     display: flex;
@@ -257,9 +318,9 @@ footer{
 }
 
 .processWord{
-    font-size: 25px;
+    font-size: 35px;
     font-style: italic;
-    color: #C1BC92;
+    color: #C1A390;
     text-align: center;
     margin: 0px 0px 60px;
  
@@ -298,7 +359,7 @@ footer{
 }
 
 .sumArea img{
-    background-color: #F2E9DB;
+    background-color: #F5EBE0;
     padding-left: 70%;
     padding-right: 30%;
 
@@ -334,4 +395,9 @@ footer{
     flex-direction: column;
     justify-content: center;
 }
+
+
+
+
+
 
