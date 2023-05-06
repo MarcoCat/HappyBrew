@@ -27,8 +27,8 @@ class Order(db.Model):
 
     def to_dict(self):
         return {
-            "customer_name": self.name,
-            "customer_address": self.address,
+            "name": self.name,
+            "address": self.address,
             "products": [
                 {
                     "name": product.product_name,
