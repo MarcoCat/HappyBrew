@@ -42,13 +42,22 @@ main{
 
 .navList a{
     /* background-color:#58624B; */
-    /* border-radius: 0.6em; */
+    border-radius: 0.6em;
     padding: 10px 10px;
     margin: 5px 10px;
     color: #859174;
     font-size: 20px;
     font-weight:bold;
+    letter-spacing: 1px;
+   
 }
+
+.navList a:hover, .navList a:focus{
+    box-shadow: 0px 0px 10px #B69394;
+    background-color: #B69394;
+    color:white;
+}
+
 
 .logoButton{
     display: flex;
@@ -73,6 +82,13 @@ main{
     justify-self: right;
     color:white;
 }
+
+.accountButton:hover{
+    box-shadow: 0px 0px 10px #808E68;
+    background-color: #808E68;
+}
+
+
 .cartIcon{
     grid-column: 3/4;
     justify-self: right;
@@ -376,4 +392,9 @@ footer{
     flex-direction: column;
     justify-content: center;
 }
+
+
+
+
+
 
