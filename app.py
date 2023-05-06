@@ -50,7 +50,8 @@ def customize():
     return render_template("customize1.html")
 
 
-@app.route("/cart/<int:order_id?>", methods=["GET"])
+@app.route("/cart", defaults={"order_id": None})
+@app.route("/cart/<int:order_id>")
 def cart(order_id=None):
     if order_id:
         order = db.session.get(Order, order_id)
