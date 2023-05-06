@@ -52,14 +52,17 @@ def customize():
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
+    def calculate_total(orders):
+        return sum(order.total_price for order in orders)
+
     if order_id:
-        order = db.session.get(Order, order_id)
-        if not order:
-            return "Order not found", 404
-        return render_template("cart.html", orders=[order])
+        orders = [db.session.get(Order, order_id)]
     else:
         orders = Order.query.all()
-        return render_template("cart.html", orders=orders)
+    if not orders:
+        return "Order not found", 404
+    total = calculate_total(orders)
+    return render_template("cart.html", orders=orders, total=total)
 
 
 @app.route("/checkout")
