@@ -48,7 +48,7 @@ main{
     color: #859174;
     font-size: 20px;
     font-weight:bold;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
    
 }
 
@@ -81,6 +81,9 @@ main{
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
     color:white;
+    font-weight:bold;
+    letter-spacing: 1px;
+    font-size: 15px;
 }
 
 .accountButton:hover{
