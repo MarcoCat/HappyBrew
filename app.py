@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
 
-from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+
+from database import db
 from models import Order, Product, ProductsOrder
 
 app = Flask(__name__)
@@ -49,10 +50,16 @@ def customize():
     return render_template("customize1.html")
 
 
-@app.route("/cart")
-def cart():
-    orders = Order.query.all()
-    return render_template("cart.html", orders=orders)
+@app.route("/cart/<int:order_id?>", methods=["GET"])
+def cart(order_id=None):
+    if order_id:
+        order = db.session.get(Order, order_id)
+        if not order:
+            return "Order not found", 404
+        return render_template("cart.html", orders=order)
+    else:
+        orders = Order.query.all()
+        return render_template("cart.html", orders=orders)
 
 
 @app.route("/checkout")
