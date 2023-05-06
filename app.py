@@ -1,8 +1,8 @@
-import json
 from pathlib import Path
 
-from database import db
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+
+from database import db
 from models import Order, Product, ProductsOrder
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def home():
 @app.route("/menu")
 def index():
     products = Product.query.all()
-    categories = list(set([product.category for product in products]))
+    categories = sorted(list(set([product.category for product in products])))
     product_dict = {}
     for category in categories:
         product_dict[category] = [
@@ -49,10 +49,20 @@ def customize():
     return render_template("customize1.html")
 
 
-@app.route("/cart")
-def cart():
-    orders = Order.query.all()
-    return render_template("cart.html", orders=orders)
+@app.route("/cart", defaults={"order_id": None})
+@app.route("/cart/<int:order_id>")
+def cart(order_id=None):
+    def calculate_total(orders):
+        return sum(order.total_price for order in orders)
+
+    if order_id:
+        orders = [db.session.get(Order, order_id)]
+    else:
+        orders = Order.query.all()
+    if not orders:
+        return "Order not found", 404
+    total = calculate_total(orders)
+    return render_template("cart.html", orders=orders, total=total)
 
 
 @app.route("/checkout")

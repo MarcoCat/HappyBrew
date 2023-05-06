@@ -1,6 +1,11 @@
 from app import app, db
 from models import Product
 
+with app.app_context():
+    db.create_all()
+    print("Create all tables successfully.")
+
+
 products = [
     ("Mango Smoothie", 6.50, "Seasonal only", "Special seasonal fruit", 100),
     (
