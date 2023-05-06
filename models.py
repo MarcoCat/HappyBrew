@@ -25,6 +25,15 @@ class Order(db.Model):
     completed = db.Column(db.Boolean, default=False)
     products = db.relationship("ProductsOrder", back_populates="order")
 
+    @property
+    def total_price(self):
+        if not self.products:
+            return 0
+        return round(
+            sum(product.product.price * product.quantity for product in self.products),
+            2,
+        )
+
     def to_dict(self):
         return {
             "name": self.name,
