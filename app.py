@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
