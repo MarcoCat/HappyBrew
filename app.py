@@ -57,7 +57,7 @@ def cart(order_id=None):
         order = db.session.get(Order, order_id)
         if not order:
             return "Order not found", 404
-        return render_template("cart.html", orders=order)
+        return render_template("cart.html", orders=[order])
     else:
         orders = Order.query.all()
         return render_template("cart.html", orders=orders)
