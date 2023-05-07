@@ -1,62 +1,40 @@
-  // Add event listener to all "Add to cart" buttons
+// Add to cart function
+function addToCart(productName, quantity) {
+  // Retrieve cart from local storage, parse it and store in the variable cart
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Check if the product already exists in the cart
+  let productIndex = cart.findIndex(item => item.name === productName);
+
+  // If product exists, update the quantity, else add a new item to the cart
+  if (productIndex !== -1) {
+    cart[productIndex].quantity += quantity;
+  } else {
+    cart.push({ name: productName, quantity });
+  }
+
+  // Save the updated cart back to local storage
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Get all the buttons with class "addToCartButton"
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
-console.log(addToCartButtons.length);
+
+// Add event listener to each button
 addToCartButtons.forEach(button => {
   button.addEventListener('click', () => {
-    // Get the product container element for the clicked button
-    const productContainer = button.closest('.itemType li');
-    console.log(productContainer);
-    // Extract the product name, price, and quantity from the HTML
-    const productName = productContainer.querySelector('h3').textContent;
-    const productPrice = parseFloat(productContainer.querySelector('p.price').textContent.split(':')[1].trim());
-    const productQuantity = parseInt(productContainer.querySelector('input.count').value);
+    // Get the count input element for the clicked button
+    const countInput = button.parentElement.querySelector('.count');
+    const quantity = parseInt(countInput.value);
 
-    // Prompt the user for their name and address
-    const name = prompt('Please enter your name:');
-    const address = prompt('Please enter your address:');
+    // Get the product name for the clicked button
+    const productName = button.parentElement.querySelector('h3').textContent;
 
-    // Create a JavaScript object with the product data
-    const product = {
-      name: productName,
-      price: productPrice,
-      quantity: productQuantity
-    };
-
-    // Add the product to the cart in localStorage
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    cartItems.push(product);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-    // Create a new order with the product data
-    const orderItems = [{
-      name: productName,
-      price: productPrice,
-      quantity: productQuantity
-    }];
-
-    const orderData = {
-      name: name || "John Smith",
-      address: address || "123 Main St.",
-      products: orderItems
-    };
-    fetch('/order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(orderData)
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    }).then(order => {
-      console.log(`New order created with ID ${order.id}`);
-    }).catch(error => {
-      console.error('There was a problem creating the order:', error);
-    });
+    // Call addToCart function with the product name and quantity
+    addToCart(productName, quantity);
   });
 });
+
   
   // Get all the buttons with class "addButton"
   const addButtons = document.querySelectorAll('.addButton');
