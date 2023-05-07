@@ -22,6 +22,35 @@ addToCartButtons.forEach(button => {
     let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     cartItems.push(product);
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    // Create a new order with the product data
+    const orderData = {
+      name: "",
+      address: "",
+      products: [
+        {
+          name: productName,
+          price: productPrice,
+          quantity: productQuantity
+        }
+      ]
+    };
+    fetch('/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData)
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    }).then(order => {
+      console.log(`New order created with ID ${order.id}`);
+    }).catch(error => {
+      console.error('There was a problem creating the order:', error);
+    });
   });
 });
   
