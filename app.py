@@ -1,7 +1,13 @@
 from pathlib import Path
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
-from flask_login import LoginManager, current_user, login_required, login_user
+from flask_login import (
+    LoginManager,
+    current_user,
+    login_required,
+    login_user,
+    logout_user,
+)
 
 from database import db
 from models import Order, Product, ProductsOrder, User
@@ -92,10 +98,19 @@ def signup():
     return render_template("signup.html")
 
 
-@login_required
-@app.route("/test_login")
+@app.route("/dashboard")
 def test_login():
-    return render_template("test_login.html", user=current_user)
+    if current_user.is_authenticated:
+        return render_template("dashboard.html", user=current_user)
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
 
 
 @app.route("/customize")
