@@ -27,7 +27,7 @@
           <p>Price: {{ product.price }}</p>
           <div class="quantity">
             <button class="removeButton" type="button">-</button>
-            <input class="count" type="number" value="1">
+            <input class="count" type="number" value="0">
             <button class="addButton" type="button">+</button>
           </div>
           <button class="addToCartButton" type="button" data-price="{{ product.price }}">Add to Cart</button>
@@ -35,6 +35,15 @@
         {% endfor %}
       </ul>
       {% endfor %}
+      <form id="user-info-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <br /><br />
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="address" required>
+          <br /><br />
+      </form>
+      <button id="checkout-button" type="button">Checkout</button>
     </section>
   </div>
 </main>

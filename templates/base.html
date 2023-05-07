@@ -94,4 +94,13 @@
     </footer>
   </body>
 </html>
+<script>
+  window.addEventListener('beforeunload', function(event) {
+    if (event.currentTarget.performance.navigation.type === 1) {
+      // The page is being refreshed, so don't clear local storage
+      return;
+    }
 
+    localStorage.removeItem('cart');
+  });
+</script>

@@ -41,11 +41,7 @@
             <h3>Total price:</h3>
             <p id="total-price" class="sumPrice">$ {{ "{:.2f}".format(total) }}</p>
             <div class="cartButton">
-                <form id="checkout-form" action="/order" method="POST">
-                    <input type="hidden" name="name" value="User">
-                    <input type="hidden" name="address" value="User Address">
-                    <input type="submit" value="Ready to Checkout!" class="checkoutLink">
-                  </form>
+                <a class = "checkoutLink" href="checkout">Ready to Checkout!</a>
                 <a class = "backMenuLink" href="menu">Back to menu</a>
             </div>
         </section>
@@ -79,8 +75,29 @@
     // Update the total price element
     document.getElementById('total-price').textContent = '$ ' + totalPrice.toFixed(2);
   }
-
+  
   // Call the renderCartItems function when the page loads
   renderCartItems();
+  function appendCartItemsToForm() {
+    const form = document.getElementById('checkout-form');
+  
+    cart.forEach((item, index) => {
+      const nameInput = document.createElement('input');
+      nameInput.type = 'hidden';
+      nameInput.name = `products[${index}][name]`;
+      nameInput.value = item.name;
+      form.appendChild(nameInput);
+  
+      const quantityInput = document.createElement('input');
+      quantityInput.type = 'hidden';
+      quantityInput.name = `products[${index}][quantity]`;
+      quantityInput.value = item.quantity;
+      form.appendChild(quantityInput);
+    });
+  }
+  
+  // Call the appendCartItemsToForm function when the page loads
+  appendCartItemsToForm();
+  
 </script>
 {% endblock %}
