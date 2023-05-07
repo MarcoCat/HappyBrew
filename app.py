@@ -41,7 +41,12 @@ def contact():
 
 @app.route("/login")
 def login():
-    return render_template("loginsignup.html")
+    return render_template("login.html")
+
+
+@app.route("/signup")
+def login():
+    return render_template("signup.html")
 
 
 @app.route("/customize")
