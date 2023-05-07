@@ -41,7 +41,11 @@
             <h3>Total price:</h3>
             <p id="total-price" class="sumPrice">$ {{ "{:.2f}".format(total) }}</p>
             <div class="cartButton">
-                <a class = "checkoutLink" href="checkout">Ready to Checkout!</a>
+                <form id="checkout-form" action="/order" method="POST">
+                    <input type="hidden" name="name" value="User">
+                    <input type="hidden" name="address" value="User Address">
+                    <input type="submit" value="Ready to Checkout!" class="checkoutLink">
+                  </form>
                 <a class = "backMenuLink" href="menu">Back to menu</a>
             </div>
         </section>
