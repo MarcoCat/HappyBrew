@@ -69,7 +69,7 @@ def login():
 
         else:
             login_user(user)
-            return redirect("test_login")
+            return redirect("dashboard")
 
     return render_template("login.html")
 
