@@ -1,15 +1,19 @@
   // Add event listener to all "Add to cart" buttons
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
-
+console.log(addToCartButtons.length);
 addToCartButtons.forEach(button => {
   button.addEventListener('click', () => {
     // Get the product container element for the clicked button
     const productContainer = button.closest('.itemType li');
-
+    console.log(productContainer);
     // Extract the product name, price, and quantity from the HTML
     const productName = productContainer.querySelector('h3').textContent;
     const productPrice = parseFloat(productContainer.querySelector('p.price').textContent.split(':')[1].trim());
     const productQuantity = parseInt(productContainer.querySelector('input.count').value);
+
+    // Prompt the user for their name and address
+    const name = prompt('Please enter your name:');
+    const address = prompt('Please enter your address:');
 
     // Create a JavaScript object with the product data
     const product = {
@@ -24,16 +28,16 @@ addToCartButtons.forEach(button => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     // Create a new order with the product data
+    const orderItems = [{
+      name: productName,
+      price: productPrice,
+      quantity: productQuantity
+    }];
+
     const orderData = {
-      name: "",
-      address: "",
-      products: [
-        {
-          name: productName,
-          price: productPrice,
-          quantity: productQuantity
-        }
-      ]
+      name: name || "John Smith",
+      address: address || "123 Main St.",
+      products: orderItems
     };
     fetch('/order', {
       method: 'POST',
