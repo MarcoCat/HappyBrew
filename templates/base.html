@@ -94,3 +94,8 @@
     </footer>
   </body>
 </html>
+<script>
+  window.addEventListener('unload', function() {
+    localStorage.removeItem('cart');
+  });
+</script>
