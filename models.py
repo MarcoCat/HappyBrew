@@ -1,3 +1,5 @@
+from flask_login import UserMixin
+
 from database import db
 
 
@@ -65,3 +67,9 @@ class ProductsOrder(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     product = db.relationship("Product")
     order = db.relationship("Order", back_populates="products")
+
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
