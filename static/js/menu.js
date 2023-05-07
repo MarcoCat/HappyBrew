@@ -35,7 +35,6 @@ document.getElementById('user-info-form').addEventListener('submit', (e) => {
   // Redirect to the cart page
   window.location.href = '/cart';
 });
-
 // Get all the buttons with class "addToCartButton"
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
