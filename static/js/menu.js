@@ -17,7 +17,7 @@ function addToCart(productName, productPrice, quantity) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-document.getElementById('order-form').addEventListener('submit', (e) => {
+document.getElementById('user-info-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   const name = formData.get('name');
@@ -35,6 +35,7 @@ document.getElementById('order-form').addEventListener('submit', (e) => {
   // Redirect to the cart page
   window.location.href = '/cart';
 });
+
 // Get all the buttons with class "addToCartButton"
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
