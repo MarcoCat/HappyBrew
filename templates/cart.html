@@ -49,7 +49,6 @@
     </div>
 
 </main>
-{% endblock %}
 <script>
   // Retrieve cart from local storage, parse it and store in the variable cart
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -64,7 +63,7 @@
       row.innerHTML = `
         <td>${item.name}</td>
         <td>${item.quantity}</td>
-        <td>Price TBD</td>
+        <td>${item.price}</td>
       `;
       cartTable.appendChild(row);
     });

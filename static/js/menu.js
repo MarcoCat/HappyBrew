@@ -1,16 +1,16 @@
 // Add to cart function
-function addToCart(productName, quantity) {
+function addToCart(productName, productPrice, quantity) {
   // Retrieve cart from local storage, parse it and store in the variable cart
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   // Check if the product already exists in the cart
   let productIndex = cart.findIndex(item => item.name === productName);
 
-  // If product exists, update the quantity, else add a new item to the cart
+  // If the product exists, update the quantity; else, add a new item to the cart
   if (productIndex !== -1) {
     cart[productIndex].quantity += quantity;
   } else {
-    cart.push({ name: productName, quantity });
+    cart.push({ name: productName, price: productPrice, quantity });
   }
 
   // Save the updated cart back to local storage
@@ -30,11 +30,13 @@ addToCartButtons.forEach(button => {
     // Get the product name for the clicked button
     const productName = button.parentElement.querySelector('h3').textContent;
 
-    // Call addToCart function with the product name and quantity
-    addToCart(productName, quantity);
-  });
-});
+   // Get the product price for the clicked button
+   const productPrice = parseFloat(button.dataset.price);
 
+   // Call addToCart function with the product name, price, and quantity
+   addToCart(productName, productPrice, quantity);
+ });
+});
   
   // Get all the buttons with class "addButton"
   const addButtons = document.querySelectorAll('.addButton');
