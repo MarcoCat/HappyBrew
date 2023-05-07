@@ -1,14 +1,23 @@
 from pathlib import Path
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask_login import LoginManager, login_required, login_user
 
 from database import db
-from models import Order, Product, ProductsOrder
+from models import Order, Product, ProductsOrder, User
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
 app.instance_path = str(Path(".").resolve())
 db.init_app(app)
+
+login_manager = LoginManager(app)
+app.secret_key = "abcdefg"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.query(User).get(int(user_id))
 
 
 @app.route("/")
@@ -39,14 +48,58 @@ def contact():
     return render_template("instructions.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        user = User.query.filter_by(username=username).first()
+
+        if not user:
+            return render_template("login.html", error="Username not found")
+
+        elif user.password != password:
+            return render_template("login.html", error="Incorrect password")
+
+        else:
+            login_user(user)
+            return redirect("test_login")
+
     return render_template("login.html")
 
 
-@app.route("/signup")
-def login():
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        # extract user data from form
+        username = request.form["username"]
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+
+        # check if username is already taken
+        user_exists = User.query.filter_by(username=username).first()
+        if user_exists:
+            return render_template("signup.html", error="Username already taken")
+
+        # check if passwords match
+        if password != confirm_password:
+            return render_template("signup.html", error="Passwords do not match")
+
+        # create new user
+        user = User(username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+
+        # redirect to login page
+        return redirect("/login")
+
+    # GET request: display signup form
     return render_template("signup.html")
+
+
+@app.route("/test_login")
+def test_login():
+    return render_template("test_login.html")
 
 
 @app.route("/customize")
