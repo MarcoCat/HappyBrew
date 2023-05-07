@@ -50,3 +50,27 @@
 
 </main>
 {% endblock %}
+<script>
+  // Retrieve cart from local storage, parse it and store in the variable cart
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Render cart items
+  function renderCartItems() {
+    const cartTable = document.querySelector('.cartTable tbody');
+    cartTable.innerHTML = '';
+
+    cart.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.quantity}</td>
+        <td>Price TBD</td>
+      `;
+      cartTable.appendChild(row);
+    });
+  }
+
+  // Call the renderCartItems function when the page loads
+  renderCartItems();
+</script>
+{% endblock %}
