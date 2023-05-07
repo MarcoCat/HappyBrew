@@ -17,6 +17,24 @@ function addToCart(productName, productPrice, quantity) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+document.getElementById('order-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const name = formData.get('name');
+  const address = formData.get('address');
+
+  document.querySelectorAll('.count').forEach((countInput, index) => {
+    const quantity = parseInt(countInput.value);
+    if (quantity > 0) {
+      const productName = countInput.parentElement.querySelector('h3').textContent;
+      const productPrice = parseFloat(countInput.parentElement.querySelector('.addToCartButton').dataset.price);
+      addToCart(productName, productPrice, quantity);
+    }
+  });
+
+  // Redirect to the cart page
+  window.location.href = '/cart';
+});
 // Get all the buttons with class "addToCartButton"
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
