@@ -31,7 +31,9 @@ document.getElementById('user-info-form').addEventListener('submit', async (e) =
       addToCart(productName, productPrice, quantity);
     }
   });
-
+  // Retrieve the updated cart from local storage after adding products
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
   // Create a new FormData object to store the data you want to send to the server
   const postData = new FormData();
   postData.append('name', name);
@@ -50,6 +52,7 @@ document.getElementById('user-info-form').addEventListener('submit', async (e) =
   // If the request is successful, redirect to the cart page
   if (response.ok) {
     window.location.href = '/cart';
+    localStorage.removeItem('cart');
   } else {
     console.error('Error while creating the order:', await response.text());
   }
@@ -76,28 +79,16 @@ addToCartButtons.forEach(button => {
  });
 });
   
-  // Get all the buttons with class "addButton"
-  const addButtons = document.querySelectorAll('.addButton');
-  
-  // Add event listener to each button
-  addButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Get the count input element for the clicked button
+document.querySelectorAll('.addButton').forEach(button => {
+  button.addEventListener('click', () => {
       const countInput = button.previousElementSibling;
-      // Increase the value of the input element by 1
       countInput.value = parseInt(countInput.value) + 1;
-    });
   });
+});
 
-  // Get all the buttons with class "removeButton"
-  const removeButtons = document.querySelectorAll('.removeButton');
-  
-  // Add event listener to each button
-  removeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Get the count input element for the clicked button
+document.querySelectorAll('.removeButton').forEach(button => {
+  button.addEventListener('click', () => {
       const countInput = button.nextElementSibling;
-      // Decrease the value of the input element by 1, but don't go below 1
-      countInput.value = parseInt(countInput.value) - 1 < 1 ? 1 : parseInt(countInput.value) - 1;
-    });
+      countInput.value = Math.max(0, parseInt(countInput.value) - 1);
   });
+});
