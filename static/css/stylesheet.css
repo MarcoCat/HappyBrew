@@ -307,15 +307,31 @@ footer{
 
 
 
+
+
+
 /* cart  page */
 
 .cartPageLU{
     display: flex;
     justify-content: space-evenly;
 }
+
+
 .cartTitle{
     padding-left: 20px;
 }
+
+.orderdetail{
+    display: flex;
+    flex-direction: column;
+}
+
+.orderdetail > section{
+    text-align: center;
+    margin-bottom: 60px;
+}
+
 
 .processWord{
     font-size: 35px;
@@ -335,7 +351,9 @@ footer{
 .cartTable th, .cartTable td{
     height: 6vh;
     width: 10vw;
+    border-top: 2px solid #808E68;
     border-bottom: 2px solid #e3d6c1;
+   
 }
 
 .cartTable th:first-child, .cartTable td:first-child{

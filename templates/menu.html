@@ -20,7 +20,8 @@
             src="{{ url_for('static', filename='image/menuPage/' + product.name + '.png') }}"
             alt="{{ product.name }} images"
             width="200"
-            height="250"             
+            height="250"
+            onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/menuPage/placeholder.png') }}';"
           />
           <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
