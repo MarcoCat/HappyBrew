@@ -17,7 +17,7 @@ function addToCart(productName, productPrice, quantity) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-document.getElementById('user-info-form').addEventListener('submit', (e) => {
+document.getElementById('user-info-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   const name = formData.get('name');
@@ -32,9 +32,29 @@ document.getElementById('user-info-form').addEventListener('submit', (e) => {
     }
   });
 
-  // Redirect to the cart page
-  window.location.href = '/cart';
+  // Create a new FormData object to store the data you want to send to the server
+  const postData = new FormData();
+  postData.append('name', name);
+  postData.append('address', address);
+  cart.forEach((item, index) => {
+    postData.append(`products[${index}][name]`, item.name);
+    postData.append(`products[${index}][quantity]`, item.quantity);
+  });
+
+  // Send a POST request to the /order endpoint with the form data
+  const response = await fetch('/order', {
+    method: 'POST',
+    body: postData,
+  });
+
+  // If the request is successful, redirect to the cart page
+  if (response.ok) {
+    window.location.href = '/cart';
+  } else {
+    console.error('Error while creating the order:', await response.text());
+  }
 });
+
 // Get all the buttons with class "addToCartButton"
 const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
