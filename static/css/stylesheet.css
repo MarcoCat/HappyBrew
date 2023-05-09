@@ -73,9 +73,9 @@ main{
     justify-self: right;
 }
 
-.accountButton{
-    width: 150px;
-    height: 35px;
+.accountButton1, .accountButton2{
+    width: 80px;
+    height: 30px;
     background-color:#C1BC92;
     padding-top: 20px;
     border-radius: 50px 0px 0px 50px;
@@ -83,13 +83,24 @@ main{
     color:white;
     font-weight:bold;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 13px;
+    text-align: center;
 }
 
-.accountButton:hover{
+.accountButton1:hover{
     box-shadow: 0px 0px 10px #808E68;
     background-color: #808E68;
 }
+.accountButton2{
+    background-color:#D5BDAF;
+    border-radius: 0px;
+}
+
+.accountButton2:hover{
+    box-shadow: 0px 0px 10px #B69394;
+    background-color: #B69394;
+}
+
 
 
 .cartIcon{
