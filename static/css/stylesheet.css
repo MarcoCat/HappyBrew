@@ -92,13 +92,13 @@ main{
     background-color: #808E68;
 }
 .accountButton2{
-    background-color:#D5BDAF;
+    background-color:#B69394;
     border-radius: 0px;
 }
 
 .accountButton2:hover{
-    box-shadow: 0px 0px 10px #B69394;
-    background-color: #B69394;
+    box-shadow: 0px 0px 10px #9A6768;
+    background-color: #9A6768;
 }
 
 
