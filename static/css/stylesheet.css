@@ -143,7 +143,8 @@ footer{
 }
 
 .homeContent > section:first-child{
-    padding-left: 150px;
+    padding-left: 130px;
+    padding-right: 20px;
 }
 .homeSlogan{
     font-size: 40px;
@@ -432,5 +433,113 @@ footer{
 /* signup page */
 
 
+.signupPage{
+    display: flex;
+    justify-content: center;
+}
 
+
+.imageSection{
+    border-radius: 20px 0px 0px 20px;
+    background-color: #58624B;
+    width: 30vw;
+    color:white;
+    border: 2px solid #58624B;
+}
+
+.signupSection{
+    width: 30vw;
+    border-radius: 0px 20px 20px 0px;
+    border: 5px solid #58624B;
+}
+
+
+.imageSection p{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.imageSection div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+}
+
+
+.imageSection img{
+    border-radius: 50px;
+    margin-top: 35px;
+}
+
+.imageSection h2{
+    margin-bottom: 0px;
+}
+
+
+.signupSection h1{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+}
+.signupForm{
+    margin-left: 25px;
+}
+
+
+
+.signupForm label{
+    visibility: hidden;
+    display: inline-block;
+    text-align: right;
+    width: 100px; 
+    margin-right: 10px;
+
+}
+
+.signupForm input{
+    display: inline-block;
+    width: 24vw; 
+    height: 6vh;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 0px;
+    font-size: 18px;
+    font-family: 'Josefin Sans', sans-serif;
+    border-bottom: 3px solid #808E68;
+    background-color: #F5EBE0;
+    
+  }
+
+.signupForm input::placeholder{
+    color:#808E68;
+}
+
+.signupForm input:focus, .signupForm input:valid {
+    outline: none;
+    border: 0px;
+    border-bottom: 3px solid #808E68;
+}
+
+.signupForm input:focus::placeholder{
+    transform: translate(0px, -5px);
+    font-size: 12px;
+    color: #808E68;
+}
+
+
+.signupsubmitButton{
+    align-items: center;
+    background-color: #808E68 !important;
+    color: white;
+    font-weight: bold;
+}
+
+.signupsubmitButton:hover{
+    background-color: #58624B !important;
+    border-bottom: 3px solid #58624B !important;
+    box-shadow: 0px 0px 10px #58624B;
+}
 
