@@ -41,7 +41,6 @@ main{
 }
 
 .navList a{
-    /* background-color:#58624B; */
     border-radius: 0.6em;
     padding: 10px 10px;
     margin: 5px 10px;
@@ -108,6 +107,25 @@ main{
     justify-self: right;
     padding-right: 20px;
 }
+
+.logoutButton{
+    grid-column: 4/5;
+    justify-self: right;
+    padding: 5px;
+    margin: 0px 12px 0px 0px;
+    font-size: 13px;
+    color: #58624B;
+    border-radius: 0.5em;
+    letter-spacing: 1px;
+}
+
+
+.logoutButton:hover, .logoutButton:focus{
+    color:#58624B;
+    font-style: italic;
+    font-weight:bold;
+}
+
 
 header a{
     text-decoration: none;
