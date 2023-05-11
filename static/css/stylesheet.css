@@ -454,6 +454,7 @@ footer{
 .signupPage{
     display: flex;
     justify-content: center;
+    margin-top: 220px;
 }
 
 
