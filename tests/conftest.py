@@ -14,12 +14,3 @@ def test_client():
 
     with app.app_context():
         db.drop_all()
-
-
-@pytest.fixture(scope="module")
-def new_user():
-    return {
-        "username": "testuser",
-        "password": "test1234",
-        "confirm_password": "test1234",
-    }
