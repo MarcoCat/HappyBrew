@@ -260,6 +260,7 @@ footer{
 
 .itemType li {
     flex: 1 0 calc(25% - 10px);
+    margin-bottom: 5vh;
 }
 
 .itemType img {
