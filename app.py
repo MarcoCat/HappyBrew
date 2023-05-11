@@ -62,10 +62,10 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if not user:
-            return render_template("login.html", error="Username not found")
+            return render_template("login.html", error=" >>> Username not found !")
 
         elif user.password != password:
-            return render_template("login.html", error="Incorrect password")
+            return render_template("login.html", error=" >>> Incorrect password !")
 
         else:
             login_user(user)
