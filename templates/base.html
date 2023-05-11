@@ -9,12 +9,7 @@
       href="{{ url_for('static', filename='css/stylesheet.css') }}"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- test -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -26,7 +21,6 @@
         <a href="about" title="about"> ABOUT US </a>
         <a href="instructions"> INSTRUCTIONS </a>
         <a href="order"> order </a>
-        <a href="logout"> logout </a>
       </div>
 
       <div class="logoButton">
@@ -44,8 +38,6 @@
       <div class="navList">
         <a href="menu"> MENU </a></li>
         <a href="customize"> CUSTOMIZE </a>
-        <a href="signup"> signup </a>
-        <a href="dashboard"> dashboard </a>
       </div>
 
       <div class="acctCartButton">
@@ -57,8 +49,10 @@
           width="50"
           height="50"
       /></a>
-      <a class="accountButton" href="login"> LOGIN/SIGN UP </a>
+      <a class="accountButton1" href="dashboard"> LOGIN</a>
+      <a class="accountButton2" href="signup"> SIGN UP </a>
     </div>
+    <a class = "logoutButton" href="logout"> >> LogOut </a>
     </header>
 
 
@@ -73,7 +67,7 @@
 
     {% block content %} {% endblock %}
     <footer>
-      <h3>Follow Up</h3>
+      <h3>Follow Us</h3>
       <div>
         <img
           src="{{ url_for('static', filename='image/followUP/fbLogo.png') }}"
