@@ -9,7 +9,11 @@ def test_routing(test_client):
 
 
 def test_signup_successful(test_client):
-    new_user = {"username": "test1", "password": "test1234"}
+    new_user = {
+        "username": "test1",
+        "password": "test1234",
+        "confirm_password": "test1234",
+    }
     response = test_client.post("/signup", data=new_user)
     assert response.status_code == 302
     assert User.query.filter_by(username=new_user["username"]).first() is not None
