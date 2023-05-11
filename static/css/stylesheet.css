@@ -595,3 +595,49 @@ footer{
 .welsomeSection p{
     text-align: right;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* instructions page */
+
+
+.instructionPage h1{
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
+    color:#C1A390;
+    margin-top:5vh;
+    margin-bottom:2vh;
+}
+
+
+.instructionPage section div{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.instructionPage section h2{
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    margin-top:5vh;
+}
+
+.instructionPage section p{
+    width: 30vw;
+    font-size: 25px;
+}
+
+.instructionPage section img{
+    margin-left: 5vw;
+}
