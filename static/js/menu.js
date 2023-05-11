@@ -26,7 +26,7 @@ document.getElementById('user-info-form').addEventListener('submit', async (e) =
   document.querySelectorAll('.count').forEach((countInput, index) => {
     const quantity = parseInt(countInput.value);
     if (quantity > 0) {
-      const productName = countInput.parentElement.querySelector('h3').textContent;
+      const productName = countInput.parentElement.parentElement.querySelector('h3').textContent;
       const productPrice = parseFloat(countInput.parentElement.querySelector('.addToCartButton').dataset.price);
       addToCart(productName, productPrice, quantity);
     }
