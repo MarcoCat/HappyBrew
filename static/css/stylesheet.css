@@ -528,7 +528,7 @@ footer{
 
 .signupForm input, .loginForm input{
     display: inline-block;
-    width: 20vw; 
+    width: 22vw; 
     height: 5vh;
     box-sizing: border-box;
     margin: 10px;
@@ -578,15 +578,20 @@ footer{
 
 .loginSection{
     border-radius: 20px 0px 0px 20px;
-    padding-left: 2vw;
-    
 }
 
 .welsomeSection {
     border-radius: 0px 20px 20px 0px;
 }
 
-
+.loginForm{
+    margin-left: 1vw;
+}
 .loginsubmitButton{
-    margin-top: 10px;
+    margin-top: 3vh !important;
+}
+
+
+.welsomeSection p{
+    text-align: right;
 }
