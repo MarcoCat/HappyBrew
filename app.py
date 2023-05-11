@@ -43,6 +43,25 @@ def index():
         ]
     return render_template("menu.html", products=product_dict, categories=categories)
 
+@app.route('/menu', methods=['GET', 'POST'])
+def menu():
+    if request.method == 'POST':
+        # Get the order details from the form
+        order_details = request.form.to_dict()
+
+        # Create a new Order instance
+        new_order = Order(name=order_details['name'], address=order_details['address'])
+
+        # Add the order to the database
+        db.session.add(new_order)
+        db.session.commit()
+
+        # Redirect to the cart page to show the new order
+        return redirect(url_for('cart'))
+    else:
+        # Fetch menu items from the database
+        menu_items = Product.query.all()
+        return render_template('menu.html', menu_items=menu_items)
 
 @app.route("/about")
 def about():
