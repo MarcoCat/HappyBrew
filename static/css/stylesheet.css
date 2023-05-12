@@ -617,6 +617,13 @@ footer{
 
 /* instructions page */
 
+.instructionPage > div{
+    display: grid;
+    grid-template-columns: repeat(5, 18vw) ;
+    justify-content: center;
+    gap: 2vw;
+}
+
 
 .instructionPage h1{
     text-align: center;
@@ -624,14 +631,18 @@ footer{
     font-style: italic;
     color:#C1A390;
     margin-top:5vh;
-    margin-bottom:2vh;
+    margin-bottom:5vh;
 }
 
 
 .instructionPage section div{
     display: flex;
     justify-content: center;
-    
+    flex-direction: column;
+    border: 5px double #a1988f;
+    justify-content: flex-start;
+    height: 65vh;
+    background-color: #e3d6c1;
 }
 
 .instructionPage section h2{
@@ -642,10 +653,12 @@ footer{
 }
 
 .instructionPage section p{
-    width: 30vw;
-    font-size: 25px;
+    font-size: 20px;
+    margin: 2vw;
 }
 
 .instructionPage section img{
-    margin-left: 5vw;
+    margin-left: 1.5vw;
+    width: 15vw;
+    height: 28vh;
 }
