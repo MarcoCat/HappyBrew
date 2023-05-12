@@ -1,9 +1,7 @@
-{% extends "base.html" %} {% block content %}
-<main>
+{% extends "base.html" %} 
 
-    
-    <h1>login test page, you have sccessfully logged in as {{ user.username }}</h1>
+{% block title %}Dashboard{% endblock %}
 
-
-</main>
+{% block content %}
+<main><h1>login test page, you have sccessfully logged in as {{ user.username }}</h1></main>
 {% endblock %}
