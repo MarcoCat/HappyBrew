@@ -47,3 +47,52 @@ def test_signup_username_taken(test_client):
     response = test_client.post("/signup", data=new_user)
     assert response.status_code == 200
     assert "Username already taken" in response.data.decode("utf-8")
+
+
+def test_login_successful(test_client):
+    new_user = {
+        "username": "test4",
+        "password": "test1234",
+        "confirm_password": "test1234",
+    }
+    response = test_client.post("/signup", data=new_user)
+
+    login_user = {"username": "test4", "password": "test1234"}
+    response = test_client.post("/login", data=login_user, follow_redirects=True)
+    assert response.status_code == 200
+    assert response.request.path == "/dashboard"
+    assert b"logged in as test4" in response.data
+
+
+def test_login_incorrect_password(test_client):
+    new_user = {
+        "username": "test5",
+        "password": "test1234",
+        "confirm_password": "test1234",
+    }
+    response = test_client.post("/signup", data=new_user)
+
+    login_user = {"username": "test5", "password": "wrongpassword"}
+    response = test_client.post("/login", data=login_user)
+    assert response.status_code == 200
+    assert response.request.path == "/login"
+    assert b"Incorrect password" in response.data
+
+
+def test_logout(test_client):
+    # Create a new user
+    new_user = {
+        "username": "test6",
+        "password": "test1234",
+        "confirm_password": "test1234",
+    }
+    response = test_client.post("/signup", data=new_user)
+
+    # Log in with the new user credentials
+    login_user = {"username": "test6", "password": "test1234"}
+    response = test_client.post("/login", data=login_user, follow_redirects=True)
+
+    # Log out
+    response = test_client.get("/logout", follow_redirects=True)
+    assert response.status_code == 200
+    assert response.request.path == "/home"
