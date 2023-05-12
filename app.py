@@ -1,3 +1,5 @@
+import csv
+import os
 from pathlib import Path
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
@@ -12,12 +14,49 @@ from flask_login import (
 from database import db
 from models import Order, Product, ProductsOrder, User
 
+
+def create_db(product_file):
+    with app.app_context():
+        db.create_all()
+        print("Create all tables successfully.")
+
+        with open(product_file, newline="") as csvfile:
+            reader = csv.reader(csvfile, delimiter=",", quotechar='"')
+            next(reader)
+            for row in reader:
+                obj = Product(
+                    name=row[0],
+                    price=float(row[1]),
+                    category=row[2],
+                    description=row[3],
+                    quantity=int(row[4]),
+                )
+                db.session.add(obj)
+        db.session.commit()
+        print("Successfully created all products.")
+
+
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///store.db"
+app.instance_path = str(Path(".").resolve())
+app.secret_key = "abcdefg"
+
+if __name__ == "__main__":
+    DB_NAME = "store"
+else:
+    DB_NAME = "test"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}.db"
+
+login_manager = LoginManager(app)
 app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
-login_manager = LoginManager(app)
+if not os.path.isfile(f"{DB_NAME}.db") and DB_NAME == "store":
+    create_db("products.csv")
+
+if DB_NAME == "test":
+    create_db("test_products.csv")
+
 app.secret_key = "abcdefg"
 
 
@@ -195,6 +234,11 @@ def get_order(order_id):
         return "Order not found", 404
     order_json = order.to_dict()
     return jsonify(order_json)
+
+
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
 
 
 if __name__ == "__main__":
