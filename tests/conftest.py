@@ -3,7 +3,6 @@ import pytest
 from app import app, db
 
 
-# TODO: fix deletes all data from the database
 @pytest.fixture(scope="module")
 def test_client():
     app.config["TESTING"] = True
