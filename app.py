@@ -51,11 +51,11 @@ login_manager = LoginManager(app)
 app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
-if not os.path.isfile(f"{DB_NAME}.db"):
-    if DB_NAME == "store":
-        create_db("products.csv")
-    if DB_NAME == "test":
-        create_db("test_products.csv")
+if not os.path.isfile(f"{DB_NAME}.db") and DB_NAME == "store":
+    create_db("products.csv")
+
+if DB_NAME == "test":
+    create_db("test_products.csv")
 
 app.secret_key = "abcdefg"
 
