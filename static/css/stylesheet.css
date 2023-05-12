@@ -449,6 +449,11 @@ footer{
 
 
 
+
+
+
+
+
 /* signup page & login page */
 
 
@@ -458,7 +463,7 @@ footer{
 .signupPage, .loginPage{
     display: flex;
     justify-content: center;
-    margin-top: 220px;
+    margin-top: 24vh;
     
 }
 
