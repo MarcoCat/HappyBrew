@@ -15,12 +15,12 @@ from database import db
 from models import Order, Product, ProductsOrder, User
 
 
-def create_db():
+def create_db(product_file):
     with app.app_context():
         db.create_all()
         print("Create all tables successfully.")
 
-        with open("products.csv", newline="") as csvfile:
+        with open(product_file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",", quotechar='"')
             next(reader)
             for row in reader:
@@ -52,7 +52,10 @@ app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
 if not os.path.isfile(f"{DB_NAME}.db"):
-    create_db()
+    if DB_NAME == "store":
+        create_db("products.csv")
+    if DB_NAME == "test":
+        create_db("test_products.csv")
 
 app.secret_key = "abcdefg"
 
