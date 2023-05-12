@@ -1,4 +1,9 @@
+from app import app
 from models import User
+
+
+def test_config():
+    assert app.config["SQLALCHEMY_DATABASE_URI"] == "sqlite:///test.db"
 
 
 def test_routing(test_client):
