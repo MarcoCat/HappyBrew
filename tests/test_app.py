@@ -1,5 +1,5 @@
-from app import app
-from models import User
+from app import app, db
+from models import Product, User
 
 
 def test_config():
@@ -80,7 +80,6 @@ def test_login_incorrect_password(test_client):
 
 
 def test_logout(test_client):
-    # Create a new user
     new_user = {
         "username": "test6",
         "password": "test1234",
@@ -88,11 +87,25 @@ def test_logout(test_client):
     }
     response = test_client.post("/signup", data=new_user)
 
-    # Log in with the new user credentials
     login_user = {"username": "test6", "password": "test1234"}
     response = test_client.post("/login", data=login_user, follow_redirects=True)
 
-    # Log out
     response = test_client.get("/logout", follow_redirects=True)
     assert response.status_code == 200
     assert response.request.path == "/home"
+
+
+def test_products(test_client):
+    green_tea = Product.query.filter_by(name="Green Tea").first()
+    assert green_tea is not None
+    assert green_tea.price == 1.0
+    assert green_tea.category == "Tea"
+    assert green_tea.description == "Classic green tea"
+    assert green_tea.quantity == 10
+
+    apple_juice = Product.query.filter_by(name="Apple Juice").first()
+    assert apple_juice is not None
+    assert apple_juice.price == 2.5
+    assert apple_juice.category == "Fruit"
+    assert apple_juice.description == "Fresh apple juice"
+    assert apple_juice.quantity == 2
