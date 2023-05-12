@@ -197,5 +197,10 @@ def get_order(order_id):
     return jsonify(order_json)
 
 
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
+
+
 if __name__ == "__main__":
     app.run()
