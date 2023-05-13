@@ -242,6 +242,7 @@ footer{
     font-style: italic;
     color:#C1A390;
     margin: 0px;
+    font-weight: bold;
 }
 .menuItem h2{
     padding-top: 20vh;
@@ -260,6 +261,7 @@ footer{
 
 .itemType li {
     flex: 1 0 calc(25% - 10px);
+    margin-bottom: 5vh;
 }
 
 .itemType img {
@@ -369,6 +371,7 @@ footer{
     color: #C1A390;
     text-align: center;
     margin: 0px 0px 60px;
+    font-weight: bold;
  
 }
 
@@ -448,37 +451,49 @@ footer{
 
 
 
-/* signup page */
 
 
-.signupPage{
+
+
+
+/* signup page & login page */
+
+
+/* for sign up page */
+
+
+.signupPage, .loginPage{
     display: flex;
     justify-content: center;
+    margin-top: 24vh;
+    
 }
 
 
-.imageSection{
+.imageSection, .welsomeSection{
     border-radius: 20px 0px 0px 20px;
     background-color: #58624B;
-    width: 30vw;
+    width: 25vw;
+    height: 45vh;
     color:white;
-    border: 2px solid #58624B;
+    border: 5px solid #58624B;
 }
 
-.signupSection{
-    width: 30vw;
+.signupSection, .loginSection{
+    width: 25vw;
+    height: 45vh;
     border-radius: 0px 20px 20px 0px;
     border: 5px solid #58624B;
 }
 
 
-.imageSection p{
+.imageSection p, .welsomeSection p{
     font-size: 15px;
     font-weight: bold;
     margin: 0px;
 }
 
-.imageSection div{
+.imageSection div, .welsomeSection div{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -486,30 +501,31 @@ footer{
 }
 
 
-.imageSection img{
+.imageSection img, .welsomeSection img{
     border-radius: 50px;
     margin-top: 35px;
 }
 
-.imageSection h2{
+.imageSection h2, .welsomeSection h2{
     margin-bottom: 0px;
 }
 
 
-.signupSection h1{
+.signupSection h1, .loginSection h1{
     font-size: 25px;
     text-align: center;
     margin-top: 15px;
     font-style: italic;
     color: #C1A390;
 }
+
 .signupForm{
     margin-left: 25px;
 }
 
 
 
-.signupForm label{
+.signupForm label, .loginSection label{
     visibility: hidden;
     display: inline-block;
     text-align: right;
@@ -518,10 +534,10 @@ footer{
 
 }
 
-.signupForm input{
+.signupForm input, .loginForm input{
     display: inline-block;
-    width: 24vw; 
-    height: 6vh;
+    width: 22vw; 
+    height: 5vh;
     box-sizing: border-box;
     margin: 10px;
     border: 0px;
@@ -529,36 +545,120 @@ footer{
     font-family: 'Josefin Sans', sans-serif;
     border-bottom: 3px solid #808E68;
     background-color: #F5EBE0;
-    
-  }
+}
 
-.signupForm input::placeholder{
+
+.signupForm input::placeholder, .loginForm input::placeholder{
     color:#808E68;
 }
 
-.signupForm input:focus, .signupForm input:valid {
+.signupForm input:focus, .signupForm input:valid, .loginForm input:focus, .loginForm input:valid{
     outline: none;
     border: 0px;
     border-bottom: 3px solid #808E68;
 }
 
-.signupForm input:focus::placeholder{
+.signupForm input:focus::placeholder, .loginForm input:focus::placeholder {
     transform: translate(0px, -5px);
     font-size: 12px;
     color: #808E68;
 }
 
 
-.signupsubmitButton{
+
+.signupsubmitButton, .loginsubmitButton{
     align-items: center;
     background-color: #808E68 !important;
     color: white;
     font-weight: bold;
 }
 
-.signupsubmitButton:hover{
+.signupsubmitButton:hover, .loginsubmitButton:hover{
     background-color: #58624B !important;
     border-bottom: 3px solid #58624B !important;
     box-shadow: 0px 0px 10px #58624B;
 }
 
+
+
+/* for login page */
+
+
+.loginSection{
+    border-radius: 20px 0px 0px 20px;
+}
+
+.welsomeSection {
+    border-radius: 0px 20px 20px 0px;
+}
+
+.loginForm{
+    margin-left: 1vw;
+}
+.loginsubmitButton{
+    margin-top: 3vh !important;
+}
+
+
+.welsomeSection p{
+    text-align: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* instructions page */
+
+.instructionPage > div{
+    display: grid;
+    grid-template-columns: repeat(5, 18vw) ;
+    justify-content: center;
+    gap: 2vw;
+}
+
+
+.instructionPage h1{
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
+    color:#C1A390;
+    margin-top:5vh;
+    margin-bottom:5vh;
+}
+
+
+.instructionPage section div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 5px double #a1988f;
+    justify-content: flex-start;
+    height: 65vh;
+    background-color: #e3d6c1;
+}
+
+.instructionPage section h2{
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    margin-top:5vh;
+}
+
+.instructionPage section p{
+    font-size: 20px;
+    margin: 2vw;
+}
+
+.instructionPage section img{
+    margin-left: 1.5vw;
+    width: 15vw;
+    height: 28vh;
+}
