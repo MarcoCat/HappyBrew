@@ -511,7 +511,7 @@ footer{
 }
 
 
-.signupSection h1, .loginSection h1{
+.signupSection h1, .loginSection h1, .feedbackPage h1{
     font-size: 25px;
     text-align: center;
     margin-top: 15px;
@@ -671,4 +671,67 @@ footer{
     margin-left: 1.3vw;
     width: 15vw;
     height: 28vh;
+}
+
+
+
+/* feedback page */
+
+
+.feedbackPage{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+}
+/* h1 style put with signuppage/loginage h1 */
+
+.feedbackPage h1{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-bottom: 5vh;
+}
+
+
+.feedbackPage textarea{
+    border: 3px solid #D5BDAF;
+    border-radius: 10px ;
+    grid-column: 2/3;
+    grid-row: 2/3;
+} 
+
+
+
+.feedbackPage div{
+    grid-column: 2/3;
+    grid-row: 3/4;
+    justify-self: self-end;
+
+}
+
+.saveb, .cancelb{
+    background-color: #58624B;
+    color: #FAF4EC;
+    border-radius: 0.6em;
+    border: none;
+    padding: 6px 6px;
+    margin: 5px 5px;
+    font-size: 15px;
+    font-weight:bold;
+    letter-spacing: 1px;
+}
+
+.cancelb{
+    background-color: #9A6768;
+}
+
+.saveb:hover, .saveb:active{
+    box-shadow: 0px 0px 10px #C1BC92;
+    background-color: #C1BC92;
+    color:white;
+}
+
+.cancelb:hover, .cancelb:active{
+    box-shadow: 0px 0px 10px #B69394;
+    background-color: #B69394;
+    color:white;
 }
