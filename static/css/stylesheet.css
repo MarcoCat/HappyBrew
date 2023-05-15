@@ -307,6 +307,13 @@ footer{
 
 
 
+
+
+
+
+
+
+
 /* customize1 page */
 
 .customizePage{
@@ -734,4 +741,39 @@ footer{
     box-shadow: 0px 0px 10px #B69394;
     background-color: #B69394;
     color:white;
+}
+
+
+
+
+
+/* about page */
+
+
+
+
+
+.ourteamContent{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+
+
+.ourteamContent h2{
+    background-color: #C1A390;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin: 0px;
+    padding-top:10px;
+}
+
+
+
+.lastPosition{
+    border-radius: 0px 50px 50px 0px;
 }
