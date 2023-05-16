@@ -5,16 +5,18 @@
 {% block content %}
 <main class="feedbackPage">
     <h1>Any thoughts? Help us to improve.</h1>
-    
-    <textarea
-      name="note"
-      rows="10"
-      cols="125"
-      placeholder="Type your thought here..."></textarea>
-    <div>
-      <button class="saveb" type="button">Save</button>
-      <button class="cancelb" type="button">Cancel</button>
-    </div>
-
+    <form id="feedback-form" onsubmit="return submitFeedback(event)">
+        <textarea
+            id="feedback-textarea"
+            name="note"
+            rows="10"
+            cols="125"
+            placeholder="Type your thought here..."
+        ></textarea>
+        <div>
+            <button class="saveb" type="submit">Submit</button>
+            <button class="cancelb" type="button">Cancel</button>
+        </div>
+    </form>
 </main>
 {% endblock %}
