@@ -240,6 +240,16 @@ def get_order(order_id):
 def feedback():
     return render_template("feedback.html")
 
+@app.route("/feedback", methods=["POST"])
+def create_feedback():
+    message = request.form.get("message")
+    feedback = Feedback(message=message)
+
+    db.session.add(feedback)
+    db.session.commit()
+
+    return redirect(url_for("feedback"))
+
 
 if __name__ == "__main__":
     app.run()
