@@ -687,6 +687,8 @@ footer{
 
 
 
+
+
 /* feedback page */
 
 
@@ -752,10 +754,25 @@ footer{
 
 
 
+
+
+
+
+
+
 /* about page */
 
+.aboutPage section, .teamTitle{
+    margin-left: 20px;
+}
 
-
+.aboutPage p{
+    font-size: 18px;
+    width: 65%;
+    margin-left: 2vw;
+    line-height: 1.5em;
+    /* color: #91705a; */
+}
 
 
 .ourteamContent{
@@ -763,6 +780,10 @@ footer{
     grid-template-columns: repeat(5, 1fr);
     align-items: center;
     justify-items: center;
+}
+
+.teamTitle{
+    margin-top: 10vh;
 }
 
 
@@ -774,11 +795,15 @@ footer{
     text-align: center;
     color: white;
     margin: 5px 0px;
-    padding-top: 20px;
+    padding-top: 25px;
+    font-size: 20px;
 }
-
 
 
 .lastPosition{
     border-radius: 0px 50px 50px 0px;
+}
+
+.ourteamContent h3{
+    font-style: italic;
 }
