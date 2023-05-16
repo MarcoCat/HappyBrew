@@ -12,7 +12,7 @@ from flask_login import (
 )
 
 from database import db
-from models import Order, Product, ProductsOrder, User
+from models import Order, Product, ProductsOrder, User, Feedback
 
 
 def create_db(product_file):
