@@ -307,6 +307,13 @@ footer{
 
 
 
+
+
+
+
+
+
+
 /* customize1 page */
 
 .customizePage{
@@ -511,7 +518,7 @@ footer{
 }
 
 
-.signupSection h1, .loginSection h1{
+.signupSection h1, .loginSection h1, .feedbackPage h1{
     font-size: 25px;
     text-align: center;
     margin-top: 15px;
@@ -639,26 +646,164 @@ footer{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border: 5px double #a1988f;
     justify-content: flex-start;
-    height: 65vh;
-    background-color: #e3d6c1;
+    height: 75vh;
+    border: 7px double #DAD7CD;
+    background-color: #859174;
+    color: #f5ebe0;
 }
 
 .instructionPage section h2{
-    font-size: 30px;
+    font-size: 35px;
     text-align: center;
     font-family: 'Pacifico', cursive;
     margin-top:5vh;
 }
 
+.instructionPage section h3{
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+    margin-top: 2.5vw;
+}
+
+
 .instructionPage section p{
-    font-size: 20px;
-    margin: 2vw;
+    font-size: 18px;
+    margin: 1vw;
+    text-align: center;
+    padding-bottom: 10px;
 }
 
 .instructionPage section img{
-    margin-left: 1.5vw;
+    margin-left: 1.3vw;
     width: 15vw;
     height: 28vh;
+}
+
+
+
+
+
+
+
+
+
+/* feedback page */
+
+
+.feedbackPage{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+}
+/* h1 style put with signuppage/loginage h1 */
+
+.feedbackPage h1{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-bottom: 5vh;
+}
+
+
+.feedbackPage textarea{
+    border: 3px solid #D5BDAF;
+    border-radius: 10px ;
+    grid-column: 2/3;
+    grid-row: 2/3;
+} 
+
+
+
+.feedbackPage div{
+    grid-column: 2/3;
+    grid-row: 3/4;
+    justify-self: self-end;
+
+}
+
+.saveb, .cancelb{
+    background-color: #58624B;
+    color: #FAF4EC;
+    border-radius: 0.6em;
+    border: none;
+    padding: 6px 6px;
+    margin: 5px 5px;
+    font-size: 15px;
+    font-weight:bold;
+    letter-spacing: 1px;
+}
+
+.cancelb{
+    background-color: #9A6768;
+}
+
+.saveb:hover, .saveb:active{
+    box-shadow: 0px 0px 10px #C1BC92;
+    background-color: #C1BC92;
+    color:white;
+}
+
+.cancelb:hover, .cancelb:active{
+    box-shadow: 0px 0px 10px #B69394;
+    background-color: #B69394;
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* about page */
+
+.aboutPage section, .teamTitle{
+    margin-left: 20px;
+}
+
+.aboutPage p{
+    font-size: 18px;
+    width: 65%;
+    margin-left: 2vw;
+    line-height: 1.5em;
+    /* color: #91705a; */
+}
+
+
+.ourteamContent{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+.teamTitle{
+    margin-top: 10vh;
+}
+
+
+
+.ourteamContent h2{
+    background-color: #C1A390;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin: 5px 0px;
+    padding-top: 25px;
+    font-size: 20px;
+}
+
+
+.lastPosition{
+    border-radius: 0px 50px 50px 0px;
+}
+
+.ourteamContent h3{
+    font-style: italic;
 }
