@@ -19,25 +19,31 @@ content %}
 
 <script>
     async function submitFeedback(event) {
-    event.preventDefault();
-    const feedback = {
-        message: document.querySelector("textarea[name='note']").value,
-    };
+        event.preventDefault();
+        const message = document.querySelector("textarea[name='note']").value;
 
-    try {
-        const response = await fetch("/feedback", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(feedback),
-        });
-        console.log("Feedback submitted successfully!");
-        alert("Thank you for your feedback!");
-    } catch (error) {
-        console.error("Error saving feedback:", error);
+        if (!message.trim()) {
+            alert("Please enter a message.");
+            return;
+        }
+
+        const feedback = {
+            message: message,
+        };
+
+        try {
+            const response = await fetch("/feedback", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(feedback),
+            });
+            console.log("Feedback submitted successfully!");
+            alert("Thank you for your feedback!");
+        } catch (error) {
+            console.error("Error saving feedback:", error);
+        }
     }
-}
-
 </script>
 {% endblock %}
