@@ -1,8 +1,5 @@
-{% extends "base.html" %} 
-
-{% block title %}Feedback{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Feedback{% endblock %} {% block
+content %}
 <main class="feedbackPage">
     <h1>Any thoughts? Help us to improve.</h1>
     <form id="feedback-form" onsubmit="return submitFeedback(event)">
@@ -19,4 +16,26 @@
         </div>
     </form>
 </main>
+
+<script>
+    function submitFeedback(event) {
+        const feedback = {
+            message: document.querySelector("textarea[name='note']").value,
+        };
+
+        fetch("/feedback", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(feedback),
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                console.error("Error saving feedback:", error);
+            });
+
+        return false;
+    }
+</script>
 {% endblock %}
