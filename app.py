@@ -242,7 +242,7 @@ def feedback():
 
 @app.route("/feedback", methods=["POST"])
 def create_feedback():
-    message = request.form.get("message")
+    message = request.get_json()['message']
     feedback = Feedback(message=message)
 
     db.session.add(feedback)
