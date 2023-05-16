@@ -26,7 +26,7 @@ content %}
 
     async function submitFeedback(event) {
         event.preventDefault();
-        const message = document.querySelector("textarea[name='note']").value;
+        const message = document.getElementById("feedback-textarea").value;
 
         if (!message.trim()) {
             alert("Please enter a message.");
