@@ -45,7 +45,7 @@ content %}
                 },
                 body: JSON.stringify(feedback),
             });
-            console.log("Feedback submitted successfully!");
+            clearTextArea()
             alert("Thank you for your feedback!");
         } catch (error) {
             console.error("Error saving feedback:", error);
