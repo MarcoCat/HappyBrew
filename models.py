@@ -4,19 +4,25 @@ from database import db
 
 
 class Product(db.Model):
-    name = db.Column(db.String, unique=True, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     category = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
+    ingredients = db.relationship(
+        "Ingredient", secondary="product_ingredient", backref="products", lazy="dynamic"
+    )
 
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "price": self.price,
             "category": self.category,
             "description": self.description,
-            "quantity": self.quantity,
+            "ingredients": [
+                ingredient.to_dict() for ingredient in self.ingredients.all()
+            ],
         }
 
 
@@ -87,3 +93,5 @@ class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     amount = db.Column(db.Float, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=True)
+    product = db.relationship("Product", backref="ingredients")
