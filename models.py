@@ -76,8 +76,16 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
-    
+
 
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String, nullable=False)
+
+
+class Custom_Product(db.Model):
+    name = db.Column(db.String, unique=True, primary_key=True, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    ingredients = db.relationship(
+        "Ingredient", secondary="product_ingredient", backref="products"
+    )
