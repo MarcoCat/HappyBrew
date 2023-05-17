@@ -5,12 +5,17 @@ from database import db
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(80), unique=True, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    category = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    category = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    quantity = db.Column(db.Integer, nullable=False)
+
     ingredients = db.relationship(
-        "Ingredient", secondary="product_ingredient", backref="products", lazy="dynamic"
+        "Ingredient",
+        secondary="product_ingredient",
+        lazy="subquery",
+        backref=db.backref("products", lazy=True),
     )
 
     def to_dict(self):
@@ -71,8 +76,8 @@ class Order(db.Model):
 
 
 class ProductsOrder(db.Model):
-    product_name = db.Column(db.ForeignKey("product.name"), primary_key=True)
-    order_id = db.Column(db.ForeignKey("order.id"), primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey("order.id"), primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
     product = db.relationship("Product")
     order = db.relationship("Order", back_populates="products")
@@ -91,12 +96,10 @@ class Feedback(db.Model):
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    category = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
-    stock = db.Column(db.Float, nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=True)
-    product = db.relationship("Product", backref="ingredients")
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    category = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.Text)
+    stock = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return {
@@ -105,20 +108,12 @@ class Ingredient(db.Model):
             "category": self.category,
             "description": self.description,
             "stock": self.stock,
-            "product_id": self.product_id,
         }
 
 
 class ProductIngredient(db.Model):
-    product_name = db.Column(db.ForeignKey("custom_product.name"), primary_key=True)
-    ingredient_id = db.Column(db.ForeignKey("ingredient.id"), primary_key=True)
-    amount = db.Column(db.Float, nullable=False)
-    product = db.relationship("Custom_Product", back_populates="ingredients")
-    ingredient = db.relationship("Ingredient")
-
-    def to_dict(self):
-        return {
-            "product_name": self.product_name,
-            "ingredient_name": self.ingredient.name,
-            "amount": self.amount,
-        }
+    __tablename__ = "product_ingredient"
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), primary_key=True)
+    ingredient_id = db.Column(
+        db.Integer, db.ForeignKey("ingredient.id"), primary_key=True
+    )
