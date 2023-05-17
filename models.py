@@ -25,9 +25,7 @@ class Product(db.Model):
             "price": self.price,
             "category": self.category,
             "description": self.description,
-            "ingredients": [
-                ingredient.to_dict() for ingredient in self.ingredients.all()
-            ],
+            "ingredients": [ingredient.to_dict() for ingredient in self.ingredients],
         }
 
 
