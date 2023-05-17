@@ -692,16 +692,14 @@ footer{
 /* feedback page */
 
 
-.feedbackPage{
+#feedback-form{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-rows: 4fr 1fr;
 }
 /* h1 style put with signuppage/loginage h1 */
 
 .feedbackPage h1{
-    grid-column: 2/3;
-    grid-row: 1/2;
     margin-bottom: 5vh;
 }
 
@@ -710,14 +708,14 @@ footer{
     border: 3px solid #D5BDAF;
     border-radius: 10px ;
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 1/2;
 } 
 
 
 
 .feedbackPage div{
     grid-column: 2/3;
-    grid-row: 3/4;
+    grid-row: 2/3;
     justify-self: self-end;
 
 }
