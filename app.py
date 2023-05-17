@@ -187,6 +187,9 @@ def create_drink():
     ingredient_names = data.get("ingredients")
     description = data.get("description")
 
+    if Product.query.filter_by(name=name).first():
+        return jsonify({"error": "Product name already exists"}), 400
+
     product = Product(
         name=name, description=description, price=7.00, category="Custom", quantity=1
     )
@@ -194,8 +197,7 @@ def create_drink():
     for ingredient_name in ingredient_names:
         ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
         if ingredient is None:
-            ingredient = Ingredient(name=ingredient_name)
-            db.session.add(ingredient)
+            return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
 
         product.ingredients.append(ingredient)
 
