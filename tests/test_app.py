@@ -2,6 +2,10 @@ from app import app, db
 from models import Product, User
 
 
+def test_bad():
+    assert 1 + 1 == 3
+
+
 def test_config():
     assert app.config["SQLALCHEMY_DATABASE_URI"] == "sqlite:///test.db"
 
