@@ -95,3 +95,11 @@ class Ingredient(db.Model):
     amount = db.Column(db.Float, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=True)
     product = db.relationship("Product", backref="ingredients")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "amount": self.amount,
+            "product_id": self.product_id,
+        }
