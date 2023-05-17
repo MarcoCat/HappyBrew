@@ -180,6 +180,8 @@ def customize():
 
 @app.route("/customize", methods=["POST"])
 def create_drink():
+    # sample json
+    # {"name": "Good Drink", "ingredients": ["Aloe Vera", "Grass Jelly"], "description":"drink desc"}
     data = request.json
     name = data.get("name")
     ingredient_names = data.get("ingredients")
