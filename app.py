@@ -178,9 +178,29 @@ def customize():
     return render_template("customize1.html")
 
 
-# @app.route("/customize", methods=["POST"])
-# def customize():
-#     pass
+@app.route("/customize", methods=["POST"])
+def create_drink():
+    data = request.json
+    name = data.get("name")
+    ingredient_names = data.get("ingredients")
+    description = data.get("description")
+
+    product = Product(
+        name=name, description=description, price=7.00, category="Custom", quantity=1
+    )
+
+    for ingredient_name in ingredient_names:
+        ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
+        if ingredient is None:
+            ingredient = Ingredient(name=ingredient_name)
+            db.session.add(ingredient)
+
+        product.ingredients.append(ingredient)
+
+    db.session.add(product)
+    db.session.commit()
+
+    return jsonify(product.to_dict()), 201
 
 
 @app.route("/cart", defaults={"order_id": None})
