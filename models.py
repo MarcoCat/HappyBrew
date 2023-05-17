@@ -83,19 +83,7 @@ class Feedback(db.Model):
     message = db.Column(db.String, nullable=False)
 
 
-class Custom_Product(db.Model):
-    name = db.Column(db.String, unique=True, primary_key=True, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    ingredients = db.relationship(
-        "Ingredient", secondary="product_ingredient", backref="products"
-    )
-
-
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    product_id = db.Column(
-        db.String, db.ForeignKey("custom_product.name"), nullable=False
-    )
-    product = db.relationship("Custom_Product", backref="ingredients")
