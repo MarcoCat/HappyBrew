@@ -92,7 +92,9 @@ class Feedback(db.Model):
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    amount = db.Column(db.Float, nullable=False)
+    category = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    stock = db.Column(db.Float, nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=True)
     product = db.relationship("Product", backref="ingredients")
 
