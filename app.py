@@ -12,7 +12,15 @@ from flask_login import (
 )
 
 from database import db
-from models import Order, Product, ProductsOrder, User, Feedback, Ingredient
+from models import (
+    Feedback,
+    Ingredient,
+    Order,
+    Product,
+    ProductIngredient,
+    ProductsOrder,
+    User,
+)
 
 
 def create_db(product_file, ingredient_file):
@@ -34,7 +42,7 @@ def create_db(product_file, ingredient_file):
                 db.session.add(obj)
         db.session.commit()
         print("Successfully created all products.")
-        
+
         with open(ingredient_file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",", quotechar='"')
             next(reader)
@@ -48,6 +56,7 @@ def create_db(product_file, ingredient_file):
                 db.session.add(obj)
         db.session.commit()
         print("Successfully created all ingredients.")
+
 
 app = Flask(__name__)
 app.instance_path = str(Path(".").resolve())
@@ -169,7 +178,9 @@ def customize():
     return render_template("customize1.html")
 
 
-@app.route("/customize", methods=["POST"]):
+# @app.route("/customize", methods=["POST"])
+# def customize():
+#     pass
 
 
 @app.route("/cart", defaults={"order_id": None})
@@ -256,9 +267,10 @@ def get_order(order_id):
 def feedback():
     return render_template("feedback.html")
 
+
 @app.route("/feedback", methods=["POST"])
 def create_feedback():
-    message = request.get_json()['message']
+    message = request.get_json()["message"]
     feedback = Feedback(message=message)
 
     db.session.add(feedback)
