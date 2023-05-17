@@ -102,6 +102,23 @@ class Ingredient(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "amount": self.amount,
+            "category": self.category,
+            "description": self.description,
+            "stock": self.stock,
             "product_id": self.product_id,
+        }
+
+
+class ProductIngredient(db.Model):
+    product_name = db.Column(db.ForeignKey("custom_product.name"), primary_key=True)
+    ingredient_id = db.Column(db.ForeignKey("ingredient.id"), primary_key=True)
+    amount = db.Column(db.Float, nullable=False)
+    product = db.relationship("Custom_Product", back_populates="ingredients")
+    ingredient = db.relationship("Ingredient")
+
+    def to_dict(self):
+        return {
+            "product_name": self.product_name,
+            "ingredient_name": self.ingredient.name,
+            "amount": self.amount,
         }
