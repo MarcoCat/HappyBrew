@@ -12,10 +12,10 @@ from flask_login import (
 )
 
 from database import db
-from models import Order, Product, ProductsOrder, User, Feedback
+from models import Order, Product, ProductsOrder, User, Feedback, Ingredient
 
 
-def create_db(product_file):
+def create_db(product_file, ingredient_file):
     with app.app_context():
         db.create_all()
         print("Create all tables successfully.")
@@ -34,7 +34,20 @@ def create_db(product_file):
                 db.session.add(obj)
         db.session.commit()
         print("Successfully created all products.")
-
+        
+        with open(ingredient_file, newline="") as csvfile:
+            reader = csv.reader(csvfile, delimiter=",", quotechar='"')
+            next(reader)
+            for row in reader:
+                obj = Ingredient(
+                    name=row[0],
+                    category=row[1],
+                    description=row[2],
+                    stock=int(row[3]),
+                )
+                db.session.add(obj)
+        db.session.commit()
+        print("Successfully created all ingredients.")
 
 app = Flask(__name__)
 app.instance_path = str(Path(".").resolve())
@@ -52,10 +65,10 @@ app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
 if not os.path.isfile(f"{DB_NAME}.db") and DB_NAME == "store":
-    create_db("products.csv")
+    create_db("products.csv", "ingredients.csv")
 
 if DB_NAME == "test":
-    create_db("test_products.csv")
+    create_db("test_products.csv", "ingredients.csv")
 
 app.secret_key = "abcdefg"
 
@@ -154,6 +167,9 @@ def logout():
 @app.route("/customize")
 def customize():
     return render_template("customize1.html")
+
+
+@app.route("/customize", methods=["POST"]):
 
 
 @app.route("/cart", defaults={"order_id": None})
