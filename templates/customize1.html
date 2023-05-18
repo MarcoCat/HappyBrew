@@ -48,10 +48,10 @@
               {% for product in products[category] %}
               <li>
                 <img 
-                  src="{{ url_for('static', filename='image/menuPage/' + product.name + '.png') }}"
+                  src="{{ url_for('static', filename='image/customize1Page/' + product.name + '.png') }}"
                   alt="{{ product.name }} images"
-                  width="200"
-                  height="230"
+                  width="100"
+                  height="100"
                   onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
                 />
                 <h3 id="{{ product }}">{{ product.name }}</h3>

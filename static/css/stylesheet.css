@@ -210,7 +210,7 @@ footer{
 
 .menucustomPage{
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 2fr 6fr;
     grid-template-rows: 50px 1fr ;
    
 }
@@ -263,7 +263,7 @@ footer{
 }
 
 .itemType li {
-    flex: 1 0 calc(25% - 10px);
+    flex: 1 0 calc(20% - 10px);
     margin-bottom: 5vh;
 }
 
