@@ -272,28 +272,6 @@ def create_order():
 
     return {"location": url_for("cart")}
 
-    # for key in ("name", "address"):
-    #     if key not in data:
-    #         return f"The JSON is missing: {key}", 400
-
-
-    # order = Order(
-    #     name=data["name"],
-    #     address=data["address"],
-    # )
-
-    # for product in data["products"]:
-    #     association = ProductsOrder(
-    #         product=db.session.get(Product, product["name"]),
-    #         order=order,
-    #         quantity=product["quantity"],
-    #     )
-    #     db.session.add(association)
-    # db.session.add(order)
-    # db.session.commit()
-
-    # return redirect(url_for("cart"))
-
 
 @app.route("/order/<int:order_id>", methods=["GET"])
 def get_order(order_id):
