@@ -195,7 +195,7 @@ def customize():
 @app.route("/customize", methods=["POST"])
 def create_drink():
     data = request.json
-    item = data.get("item")
+    items = data.get("item")
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
@@ -208,7 +208,7 @@ def create_drink():
         name=name,
         price=7.0,
         category="Custom",
-        description=item,
+        description=' '.join(items),
         quantity=1
     )
 

@@ -50,57 +50,48 @@
 </main>
 
 <script>
-
-
-
     var selectedItems = {};
 
-  
     function selectItem(button, itemName) {
-    if (button.classList.contains('selected')) {
-        button.classList.remove('selected');
-        delete selectedItems[itemName];
-        console.log("Item removed from selection:", itemName);
-    } else {
-        
-        button.classList.add('selected');
-        selectedItems[itemName] = 1;
-        console.log("Item added to selection:", itemName);
+        if (button.classList.contains('selected')) {
+            button.classList.remove('selected');
+            delete selectedItems[itemName];
+            console.log("Item removed from selection:", itemName);
+        } else {
+            button.classList.add('selected');
+            selectedItems[itemName] = 1;
+            console.log("Item added to selection:", itemName);
+        }
     }
-}
-
-
 
     function createDrink() {
-    const item = Object.keys(selectedItems).join(", ");
-    
-    const customize = {
-        item: item
-    };
+        const item = [Object.keys(selectedItems).join(", ")];
 
-    fetch("/customize", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify(customize)
-    })
+        const customize = {
+            item: item
+        };
+
+        fetch("/customize", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(customize)
+        })
         .then(response => response.json())
         .then(result => {
-        console.log(result);
-        alert("Item added to Menu!");
-        
-        // Reset the selection
-        selectedItems = {};
-        
-        // Clear the selection display (assuming you have an element with the id "selection-display")
-        document.getElementById("selection-display").textContent = "";
+            console.log(result);
+            alert("Item added to Menu!");
+
+            // Reset the selection
+            selectedItems = {};
+
+            // Clear the selection display (assuming you have an element with the id "selection-display")
+            document.getElementById("selection-display").textContent = "";
         })
         .catch(error => {
-        console.error("Error:", error);
+            console.error("Error:", error);
         });
     }
-
-
 </script>
 {% endblock %}
