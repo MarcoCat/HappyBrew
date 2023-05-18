@@ -197,9 +197,15 @@ def create_drink():
     data = request.json
     item = data.get("item")
 
+    # Generate a unique name for the custom drink
+    base_name = "Custom"
+    existing_custom_drinks_count = Product.query.filter(Product.name.like(f"{base_name}%")).count()
+    name = f"{base_name}{existing_custom_drinks_count + 1}"
+
+
     # Create a new custom product
     product = Product(
-        name="Custom Drink",
+        name=name,
         price=7.0,
         category="Custom",
         description=item,
