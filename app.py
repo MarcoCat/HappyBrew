@@ -245,7 +245,6 @@ def create_order():
             return jsonify({"error": "No data provided"}), 400
     except:
         return jsonify({"error": "Invalid JSON"}), 400
-    print(data)
 
     for key in ("name", "address", "products"):
         if key not in data:
