@@ -4,16 +4,16 @@
 
 {% block content %}
 <main>
-  <div class="menuPage">
-    <section class="menuNavBar">
+  <div class="menucustomPage">
+    <section class="menucustomNavBar">
       <h1 class="menuTitile">Menu</h1>
       {% for category in categories %}
       <h3><a href="#{{ category }}">| {{ category|capitalize }}</a></h3>
       {% endfor %}
     </section>
 
-    
-    <section class="menuItem">
+
+    <section class="menucustomItem">
       <p>Enjoy your time!</p>
       {% for category in categories %}
       <h2 id="{{ category }}">{{ category|capitalize }}</h2>
