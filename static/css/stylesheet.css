@@ -326,13 +326,14 @@ footer{
     background-color: #808E68 !important;
     color: white;
     font-weight: bold;
-    font-size: 1.3em;
-    width: 15vw;
-    height: 5vh;
+    font-size: 1.4em;
+    width: 16vw;
+    height: 7vh;
     font-family: 'Josefin Sans', sans-serif;
     border-radius: 20px;
     justify-self: right;
     margin: 6vh 3vw 0px 0px ;
+    border: 5px solid #58624B;
 }
 
 .addMenuButton:hover{
