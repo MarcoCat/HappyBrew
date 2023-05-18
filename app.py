@@ -285,16 +285,6 @@ def create_order():
     return jsonify({"location": url_for("cart")})
 
 
-
-@app.route("/order/<int:order_id>", methods=["GET"])
-def get_order(order_id):
-    order = db.session.get(Order, order_id)
-    if not order:
-        return "Order not found", 404
-    order_json = order.to_dict()
-    return jsonify(order_json)
-
-
 @app.route("/feedback")
 def feedback():
     return render_template("feedback.html")
