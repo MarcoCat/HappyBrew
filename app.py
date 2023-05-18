@@ -212,6 +212,13 @@ def create_drink():
         quantity=1
     )
 
+    for ingredient_name in items:
+        ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
+        if ingredient is None:
+            return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
+
+        product.ingredients.append(ingredient)
+
     db.session.add(product)
     db.session.commit()
 
