@@ -37,13 +37,11 @@
         </section>
 
         
-
         <section class="menucustomItem">
 
-
-
-
             <p>Enjoy your time!</p>
+            {% set categoryOrder = ['Tea base', 'Dairy', 'Toppings', 'Sugar level', 'Sweetener', 'Ice level'] %}
+
             {% for category in categories %}
             <h2 id="{{ category }}">{{ category|capitalize }}</h2>
             <ul class="itemType">
@@ -58,24 +56,24 @@
                 />
                 <h3 id="{{ product }}">{{ product.name }}</h3>
                 <p>{{ product.description }}</p>
-                <!-- <div class="addMenuButton"> -->
-                    <!-- <button class="addMenuButton" type="button" onclick="selectItem('{{ product.name }}')"></button>     -->
-                    <button class="addMenuButton" type="button" onclick="selectItem(this, '{{ product.name }}')"></button>
-            
-                <!-- </div> -->
+
+                <button class="addingredientButton" type="button" onclick="selectItem(this, '{{ product.name }}')"></button>
+
               </li>
               {% endfor %}
             </ul>
             {% endfor %}
-            <button onclick="createDrink()">Create Drink</button>
+            <button class="addMenuButton" onclick="createDrink()">Create Drink</button>
         </section>
-        
+
 
     </div>
 
 </main>
 
 <script>
+
+
 
     var selectedItems = {};
 
