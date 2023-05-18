@@ -237,16 +237,14 @@ def order():
 
 @app.route("/order", methods=["POST"])
 def create_order():
-    print(json.loads(request.get_json()))
     
-    data = request.get_json()
-    if not data:
-        return "No JSON data provided", 400
-
     try:
-        data = json.loads(data)
-    except json.JSONDecodeError as e:
-        return f"Invalid JSON data: {str(e)}", 400
+        data = json.loads(request.get_json())
+        if not data:
+            return "No data provided", 400
+    except:
+        return "Invalid JSON", 400
+
     
     products = []
     for category in data:
@@ -272,6 +270,8 @@ def create_order():
     db.session.add(order)
     db.session.commit()
 
+    return redirect(url_for("cart"))
+
     # for key in ("name", "address"):
     #     if key not in data:
     #         return f"The JSON is missing: {key}", 400
@@ -292,7 +292,7 @@ def create_order():
     # db.session.add(order)
     # db.session.commit()
 
-    return redirect(url_for("cart"))
+    # return redirect(url_for("cart"))
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])
