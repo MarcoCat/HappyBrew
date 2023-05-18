@@ -218,8 +218,6 @@ def cart(order_id=None):
         orders = [db.session.get(Order, order_id)]
     else:
         orders = Order.query.all()
-    if not orders:
-        return "Order not found", 404
     total = calculate_total(orders)
     return render_template("cart.html", orders=orders, total=total)
 
