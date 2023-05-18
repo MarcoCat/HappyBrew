@@ -48,21 +48,55 @@
                   height="230"
                   onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
                 />
-                <h3>{{ product.name }}</h3>
+                <h3 id="{{ product }}">{{ product.name }}</h3>
                 <p>{{ product.description }}</p>
-                <p>Price: {{ product.price }}</p>
                 <div class="quantity">
-                  <button class="removeButton" type="button"></button>
+                    <button class="selectButton" type="button" onclick="selectItem('{{ product.name }}')">Select</button>                
                 </div>
               </li>
               {% endfor %}
             </ul>
             {% endfor %}
-
-
+            <button onclick="createDrink()">Create Drink</button>
         </section>
+        
+
     </div>
 
 </main>
 
+<script>
+    var selectedItems = {};
+
+    function selectItem(itemName) {
+        if (!(itemName in selectedItems)) {
+            selectedItems[itemName] = 1;
+            alert("Item added to selection!");
+        }
+    }
+
+    function createDrink() {
+        const item = Object.keys(selectedItems).join(", ");
+        
+        const customize = {
+            item: item
+        };
+
+        fetch("/customize", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(customize)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            alert("Item added to cart!");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+</script>
 {% endblock %}
