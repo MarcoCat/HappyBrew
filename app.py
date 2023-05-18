@@ -94,7 +94,7 @@ def home():
 
 
 @app.route("/menu")
-def index():
+def menu():
     products = Product.query.all()
     categories = sorted(list(set([product.category for product in products])))
     product_dict = {}
@@ -222,7 +222,7 @@ def create_drink():
     db.session.add(product)
     db.session.commit()
 
-    return jsonify(product.to_dict()), 201
+    return jsonify({"url": url_for("menu")})
 
 
 # marco's code

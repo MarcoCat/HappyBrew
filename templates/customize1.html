@@ -82,17 +82,10 @@
 
             if (response.ok) {
                 const result = await response.json();
-                console.log(result);
                 alert("Item added to Menu!");
-
-                // Reset the selection
-                selectedItems = {};
-
-                // Clear the selection display (assuming you have an element with the id "selection-display")
-                document.getElementById("selection-display").textContent = "";
+                window.location.href = result.url;
             } else {
                 const errorData = await response.json();
-                console.error("Error:", errorData.error);
                 alert(errorData.error);
             }
         } catch (error) {
