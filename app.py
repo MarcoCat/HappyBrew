@@ -270,7 +270,7 @@ def create_order():
     db.session.add(order)
     db.session.commit()
 
-    return redirect(url_for("cart"))
+    return {"location": url_for("cart")}
 
     # for key in ("name", "address"):
     #     if key not in data:
