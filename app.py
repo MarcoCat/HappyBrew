@@ -235,29 +235,42 @@ def order():
     return render_template("order.html", menu=menu)
 
 
+from flask import jsonify
+
 @app.route("/order", methods=["POST"])
 def create_order():
-    
     try:
         data = json.loads(request.get_json())
         if not data:
-            return "No data provided", 400
+            return jsonify({"error": "No data provided"}), 400
     except:
-        return "Invalid JSON", 400
+        return jsonify({"error": "Invalid JSON"}), 400
+    print(data)
 
+    for key in ("name", "address", "products"):
+        if key not in data:
+            return jsonify({"error": f"The JSON is missing: {key}"}), 400
+        
+    if not data['products']:
+        return jsonify({"error": "No products provided"}), 400
+    
+    if not data['name']:
+        return jsonify({"error": "No name provided"}), 400
+    
+    if not data['address']:
+        return jsonify({"error": "No address provided"}), 400
     
     products = []
-    for category in data:
-        for product in data[category]:
-            print(product['name'])
+    for category in data['products']:
+        for product in data['products'][category]:
             current_product = db.session.query(Product).filter_by(name=product['name']).first()
             if not current_product:
-                return f"The product {product['name']} does not exist", 404
+                return jsonify({"error": f"The product {product['name']} does not exist"}), 404
             products.append({'product':current_product, 'count':product['count']})
 
     order = Order(
-        name='name',
-        address="address",
+        name=data['name'],
+        address=data['address'],
     )
 
     for product in products:
@@ -270,7 +283,8 @@ def create_order():
     db.session.add(order)
     db.session.commit()
 
-    return {"location": url_for("cart")}
+    return jsonify({"location": url_for("cart")})
+
 
 
 @app.route("/order/<int:order_id>", methods=["GET"])

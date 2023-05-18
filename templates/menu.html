@@ -37,10 +37,17 @@
         {% endfor %}
       </ul>
       {% endfor %}
+      <div class="orderForm">
+        <label for="name">Name:</label>
+        <input id="name" type="text" placeholder="Enter your name">
+        <label for="address">Address:</label>
+        <input id="address" type="text" placeholder="Enter your address">
+      </div>
       <button class="orderButton" type="button" onclick="submitOrder()">Order</button>
     </section>
   </div>
 </main>
+
 
 <script>
   function subtractOne(button) {
@@ -60,6 +67,12 @@
   function getOrderSummary() {
   var orderSummary = {};
 
+  var name = document.getElementById('name').value;
+  var address = document.getElementById('address').value;
+  orderSummary.name = name;
+  orderSummary.address = address;
+  orderSummary.products = {}
+
   var categories = document.getElementsByClassName('menuItem')[0].getElementsByTagName('h2');
 
   for (var i = 0; i < categories.length; i++) {
@@ -75,11 +88,11 @@
       var itemCount = parseInt(countInput.value);
 
       if (itemCount > 0) {
-        if (!orderSummary[categoryName]) {
-          orderSummary[categoryName] = [];
+        if (!orderSummary.products[categoryName]) {
+          orderSummary.products[categoryName] = [];
         }
 
-        orderSummary[categoryName].push({
+        orderSummary.products[categoryName].push({
           name: itemName,
           count: itemCount
         });
@@ -107,7 +120,8 @@ async function submitOrder() {
       const data = await response.json()
       window.location.href = data.location;
     } else {
-      alert("Failed to submit order. Please try again.");
+      const errorData = await response.json()
+      alert(errorData.error);
     }
   } catch (error) {
     console.error("Error ordering:", error);
