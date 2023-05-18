@@ -245,6 +245,11 @@ footer{
     margin: 0px;
     font-weight: bold;
 }
+
+.reminder{
+    font-size: 25px !important;
+    padding-top: 2vh;
+}
 .menucustomItem h2{
     padding-top: 20vh;
     margin: 0px;
