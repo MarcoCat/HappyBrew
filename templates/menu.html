@@ -29,9 +29,9 @@
           <p>{{ product.description }}</p>
           <p>Price: {{ product.price }}</p>
           <div class="quantity">
-            <button class="removeButton" type="button">-</button>
+            <button class="removeButton" type="button" onclick="subtractOne(this)">-</button>
             <input class="count" type="number" value="1">
-            <button class="addButton" type="button">+</button>
+            <button class="addButton" type="button" onclick="addOne(this)">+</button>
           </div>
         </li>
         {% endfor %}
@@ -40,4 +40,20 @@
     </section>
   </div>
 </main>
+
+<script>
+  function subtractOne(button) {
+    var input = button.nextElementSibling;
+    var value = parseInt(input.value);
+    if (value >= 1) {
+      input.value = value - 1;
+    }
+  }
+
+  function addOne(button) {
+    var input = button.previousElementSibling;
+    var value = parseInt(input.value);
+    input.value = value + 1;
+  }
+</script>
 {% endblock %}
