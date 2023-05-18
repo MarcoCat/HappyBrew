@@ -1,83 +1,95 @@
-{% extends "base.html" %} 
-
-{% block title %}Customize{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Customize{% endblock %} {% block
+content %}
 <main>
     <div class="menucustomPage">
         <section class="menucustomNavBar">
-
             <h1 class="stepTitile">Let's Start !</h1>
             {% for category in categories %}
-            <h3><a href="#{{ category }}">|  Choose your {{ category|capitalize }}</a></h3>
+            <h3>
+                <a href="#{{ category }}"
+                    >| Choose your {{ category|capitalize }}</a
+                >
+            </h3>
             {% endfor %}
         </section>
 
-        
         <section class="menucustomItem">
-
             <p>Enjoy your time!</p>
-            <p class="reminder">Checkout instruction page for more information.</p>
-            {% set categoryOrder = ['Tea base', 'Dairy', 'Toppings', 'Sugar level', 'Sweetener', 'Ice level'] %}
-
-            {% for category in categories %}
+            <p class="reminder">
+                Checkout instruction page for more information.
+            </p>
+            {% set categoryOrder = ['Tea base', 'Dairy', 'Toppings', 'Sugar
+            level', 'Sweetener', 'Ice level'] %} {% for category in categories
+            %}
             <h2 id="{{ category }}">{{ category|capitalize }}</h2>
             <ul class="itemType">
-              {% for product in products[category] %}
-              <li>
-                <img 
-                  src="{{ url_for('static', filename='image/customize1Page/' + category + '/' + product.name + '.png') }}"
-                  alt="{{ product.name }} images"
-                  width="110"
-                  height="100"
-                  onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
-                />
-                <h3 id="{{ product }}">{{ product.name }}</h3>
-                <p>{{ product.description }}</p>
+                {% for product in products[category] %}
+                <li>
+                    <img
+                        src="{{ url_for('static', filename='image/customize1Page/' + category + '/' + product.name + '.png') }}"
+                        alt="{{ product.name }} images"
+                        width="110"
+                        height="100"
+                        onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
+                    />
+                    <h3 id="{{ product }}">{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
 
-                <button class="addingredientButton" type="button" onclick="selectItem(this, '{{ product.name }}')"></button>
-
-              </li>
-              {% endfor %}
+                    <button
+                        class="addingredientButton"
+                        type="button"
+                        onclick="selectItem(this, '{{ product.name }}', '{{ category }}')"
+                        data-item="{{ product.name }}"
+                        data-category="{{ category }}"
+                    ></button>
+                </li>
+                {% endfor %}
             </ul>
             {% endfor %}
-            <button class="addMenuButton" onclick="createDrink()">Create Drink</button>
+            <button class="addMenuButton" onclick="createDrink()">
+                Create Drink
+            </button>
         </section>
-
-
     </div>
-
 </main>
 
 <script>
     var selectedItems = {};
 
-    function selectItem(button, itemName) {
-        if (button.classList.contains('selected')) {
-            button.classList.remove('selected');
+    function selectItem(button, itemName, itemCategory) {
+        var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
+        console.log(buttons);
+
+        // Deselect all buttons in the category
+        buttons.forEach(function (btn) {
+            btn.classList.remove("selected");
+            delete selectedItems[btn.dataset.item];
+        });
+
+        if (button.classList.contains("selected")) {
+            button.classList.remove("selected");
             delete selectedItems[itemName];
-            console.log("Item removed from selection:", itemName);
         } else {
-            button.classList.add('selected');
+            button.classList.add("selected");
             selectedItems[itemName] = 1;
-            console.log("Item added to selection:", itemName);
         }
+        console.log(selectedItems)
     }
 
     async function createDrink() {
         const items = Object.keys(selectedItems);
 
         const customize = {
-            item: items
+            item: items,
         };
 
         try {
             const response = await fetch("/customize", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(customize)
+                body: JSON.stringify(customize),
             });
 
             if (response.ok) {
