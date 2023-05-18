@@ -180,7 +180,8 @@ def logout():
 @app.route("/customize")
 def customize():
     products = Ingredient.query.all()
-    categories = sorted(list(set([product.category for product in products])))
+    # hard coded categories please ensure the toppings is in one of these categories
+    categories = ['Tea Base', 'Dairy', 'Toppings', 'Sweetener', 'Sugar Level', 'Ice Level']
     product_dict = {}
     for category in categories:
         product_dict[category] = [
