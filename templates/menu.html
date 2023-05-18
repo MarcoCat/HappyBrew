@@ -58,15 +58,38 @@
   }
 
   function getOrderSummary() {
-    var orderSummary = {};
-    var items = document.getElementsByClassName('itemType')[0].getElementsByTagName('li');
-    for (var i = 0; i < items.length; i++) {
-      var itemName = items[i].getElementsByTagName('h3')[0].textContent;
-      var itemCount = parseInt(items[i].getElementsByClassName('count')[0].value);
-      orderSummary[itemName] = itemCount;
+  var orderSummary = {};
+
+  var categories = document.getElementsByClassName('menuItem')[0].getElementsByTagName('h2');
+
+  for (var i = 0; i < categories.length; i++) {
+    var category = categories[i];
+    var categoryName = category.id;
+    var itemsContainer = category.nextElementSibling;
+    var items = itemsContainer.querySelectorAll('.itemType li');
+
+    for (var j = 0; j < items.length; j++) {
+      var item = items[j];
+      var itemName = item.getElementsByTagName('h3')[0].textContent;
+      var countInput = item.getElementsByClassName('count')[0];
+      var itemCount = parseInt(countInput.value);
+
+      if (itemCount > 0) {
+        if (!orderSummary[categoryName]) {
+          orderSummary[categoryName] = [];
+        }
+
+        orderSummary[categoryName].push({
+          name: itemName,
+          count: itemCount
+        });
+      }
     }
-    return JSON.stringify(orderSummary);
   }
+
+  return JSON.stringify(orderSummary);
+}
+
 
   async function submitOrder() {
         const order_summary = getOrderSummary();
