@@ -90,23 +90,28 @@
   return JSON.stringify(orderSummary);
 }
 
+async function submitOrder() {
+  const order_summary = getOrderSummary();
 
-  async function submitOrder() {
-        const order_summary = getOrderSummary();
+  try {
+    const response = await fetch("/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order_summary),
+    });
 
-        try {
-            const response = await fetch("/order", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(order_summary),
-            });
-            alert("Thank you for your ordering!");
-        } catch (error) {
-            console.error("Error ordering:", error);
-        }
+    if (response.ok) {
+      alert("Thank you for your ordering!");
+    } else {
+      alert("Failed to submit order. Please try again.");
     }
+  } catch (error) {
+    console.error("Error ordering:", error);
+  }
+}
+
 
 </script>
 {% endblock %}
