@@ -31,11 +31,38 @@
         </section>
 
         <section class="customizeItem">
-            <h2>Step 1</h2>
-            <!-- code for display database data: Tea -->
+
+
+
+
+            <p>Enjoy your time!</p>
+            {% for category in categories %}
+            <h2 id="{{ category }}">{{ category|capitalize }}</h2>
+            <ul class="itemType">
+              {% for product in products[category] %}
+              <li>
+                <img 
+                  src="{{ url_for('static', filename='image/menuPage/' + product.name + '.png') }}"
+                  alt="{{ product.name }} images"
+                  width="200"
+                  height="230"
+                  onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
+                />
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>Price: {{ product.price }}</p>
+                <div class="quantity">
+                  <button class="removeButton" type="button"></button>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endfor %}
+
 
         </section>
     </div>
 
 </main>
+
 {% endblock %}

@@ -173,13 +173,35 @@ def logout():
     return redirect(url_for("home"))
 
 
+
+
+
+# @app.route("/customize")
+# def customize():
+#     return render_template("customize1.html")
+
+
+
+
 @app.route("/customize")
 def customize():
-    return render_template("customize1.html")
+    products = Ingredient.query.all()
+    categories = sorted(list(set([product.category for product in products])))
+    product_dict = {}
+    for category in categories:
+        product_dict[category] = [
+            product for product in products if product.category == category
+        ]
+    return render_template("customize1.html", products=product_dict, categories=categories)
+
+
+
+
 
 
 @app.route("/customize", methods=["POST"])
 def create_drink():
+
     # sample json
     # {"name": "Good Drink", "ingredients": ["Aloe Vera", "Grass Jelly"], "description":"drink desc"}
     data = request.json
@@ -205,6 +227,9 @@ def create_drink():
     db.session.commit()
 
     return jsonify(product.to_dict()), 201
+
+
+
 
 
 @app.route("/cart", defaults={"order_id": None})
