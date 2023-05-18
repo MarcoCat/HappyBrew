@@ -77,13 +77,6 @@
 
     var selectedItems = {};
 
-    function selectItem(itemName) {
-        if (!(itemName in selectedItems)) {
-            selectedItems[itemName] = 1;
-            alert("Item added to selection!");
-        }
-    }
-
   
     function selectItem(button, itemName) {
     if (button.classList.contains('selected')) {
