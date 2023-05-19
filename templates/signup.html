@@ -1,8 +1,5 @@
-{% extends "base.html" %} 
-
-{% block title %}Signup{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Signup{% endblock %} {% block content
+%}
 <main class="signupPage">
   <section class="imageSection">
     <p>. . . . . .</p>
@@ -10,12 +7,12 @@
     <p>. . . . . .</p>
     <div>
       <img
-            src="{{ url_for('static', filename='image/loginsignupPage/teaDrink.png') }}"
-            alt="a drink image"
-            width="240"
-            height="210"
-          />
-      <h2>ReaTea</h2>  
+        src="{{ url_for('static', filename='image/loginsignupPage/teaDrink.png') }}"
+        alt="a drink image"
+        width="240"
+        height="210"
+      />
+      <h2>ReaTea</h2>
     </div>
     <p>. . . . . .</p>
     <p>. . . . . .</p>
@@ -29,10 +26,22 @@
     {% endif %}
     <form action="/signup" method="POST" class="signupForm">
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" placeholder="username" required />
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="username"
+        required
+      />
       <br />
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" placeholder="password" required />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+        required
+      />
       <br />
       <label for="confirm_password">Confirm Password:</label>
       <input
