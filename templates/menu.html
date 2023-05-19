@@ -1,8 +1,5 @@
-{% extends "base.html" %} 
-
-{% block title %}Menu{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Menu{% endblock %} {% block content
+%}
 <main>
   <div class="menucustomPage">
     <section class="menucustomNavBar">
@@ -12,7 +9,6 @@
       {% endfor %}
     </section>
 
-
     <section class="menuItem">
       <p>Enjoy your time!</p>
       {% for category in categories %}
@@ -20,7 +16,7 @@
       <ul class="itemType">
         {% for product in products[category] %}
         <li>
-          <img 
+          <img
             src="{{ url_for('static', filename='image/menuPage/' + product.name + '.png') }}"
             alt="{{ product.name }} images"
             width="200"
@@ -31,9 +27,17 @@
           <p>{{ product.description }}</p>
           <p>Price: {{ product.price }}</p>
           <div class="quantity">
-            <button class="removeButton" type="button" onclick="subtractOne(this)">-</button>
-            <input class="count" type="number" value="0" readonly>
-            <button class="addButton" type="button" onclick="addOne(this)">+</button>
+            <button
+              class="removeButton"
+              type="button"
+              onclick="subtractOne(this)"
+            >
+              -
+            </button>
+            <input class="count" type="number" value="0" readonly />
+            <button class="addButton" type="button" onclick="addOne(this)">
+              +
+            </button>
           </div>
         </li>
         {% endfor %}
@@ -41,15 +45,16 @@
       {% endfor %}
       <div class="orderForm">
         <label for="name">Name:</label>
-        <input id="name" type="text" placeholder="Enter your name">
+        <input id="name" type="text" placeholder="Enter your name" />
         <label for="address">Address:</label>
-        <input id="address" type="text" placeholder="Enter your address">
+        <input id="address" type="text" placeholder="Enter your address" />
       </div>
-      <button class="orderButton" type="button" onclick="submitOrder()">Order</button>
+      <button class="orderButton" type="button" onclick="submitOrder()">
+        Order
+      </button>
     </section>
   </div>
 </main>
-
 
 <script>
   function subtractOne(button) {
@@ -67,69 +72,69 @@
   }
 
   function getOrderSummary() {
-  var orderSummary = {};
+    var orderSummary = {};
 
-  var name = document.getElementById('name').value;
-  var address = document.getElementById('address').value;
-  orderSummary.name = name;
-  orderSummary.address = address;
-  orderSummary.products = {}
+    var name = document.getElementById("name").value;
+    var address = document.getElementById("address").value;
+    orderSummary.name = name;
+    orderSummary.address = address;
+    orderSummary.products = {};
 
-  var categories = document.getElementsByClassName('menuItem')[0].getElementsByTagName('h2');
+    var categories = document
+      .getElementsByClassName("menuItem")[0]
+      .getElementsByTagName("h2");
 
-  for (var i = 0; i < categories.length; i++) {
-    var category = categories[i];
-    var categoryName = category.id;
-    var itemsContainer = category.nextElementSibling;
-    var items = itemsContainer.querySelectorAll('.itemType li');
+    for (var i = 0; i < categories.length; i++) {
+      var category = categories[i];
+      var categoryName = category.id;
+      var itemsContainer = category.nextElementSibling;
+      var items = itemsContainer.querySelectorAll(".itemType li");
 
-    for (var j = 0; j < items.length; j++) {
-      var item = items[j];
-      var itemName = item.getElementsByTagName('h3')[0].textContent;
-      var countInput = item.getElementsByClassName('count')[0];
-      var itemCount = parseInt(countInput.value);
+      for (var j = 0; j < items.length; j++) {
+        var item = items[j];
+        var itemName = item.getElementsByTagName("h3")[0].textContent;
+        var countInput = item.getElementsByClassName("count")[0];
+        var itemCount = parseInt(countInput.value);
 
-      if (itemCount > 0) {
-        if (!orderSummary.products[categoryName]) {
-          orderSummary.products[categoryName] = [];
+        if (itemCount > 0) {
+          if (!orderSummary.products[categoryName]) {
+            orderSummary.products[categoryName] = [];
+          }
+
+          orderSummary.products[categoryName].push({
+            name: itemName,
+            count: itemCount,
+          });
         }
-
-        orderSummary.products[categoryName].push({
-          name: itemName,
-          count: itemCount
-        });
       }
     }
+
+    return JSON.stringify(orderSummary);
   }
 
-  return JSON.stringify(orderSummary);
-}
+  async function submitOrder() {
+    const order_summary = getOrderSummary();
 
-async function submitOrder() {
-  const order_summary = getOrderSummary();
+    try {
+      const response = await fetch("/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order_summary),
+      });
 
-  try {
-    const response = await fetch("/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order_summary),
-    });
-
-    if (response.ok) {
-      alert("Thank you for your ordering!");
-      const data = await response.json()
-      window.location.href = data.location;
-    } else {
-      const errorData = await response.json()
-      alert(errorData.error);
+      if (response.ok) {
+        alert("Thank you for your ordering!");
+        const data = await response.json();
+        window.location.href = data.location;
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error ordering:", error);
     }
-  } catch (error) {
-    console.error("Error ordering:", error);
   }
-}
-
-
 </script>
 {% endblock %}

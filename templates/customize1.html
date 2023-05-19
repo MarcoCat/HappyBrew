@@ -51,19 +51,21 @@ content %}
   var selectedItems = {};
 
   function selectItem(button, itemName, itemCategory) {
-    if (itemCategory !== 'Toppings') {
-      var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
+    if (itemCategory !== "Toppings") {
+      var buttons = document.querySelectorAll(
+        `button[data-category="${itemCategory}"]`
+      );
       console.log(buttons);
-  
+
       // Deselect all buttons in the category except for Toppings
       buttons.forEach(function (btn) {
-        if (btn.dataset.category !== 'Toppings') {
+        if (btn.dataset.category !== "Toppings") {
           btn.classList.remove("selected");
           delete selectedItems[btn.dataset.category];
         }
       });
     }
-  
+
     if (button.classList.contains("selected")) {
       button.classList.remove("selected");
       if (itemCategory in selectedItems) {
@@ -77,15 +79,15 @@ content %}
         }
       }
     } else {
-      if (itemCategory === 'Toppings') {
-        var toppingsCount = Object.keys(selectedItems['Toppings'] || {}).length;
+      if (itemCategory === "Toppings") {
+        var toppingsCount = Object.keys(selectedItems["Toppings"] || {}).length;
         if (toppingsCount >= 3) {
           // Limit the toppings to 3 items
           alert("You can select up to 3 toppings.");
           return;
         }
       }
-  
+
       button.classList.add("selected");
       if (!(itemCategory in selectedItems)) {
         selectedItems[itemCategory] = [];
@@ -94,7 +96,6 @@ content %}
     }
     console.log(selectedItems);
   }
-  
 
   async function createDrink() {
     try {
