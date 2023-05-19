@@ -201,7 +201,26 @@ def customize():
 @app.route("/customize", methods=["POST"])
 def create_drink():
     data = request.json
-    items = data.get("item")
+    print("here")
+    print(data)
+    items = []
+
+    for category in (
+        "Tea Base",
+        "Dairy",
+        "Toppings",
+        "Sweetener",
+        "Sugar Level",
+        "Ice Level",
+    ):
+        if category not in data:
+            return (
+                jsonify({"error": f"Category: '{category}' was not chosen"}),
+                400,
+            )
+        for item in data[category]:
+            items.append(item)
+    print(item)
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
