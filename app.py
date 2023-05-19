@@ -1,7 +1,7 @@
 import csv
+import json
 import os
 from pathlib import Path
-import json
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_login import (
@@ -286,8 +286,6 @@ def create_drink():
 #     return jsonify(product.to_dict()), 201
 
 
-
-
 # @app.route("/cart", defaults={"order_id": None})
 # @app.route("/cart/<int:order_id>")
 # def cart(order_id=None):
@@ -304,9 +302,8 @@ def create_drink():
 #     return render_template("cart.html", orders=orders, total=total)
 
 
-
-
 # testing - to diaplay last order in cart, will write code to display all in account history
+
 
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
@@ -316,12 +313,11 @@ def cart(order_id=None):
 
     if order_id:
         order = db.session.get(Order, order_id)
-        orders = [order] if order else []
     else:
-        last_order = db.session.query(Order).order_by(Order.id.desc()).first()
-        orders = [last_order] if last_order else []
-    total = calculate_total(orders)
-    return render_template("cart.html", orders=orders, total=total)
+        order = db.session.query(Order).order_by(Order.id.desc()).first()
+    order = [order] or []
+    total = calculate_total(order)
+    return render_template("cart.html", orders=order, total=total)
 
 
 @app.route("/update_quantity", methods=["POST"])
@@ -339,17 +335,6 @@ def update_quantity():
     return redirect("/cart")
 
 
-
-
-
-
-
-
-
-
-
-
-
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
@@ -363,6 +348,7 @@ def order():
 
 from flask import jsonify
 
+
 @app.route("/order", methods=["POST"])
 def create_order():
     try:
@@ -375,32 +361,37 @@ def create_order():
     for key in ("name", "address", "products"):
         if key not in data:
             return jsonify({"error": f"The JSON is missing: {key}"}), 400
-        
-    if not data['products']:
+
+    if not data["products"]:
         return jsonify({"error": "No products provided"}), 400
-    
-    if not data['name']:
+
+    if not data["name"]:
         return jsonify({"error": "No name provided"}), 400
-    
-    if not data['address']:
+
+    if not data["address"]:
         return jsonify({"error": "No address provided"}), 400
-    
+
     products = []
-    for category in data['products']:
-        for product in data['products'][category]:
-            current_product = db.session.query(Product).filter_by(name=product['name']).first()
+    for category in data["products"]:
+        for product in data["products"][category]:
+            current_product = (
+                db.session.query(Product).filter_by(name=product["name"]).first()
+            )
             if not current_product:
-                return jsonify({"error": f"The product {product['name']} does not exist"}), 404
-            products.append({'product':current_product, 'count':product['count']})
+                return (
+                    jsonify({"error": f"The product {product['name']} does not exist"}),
+                    404,
+                )
+            products.append({"product": current_product, "count": product["count"]})
 
     order = Order(
-        name=data['name'],
-        address=data['address'],
+        name=data["name"],
+        address=data["address"],
     )
 
     for product in products:
         association = ProductsOrder(
-            product=product['product'],
+            product=product["product"],
             order=order,
             quantity=product["count"],
         )
