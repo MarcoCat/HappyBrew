@@ -205,22 +205,21 @@ def create_drink():
     print(data)
     items = []
 
-    for category in (
-        "Tea Base",
-        "Dairy",
-        "Toppings",
-        "Sweetener",
-        "Sugar Level",
-        "Ice Level",
-    ):
-        if category not in data:
+    for category in ("Tea Base", "Dairy", "Sweetener", "Sugar Level", "Ice Level"):
+        if category not in data or len(data[category]) != 1:
             return (
-                jsonify({"error": f"Category: '{category}' was not chosen"}),
+                jsonify(
+                    {"error": f"Category: '{category}' must have exactly one item"}
+                ),
                 400,
             )
-        for item in data[category]:
-            items.append(item)
-    print(item)
+        items.extend(data[category])
+
+    if "Toppings" in data:
+        if len(data["Toppings"]) > 3:
+            return jsonify({"error": "Category 'Toppings' must have 0-3 items"}), 400
+        else:
+            items.extend(data["Toppings"])
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
