@@ -4,15 +4,20 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    margin-top: 0px;
+    margin: 0px;
     color: #58624B;
 }
 
 header{
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+}
+
+.topMainNavBar{
     display: grid;
     grid-template-columns: 4fr 1fr 3fr 1fr;
-    position:fixed;
-    background: #F5EBE0;
+    background: #58624B;
     width: 100%;
     align-items: center;
 }
@@ -37,14 +42,31 @@ main{
 .navList{
     display: flex;
     list-style-type: none;
-    justify-content: center;
+    justify-content: space-evenly;
+    
 }
+
+.colorContainer{
+
+    display: flex;
+    color:white;
+}
+
+.navColor{
+    background-color: #58624B;
+    width: 7.5vw;
+    /* height: 100%; */
+    border-radius: 0px 0px 50px 50px;
+
+}
+
+
 
 .navList a{
     border-radius: 0.6em;
     padding: 10px 10px;
     margin: 5px 10px;
-    color: #859174;
+    color: white;
     font-size: 20px;
     font-weight:bold;
     letter-spacing: 1px;
@@ -65,11 +87,13 @@ main{
 
 .logoButton > a{
     margin-top:10px;
+    color: white;
 }
 
 .acctCartButton{
     display: flex;
     justify-self: right;
+    /* padding-right: 1vw; */
 }
 
 .accountButton1, .accountButton2{
@@ -109,21 +133,22 @@ main{
 }
 
 .logoutButton{
-    grid-column: 4/5;
-    justify-self: right;
+    width: 10vw;
+    text-align: center;
     padding: 5px;
-    margin: 0px 12px 0px 0px;
     font-size: 13px;
-    color: #58624B;
-    border-radius: 0.5em;
+    color: white;
     letter-spacing: 1px;
+    background-color: #58624B;
+    border-radius: 0px 0px 50px 50px;
 }
 
 
 .logoutButton:hover, .logoutButton:focus{
-    color:#58624B;
+    color:white;
     font-style: italic;
     font-weight:bold;
+    font-size: 15px;
 }
 
 
