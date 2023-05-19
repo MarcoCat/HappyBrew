@@ -311,6 +311,68 @@ footer{
 
 
 
+/* menu page new new new, I will clean and combine with other class later after both this and my branch merge */
+
+
+.orderButton{
+    align-items: center;
+    background-color: #808E68 !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    width: 14vw;
+    height: 6vh;
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 20px;
+    justify-self: right;
+    border: 5px solid #58624B;
+    margin-right: 1vw;
+}
+
+.orderButton:hover{
+    background-color: #58624B !important;
+    border-bottom: 3px solid #58624B !important; 
+    box-shadow: 0px 0px 10px #58624B;
+}
+
+
+.menuItem .orderForm{
+    justify-self: right;
+    margin: 3vh 0px 2vh 0px;
+    border-top: 3px dashed #58624B;
+    padding-top: 5vh
+
+}
+
+
+.menuItem .orderForm label{
+   
+    font-size: 1.2em;
+    font-weight: bold;
+} 
+
+
+.menuItem .orderForm input{
+    border: 3px solid #D5BDAF;
+    border-radius: 10px ;
+    width: 10vw;
+    height: 3vh;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0px 1vw 0px 1vw;
+    justify-self: center;
+    font-size: 1.2em;
+} 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
