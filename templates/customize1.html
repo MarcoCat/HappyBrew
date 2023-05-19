@@ -1,106 +1,122 @@
-{% extends "base.html" %} 
-
-{% block title %}Customize{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Customize{% endblock %} {% block
+content %}
 <main>
-    <div class="menucustomPage">
-        <section class="menucustomNavBar">
+  <div class="menucustomPage">
+    <section class="menucustomNavBar">
+      <h1 class="stepTitile">Let's Start !</h1>
+      {% for category in categories %}
+      <h3>
+        <a href="#{{ category }}">| Choose your {{ category|capitalize }}</a>
+      </h3>
+      {% endfor %}
+    </section>
 
-            <h1 class="stepTitile">Let's Start !</h1>
-            {% for category in categories %}
-            <h3><a href="#{{ category }}">|  Choose your {{ category|capitalize }}</a></h3>
-            {% endfor %}
-        </section>
+    <section class="menucustomItem">
+      <p>Enjoy your time!</p>
+      <p class="reminder">Checkout instruction page for more information.</p>
+      {% for category in categories %}
+      <h2 id="{{ category }}">{{ category|capitalize }}</h2>
+      <ul class="itemType">
+        {% for product in products[category] %}
+        <li>
+          <img
+            src="{{ url_for('static', filename='image/customize1Page/' + category + '/' + product.name + '.png') }}"
+            alt="{{ product.name }} images"
+            width="110"
+            height="100"
+            onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
+          />
+          <h3 id="{{ product }}">{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
 
-        
-        <section class="menucustomItem">
-
-            <p>Enjoy your time!</p>
-            <p class="reminder">Checkout instruction page for more information.</p>
-            {% set categoryOrder = ['Tea base', 'Dairy', 'Toppings', 'Sugar level', 'Sweetener', 'Ice level'] %}
-
-            {% for category in categories %}
-            <h2 id="{{ category }}">{{ category|capitalize }}</h2>
-            <ul class="itemType">
-              {% for product in products[category] %}
-              <li>
-                <img 
-                  src="{{ url_for('static', filename='image/customize1Page/' + category + '/' + product.name + '.png') }}"
-                  alt="{{ product.name }} images"
-                  width="110"
-                  height="100"
-                  onerror="this.onerror=null;this.src='{{ url_for('static', filename='image/customize1Page/placeholder.png') }}';"
-                />
-                <h3 id="{{ product }}">{{ product.name }}</h3>
-                <p>{{ product.description }}</p>
-
-                <button class="addingredientButton" type="button" onclick="selectItem(this, '{{ product.name }}')"></button>
-
-              </li>
-              {% endfor %}
-            </ul>
-            {% endfor %}
-            <button class="addMenuButton" onclick="createDrink()">Create Drink</button>
-        </section>
-
-
-    </div>
-
+          <button
+            class="addingredientButton"
+            type="button"
+            onclick="selectItem(this, '{{ product.name }}', '{{ category }}')"
+            data-item="{{ product.name }}"
+            data-category="{{ category }}"
+          ></button>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+      <button class="addMenuButton" onclick="createDrink()">
+        Create Drink
+      </button>
+    </section>
+  </div>
 </main>
 
 <script>
+  var selectedItems = {};
 
-
-
-    var selectedItems = {};
-
+  function selectItem(button, itemName, itemCategory) {
+    if (itemCategory !== 'Toppings') {
+      var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
+      console.log(buttons);
   
-    function selectItem(button, itemName) {
-    if (button.classList.contains('selected')) {
-        button.classList.remove('selected');
-        delete selectedItems[itemName];
-        console.log("Item removed from selection:", itemName);
-    } else {
-        
-        button.classList.add('selected');
-        selectedItems[itemName] = 1;
-        console.log("Item added to selection:", itemName);
+      // Deselect all buttons in the category except for Toppings
+      buttons.forEach(function (btn) {
+        if (btn.dataset.category !== 'Toppings') {
+          btn.classList.remove("selected");
+          delete selectedItems[btn.dataset.category];
+        }
+      });
     }
-}
+  
+    if (button.classList.contains("selected")) {
+      button.classList.remove("selected");
+      if (itemCategory in selectedItems) {
+        const categoryItems = selectedItems[itemCategory];
+        const itemIndex = categoryItems.indexOf(itemName);
+        if (itemIndex !== -1) {
+          categoryItems.splice(itemIndex, 1);
+          if (categoryItems.length === 0) {
+            delete selectedItems[itemCategory];
+          }
+        }
+      }
+    } else {
+      if (itemCategory === 'Toppings') {
+        var toppingsCount = Object.keys(selectedItems['Toppings'] || {}).length;
+        if (toppingsCount >= 3) {
+          // Limit the toppings to 3 items
+          alert("You can select up to 3 toppings.");
+          return;
+        }
+      }
+  
+      button.classList.add("selected");
+      if (!(itemCategory in selectedItems)) {
+        selectedItems[itemCategory] = [];
+      }
+      selectedItems[itemCategory].push(itemName);
+    }
+    console.log(selectedItems);
+  }
+  
 
-
-
-    function createDrink() {
-    const item = Object.keys(selectedItems).join(", ");
-    
-    const customize = {
-        item: item
-    };
-
-    fetch("/customize", {
+  async function createDrink() {
+    try {
+      const response = await fetch("/customize", {
         method: "POST",
         headers: {
-        "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(customize)
-    })
-        .then(response => response.json())
-        .then(result => {
-        console.log(result);
+        body: JSON.stringify(selectedItems),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
         alert("Item added to Menu!");
-        
-        // Reset the selection
-        selectedItems = {};
-        
-        // Clear the selection display (assuming you have an element with the id "selection-display")
-        document.getElementById("selection-display").textContent = "";
-        })
-        .catch(error => {
-        console.error("Error:", error);
-        });
+        window.location.href = result.url;
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-
-
+  }
 </script>
 {% endblock %}

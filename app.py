@@ -94,7 +94,7 @@ def home():
 
 
 @app.route("/menu")
-def index():
+def menu():
     products = Product.query.all()
     categories = sorted(list(set([product.category for product in products])))
     product_dict = {}
@@ -173,49 +173,79 @@ def logout():
     return redirect(url_for("home"))
 
 
-
-
 # katy's code
+
 
 @app.route("/customize")
 def customize():
     products = Ingredient.query.all()
-    categories = sorted(list(set([product.category for product in products])))
+    # hard coded categories please ensure the toppings is in one of these categories
+    categories = [
+        "Tea Base",
+        "Dairy",
+        "Toppings",
+        "Sweetener",
+        "Sugar Level",
+        "Ice Level",
+    ]
     product_dict = {}
     for category in categories:
         product_dict[category] = [
             product for product in products if product.category == category
         ]
-    return render_template("customize1.html", products=product_dict, categories=categories)
-
-
-
+    return render_template(
+        "customize1.html", products=product_dict, categories=categories
+    )
 
 
 @app.route("/customize", methods=["POST"])
 def create_drink():
     data = request.json
-    item = data.get("item")
+    items = []
+
+    for category in ("Tea Base", "Dairy", "Sweetener", "Sugar Level", "Ice Level"):
+        if category not in data or len(data[category]) != 1:
+            return (
+                jsonify(
+                    {"error": f"Category: '{category}' must have exactly one item"}
+                ),
+                400,
+            )
+        items.extend(data[category])
+
+    if "Toppings" in data:
+        if len(data["Toppings"]) > 3:
+            return jsonify({"error": "Category 'Toppings' must have 0-3 items"}), 400
+        else:
+            items.extend(data["Toppings"])
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
-    existing_custom_drinks_count = Product.query.filter(Product.name.like(f"{base_name}%")).count()
+    existing_custom_drinks_count = Product.query.filter(
+        Product.name.like(f"{base_name}%")
+    ).count()
     name = f"{base_name}{existing_custom_drinks_count + 1}"
-
 
     # Create a new custom product
     product = Product(
         name=name,
         price=7.0,
         category="Custom",
-        description=item,
-        quantity=1
+        description=", ".join(items),
+        quantity=1,
     )
+
+    for ingredient_name in items:
+        ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
+        if ingredient is None:
+            return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
+
+        product.ingredients.append(ingredient)
 
     db.session.add(product)
     db.session.commit()
 
-    return jsonify(product.to_dict()), 201
+    return jsonify({"url": url_for("menu")})
 
 
 # marco's code
@@ -223,7 +253,6 @@ def create_drink():
 # @app.route("/customize")
 # def customize():
 #     return render_template("customize1.html")
-
 
 
 # @app.route("/customize", methods=["POST"])
@@ -254,9 +283,6 @@ def create_drink():
 #     db.session.commit()
 
 #     return jsonify(product.to_dict()), 201
-
-
-
 
 
 @app.route("/cart", defaults={"order_id": None})
