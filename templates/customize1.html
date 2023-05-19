@@ -51,19 +51,41 @@ content %}
   var selectedItems = {};
 
   function selectItem(button, itemName, itemCategory) {
-    var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
-    console.log(buttons);
+    if (itemCategory !== 'Toppings') {
+      var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
+      console.log(buttons);
   
-    // Deselect all buttons in the category
-    buttons.forEach(function (btn) {
-      btn.classList.remove("selected");
-      delete selectedItems[btn.dataset.category];
-    });
+      // Deselect all buttons in the category except for Toppings
+      buttons.forEach(function (btn) {
+        if (btn.dataset.category !== 'Toppings') {
+          btn.classList.remove("selected");
+          delete selectedItems[btn.dataset.category];
+        }
+      });
+    }
   
     if (button.classList.contains("selected")) {
       button.classList.remove("selected");
-      delete selectedItems[itemCategory];
+      if (itemCategory in selectedItems) {
+        const categoryItems = selectedItems[itemCategory];
+        const itemIndex = categoryItems.indexOf(itemName);
+        if (itemIndex !== -1) {
+          categoryItems.splice(itemIndex, 1);
+          if (categoryItems.length === 0) {
+            delete selectedItems[itemCategory];
+          }
+        }
+      }
     } else {
+      if (itemCategory === 'Toppings') {
+        var toppingsCount = Object.keys(selectedItems['Toppings'] || {}).length;
+        if (toppingsCount >= 3) {
+          // Limit the toppings to 3 items
+          alert("You can select up to 3 toppings.");
+          return;
+        }
+      }
+  
       button.classList.add("selected");
       if (!(itemCategory in selectedItems)) {
         selectedItems[itemCategory] = [];
@@ -72,6 +94,7 @@ content %}
     }
     console.log(selectedItems);
   }
+  
 
   async function createDrink() {
     try {
