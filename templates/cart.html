@@ -9,37 +9,40 @@
   
     <div class="cartPageLU">
         <div class="orderdetail">
-            {% for order in orders %}
-            
-            <section>
-                
+ 
+                {% for order in orders %}
+                    <section>
                     <h2>Order {{ order.id }}</h2>
                     <p>Name: {{ order.name }}</p>
                     <p>Address: {{ order.address }}</p>
-                    <table class="cartTable">
-                        <thead>
+                    <form action="/update_quantity" method="POST">
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <table class="cartTable">
+                          <thead>
                             <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
+                              <th>Item</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            
-
+                          </thead>
+                          <tbody>
                             {% for product_order in order.products %}
                             <tr>
-                                <td>{{ product_order.product.name }}</td>
-                                <td>{{ product_order.quantity }}</td>
-                                <td>{{ product_order.product.price }}</td> 
+                              <td>{{ product_order.product.name }}</td>
+                              <td>
+                                <input class="quantityInput" type="number" name="quantity[]" value="{{ product_order.quantity }}">
+                                <input type="hidden" name="product_order_id[]" value="{{ product_order.id }}">
+                              </td>
+                              <td>{{ product_order.product.price }}</td>
                             </tr>
                             {% endfor %}
-                        </tbody>
-                    </table>
-            
-            </section>
-        
-            {% endfor %}
+                          </tbody>
+                        </table>
+                        <button type="submit">Update</button>
+                      </form>
+                    </section>
+                    {% endfor %}
+
         </div>
         
         <section class="sumArea">
@@ -60,4 +63,8 @@
     </div>
 
 </main>
+
+
+
 {% endblock %}
+
