@@ -78,6 +78,7 @@
         <td>${item.name}</td>
         <td>${item.quantity}</td>
         <td>${item.price}</td>
+        <td><button class="deleteButton" onclick="deleteItem('${item.name}')">Delete</button></td>
       `;
       cartTable.appendChild(row);
   
@@ -111,5 +112,14 @@
   // Call the appendCartItemsToForm function when the page loads
   appendCartItemsToForm();
   
+  function deleteItem(name) {
+    const index = cart.findIndex(item => item.name === name);
+    if (index > -1) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCartItems();
+      appendCartItemsToForm();
+    }
+  }
 </script>
 {% endblock %}
