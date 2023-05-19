@@ -51,41 +51,36 @@ content %}
   var selectedItems = {};
 
   function selectItem(button, itemName, itemCategory) {
-    var buttons = document.querySelectorAll(
-      `button[data-category="${itemCategory}"]`
-    );
+    var buttons = document.querySelectorAll(`button[data-category="${itemCategory}"]`);
     console.log(buttons);
-
+  
     // Deselect all buttons in the category
     buttons.forEach(function (btn) {
       btn.classList.remove("selected");
-      delete selectedItems[btn.dataset.item];
+      delete selectedItems[btn.dataset.category];
     });
-
+  
     if (button.classList.contains("selected")) {
       button.classList.remove("selected");
-      delete selectedItems[itemName];
+      delete selectedItems[itemCategory];
     } else {
       button.classList.add("selected");
-      selectedItems[itemName] = 1;
+      if (!(itemCategory in selectedItems)) {
+        selectedItems[itemCategory] = [];
+      }
+      selectedItems[itemCategory].push(itemName);
     }
     console.log(selectedItems);
   }
 
   async function createDrink() {
-    const items = Object.keys(selectedItems);
-
-    const customize = {
-      item: items,
-    };
-
     try {
       const response = await fetch("/customize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(customize),
+        body: JSON.stringify(selectedItems),
       });
 
       if (response.ok) {
