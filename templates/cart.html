@@ -1,63 +1,69 @@
-{% extends "base.html" %}
-
-{% block title %}Cart{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Cart{% endblock %} {% block content
+%}
 <main>
-    <h1 class="cartTitle">Cart</h1>
-    <p class="processWord"> You are almost done ! </p>
-  
-    <div class="cartPageLU">
-        <div class="orderdetail">
-            {% for order in orders %}
-            
-            <section>
-                
-                    <h2>Order {{ order.id }}</h2>
-                    <p>Name: {{ order.name }}</p>
-                    <p>Address: {{ order.address }}</p>
-                    <table class="cartTable">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
+  <h1 class="cartTitle">Cart</h1>
+  <p class="processWord">You are almost done !</p>
 
-                            {% for product_order in order.products %}
-                            <tr>
-                                <td>{{ product_order.product.name }}</td>
-                                <td>{{ product_order.quantity }}</td>
-                                <td>{{ product_order.product.price }}</td> 
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-            
-            </section>
-        
-            {% endfor %}
-        </div>
-        
-        <section class="sumArea">
-            <img
-            src="{{ url_for('static', filename='image/cartPage/cuteBubbleTeaCart.png') }}"
-            alt="4 bubble tea images"
-            width="85"
-            height="45"
-            />
-            <h3>Total price:</h3>
-            <p class="sumPrice">$ {{ "{:.2f}".format(total) }}</p>
-            <div class="cartButton">
-                <a class = "checkoutLink" href="checkout">Ready to Checkout!</a>
-                <a class = "backMenuLink" href="menu">Back to menu</a>
-            </div>
-        </section>
-        
+  <div class="cartPageLU">
+    <div class="orderdetail">
+      {% for order in orders %}
+      <section>
+        <h2>Order {{ order.id }}</h2>
+        <p>Name: {{ order.name }}</p>
+        <p>Address: {{ order.address }}</p>
+        <form action="/update_quantity" method="POST">
+          <input type="hidden" name="order_id" value="{{ order.id }}" />
+          <table class="cartTable">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product_order in order.products %}
+              <tr>
+                <td>{{ product_order.product.name }}</td>
+                <td>
+                  <input
+                    class="quantityInput"
+                    type="number"
+                    name="quantity[]"
+                    value="{{ product_order.quantity }}"
+                  />
+                  <input
+                    type="hidden"
+                    name="product_order_id[]"
+                    value="{{ product_order.id }}"
+                  />
+                </td>
+                <td>{{ product_order.product.price }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit">Update</button>
+        </form>
+      </section>
+      {% endfor %}
     </div>
 
+    <section class="sumArea">
+      <img
+        src="{{ url_for('static', filename='image/cartPage/cuteBubbleTeaCart.png') }}"
+        alt="4 bubble tea images"
+        width="85"
+        height="45"
+      />
+      <h3>Total price:</h3>
+      <p class="sumPrice">$ {{ "{:.2f}".format(total) }}</p>
+      <div class="cartButton">
+        <a class="checkoutLink" href="checkout">Ready to Checkout!</a>
+        <a class="backMenuLink" href="menu">Back to menu</a>
+      </div>
+    </section>
+  </div>
 </main>
+
 {% endblock %}
