@@ -32,6 +32,7 @@
                                 <td>{{ product_order.product.name }}</td>
                                 <td>{{ product_order.quantity }}</td>
                                 <td>{{ product_order.product.price }}</td> 
+                                <td><button class="deleteButton" onclick="deleteItem('{{ product_order.product.name }}')">Delete</button></td>
                             </tr>
                             {% endfor %}
                         </tbody>
