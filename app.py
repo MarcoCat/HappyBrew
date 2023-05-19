@@ -249,62 +249,6 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
-# marco's code
-
-# @app.route("/customize")
-# def customize():
-#     return render_template("customize1.html")
-
-
-# @app.route("/customize", methods=["POST"])
-# def create_drink():
-
-#     # sample json
-#     # {"name": "Good Drink", "ingredients": ["Aloe Vera", "Grass Jelly"], "description":"drink desc"}
-#     data = request.json
-#     name = data.get("name")
-#     ingredient_names = data.get("ingredients")
-#     description = data.get("description")
-
-#     if Product.query.filter_by(name=name).first():
-#         return jsonify({"error": "Product name already exists"}), 400
-
-#     product = Product(
-#         name=name, description=description, price=7.00, category="Custom", quantity=1
-#     )
-
-#     for ingredient_name in ingredient_names:
-#         ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
-#         if ingredient is None:
-#             return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
-
-#         product.ingredients.append(ingredient)
-
-#     db.session.add(product)
-#     db.session.commit()
-
-#     return jsonify(product.to_dict()), 201
-
-
-# @app.route("/cart", defaults={"order_id": None})
-# @app.route("/cart/<int:order_id>")
-# def cart(order_id=None):
-#     def calculate_total(orders):
-#         return sum(order.total_price for order in orders)
-
-#     if order_id:
-#         orders = [db.session.get(Order, order_id)]
-#     else:
-#         orders = Order.query.all()
-#     if not orders:
-#         return "Order not found", 404
-#     total = calculate_total(orders)
-#     return render_template("cart.html", orders=orders, total=total)
-
-
-# testing - to diaplay last order in cart, will write code to display all in account history
-
-
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
