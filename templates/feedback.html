@@ -1,11 +1,55 @@
-{% extends "base.html" %} 
-
-{% block title %}Feedback{% endblock %}
-
-{% block content %}
-<main>
-  <h1>Any thoughts? Help us to improve.</h1>
-  
-
+{% extends "base.html" %} {% block title %}Feedback{% endblock %} {% block
+content %}
+<main class="feedbackPage">
+    <h1>Any thoughts? Help us to improve.</h1>
+    <form id="feedback-form" onsubmit="return submitFeedback(event)">
+        <textarea
+            id="feedback-textarea"
+            name="note"
+            rows="20"
+            cols="100"
+            placeholder="Type your thought here..."
+        ></textarea>
+        <div>
+            <button class="saveb" type="submit">Submit</button>
+            <button class="cancelb" type="button" onclick="clearTextArea()">
+                Cancel
+            </button>
+        </div>
+    </form>
 </main>
+
+<script>
+    function clearTextArea() {
+        document.getElementById("feedback-textarea").value = "";
+    }
+
+    async function submitFeedback(event) {
+        event.preventDefault();
+        const message = document.getElementById("feedback-textarea").value;
+
+        if (!message.trim()) {
+            alert("Please enter a message.");
+            return;
+        }
+
+        const feedback = {
+            message: message,
+        };
+
+        try {
+            const response = await fetch("/feedback", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(feedback),
+            });
+            clearTextArea()
+            alert("Thank you for your feedback!");
+        } catch (error) {
+            console.error("Error saving feedback:", error);
+        }
+    }
+</script>
 {% endblock %}

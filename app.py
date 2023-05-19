@@ -12,10 +12,18 @@ from flask_login import (
 )
 
 from database import db
-from models import Order, Product, ProductsOrder, User
+from models import (
+    Feedback,
+    Ingredient,
+    Order,
+    Product,
+    ProductIngredient,
+    ProductsOrder,
+    User,
+)
 
 
-def create_db(product_file):
+def create_db(product_file, ingredient_file):
     with app.app_context():
         db.create_all()
         print("Create all tables successfully.")
@@ -35,6 +43,20 @@ def create_db(product_file):
         db.session.commit()
         print("Successfully created all products.")
 
+        with open(ingredient_file, newline="") as csvfile:
+            reader = csv.reader(csvfile, delimiter=",", quotechar='"')
+            next(reader)
+            for row in reader:
+                obj = Ingredient(
+                    name=row[0],
+                    category=row[1],
+                    description=row[2],
+                    stock=int(row[3]),
+                )
+                db.session.add(obj)
+        db.session.commit()
+        print("Successfully created all ingredients.")
+
 
 app = Flask(__name__)
 app.instance_path = str(Path(".").resolve())
@@ -52,10 +74,10 @@ app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
 if not os.path.isfile(f"{DB_NAME}.db") and DB_NAME == "store":
-    create_db("products.csv")
+    create_db("products.csv", "ingredients.csv")
 
 if DB_NAME == "test":
-    create_db("test_products.csv")
+    create_db("test_products.csv", "ingredients.csv")
 
 app.secret_key = "abcdefg"
 
@@ -175,6 +197,35 @@ def customize():
     return render_template("customize1.html")
 
 
+@app.route("/customize", methods=["POST"])
+def create_drink():
+    # sample json
+    # {"name": "Good Drink", "ingredients": ["Aloe Vera", "Grass Jelly"], "description":"drink desc"}
+    data = request.json
+    name = data.get("name")
+    ingredient_names = data.get("ingredients")
+    description = data.get("description")
+
+    if Product.query.filter_by(name=name).first():
+        return jsonify({"error": "Product name already exists"}), 400
+
+    product = Product(
+        name=name, description=description, price=7.00, category="Custom", quantity=1
+    )
+
+    for ingredient_name in ingredient_names:
+        ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
+        if ingredient is None:
+            return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
+
+        product.ingredients.append(ingredient)
+
+    db.session.add(product)
+    db.session.commit()
+
+    return jsonify(product.to_dict()), 201
+
+
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -258,6 +309,17 @@ def get_order(order_id):
 @app.route("/feedback")
 def feedback():
     return render_template("feedback.html")
+
+
+@app.route("/feedback", methods=["POST"])
+def create_feedback():
+    message = request.get_json()["message"]
+    feedback = Feedback(message=message)
+
+    db.session.add(feedback)
+    db.session.commit()
+
+    return redirect(url_for("feedback"))
 
 
 if __name__ == "__main__":
