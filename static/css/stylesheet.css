@@ -188,6 +188,17 @@ footer {
   color: #c1a390;
 }
 
+.redirectCustomize {
+  background-color: #808e68 !important;
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  font-family: "Josefin Sans", sans-serif;
+  border-radius: 20px;
+  border: 20px solid #808e68;
+  text-decoration: none;
+}
+
 .contentWord {
   color: #a1988f;
   font-size: 25px;
