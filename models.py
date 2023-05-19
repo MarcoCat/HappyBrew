@@ -115,3 +115,6 @@ class ProductIngredient(db.Model):
     ingredient_id = db.Column(
         db.Integer, db.ForeignKey("ingredient.id"), primary_key=True
     )
+
+
+
