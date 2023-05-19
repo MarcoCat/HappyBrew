@@ -9,6 +9,15 @@
   
     <div class="cartPageLU">
         <div class="orderdetail">
+
+
+
+            {% for order in orders %}
+ 
+   
+            <a class="checkoutLink" href="checkout">Ready to Checkout!</a>
+
+
             {% for order in orders %}
             
             <section>
@@ -60,4 +69,8 @@
     </div>
 
 </main>
+
+
+
 {% endblock %}
+
