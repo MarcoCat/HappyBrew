@@ -285,6 +285,28 @@ def create_drink():
 #     return jsonify(product.to_dict()), 201
 
 
+
+
+# @app.route("/cart", defaults={"order_id": None})
+# @app.route("/cart/<int:order_id>")
+# def cart(order_id=None):
+#     def calculate_total(orders):
+#         return sum(order.total_price for order in orders)
+
+#     if order_id:
+#         orders = [db.session.get(Order, order_id)]
+#     else:
+#         orders = Order.query.all()
+#     if not orders:
+#         return "Order not found", 404
+#     total = calculate_total(orders)
+#     return render_template("cart.html", orders=orders, total=total)
+
+
+
+
+# testing - to diaplay last order in cart, will write code to display all in account history
+
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -292,13 +314,40 @@ def cart(order_id=None):
         return sum(order.total_price for order in orders)
 
     if order_id:
-        orders = [db.session.get(Order, order_id)]
+        order = db.session.get(Order, order_id)
+        orders = [order] if order else []
     else:
-        orders = Order.query.all()
-    if not orders:
-        return "Order not found", 404
+        last_order = db.session.query(Order).order_by(Order.id.desc()).first()
+        orders = [last_order] if last_order else []
     total = calculate_total(orders)
     return render_template("cart.html", orders=orders, total=total)
+
+
+@app.route("/update_quantity", methods=["POST"])
+def update_quantity():
+    order_id = request.form.get("order_id")
+    quantities = request.form.getlist("quantity[]")
+
+    product_orders = db.session.query(ProductsOrder).filter_by(order_id=order_id).all()
+    for i, product_order in enumerate(product_orders):
+        product_order.quantity = int(quantities[i])
+
+    db.session.commit()
+
+    # Redirect to the cart page
+    return redirect("/cart")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route("/checkout")
