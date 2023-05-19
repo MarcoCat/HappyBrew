@@ -1,6 +1,7 @@
 import csv
 import os
 from pathlib import Path
+import json
 
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_login import (
@@ -349,7 +350,6 @@ def update_quantity():
 
 
 
-
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
@@ -361,57 +361,54 @@ def order():
     return render_template("order.html", menu=menu)
 
 
+from flask import jsonify
+
 @app.route("/order", methods=["POST"])
 def create_order():
-    form_data = request.form.to_dict()
-    data = {"name": form_data["name"], "address": form_data["address"], "products": []}
-    for i in range(len(form_data) // 2 - 1):
-        is_used = False
-        for product in data["products"]:
-            if product["name"] == form_data[f"products[{i}][name]"]:
-                product["quantity"] += int(form_data[f"products[{i}][quantity]"])
-                is_used = True
-                break
-        if not is_used:
-            product = {
-                "name": form_data[f"products[{i}][name]"],
-                "quantity": int(form_data[f"products[{i}][quantity]"]),
-            }
-            data["products"].append(product)
+    try:
+        data = json.loads(request.get_json())
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+    except:
+        return jsonify({"error": "Invalid JSON"}), 400
 
     for key in ("name", "address", "products"):
         if key not in data:
-            return f"The JSON is missing: {key}", 400
-
-    for product in data["products"]:
-        if not db.session.get(Product, product["name"]):
-            return f"The product {product['name']} does not exist", 400
+            return jsonify({"error": f"The JSON is missing: {key}"}), 400
+        
+    if not data['products']:
+        return jsonify({"error": "No products provided"}), 400
+    
+    if not data['name']:
+        return jsonify({"error": "No name provided"}), 400
+    
+    if not data['address']:
+        return jsonify({"error": "No address provided"}), 400
+    
+    products = []
+    for category in data['products']:
+        for product in data['products'][category]:
+            current_product = db.session.query(Product).filter_by(name=product['name']).first()
+            if not current_product:
+                return jsonify({"error": f"The product {product['name']} does not exist"}), 404
+            products.append({'product':current_product, 'count':product['count']})
 
     order = Order(
-        name=data["name"],
-        address=data["address"],
+        name=data['name'],
+        address=data['address'],
     )
 
-    for product in data["products"]:
+    for product in products:
         association = ProductsOrder(
-            product=db.session.get(Product, product["name"]),
+            product=product['product'],
             order=order,
-            quantity=product["quantity"],
+            quantity=product["count"],
         )
         db.session.add(association)
     db.session.add(order)
     db.session.commit()
 
-    return redirect(url_for("cart"))
-
-
-@app.route("/order/<int:order_id>", methods=["GET"])
-def get_order(order_id):
-    order = db.session.get(Order, order_id)
-    if not order:
-        return "Order not found", 404
-    order_json = order.to_dict()
-    return jsonify(order_json)
+    return jsonify({"location": url_for("cart")})
 
 
 @app.route("/feedback")
