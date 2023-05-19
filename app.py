@@ -315,7 +315,7 @@ def cart(order_id=None):
         order = db.session.get(Order, order_id)
     else:
         order = db.session.query(Order).order_by(Order.id.desc()).first()
-    order = [order] or []
+    order = [order] if order else []
     total = calculate_total(order)
     return render_template("cart.html", orders=order, total=total)
 
