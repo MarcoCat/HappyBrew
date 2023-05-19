@@ -229,14 +229,14 @@ footer{
 
 
 
-.menucustomItem{
+.menucustomItem, .menuItem{
     display: grid;
     grid-template-columns: 1fr;
     grid-column: 2/3;
     grid-row: 2/3;
 }
 
-.menucustomItem >p{
+.menucustomItem >p, .menuItem >p{
     margin-bottom: 0px;
     text-align: center;
     font-size: 40px;
@@ -250,7 +250,7 @@ footer{
     font-size: 25px !important;
     padding-top: 2vh;
 }
-.menucustomItem h2{
+.menucustomItem h2, .menuItem h2{
     padding-top: 20vh;
     margin: 0px;
     text-align: center;
