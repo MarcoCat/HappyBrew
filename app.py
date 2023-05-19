@@ -201,8 +201,6 @@ def customize():
 @app.route("/customize", methods=["POST"])
 def create_drink():
     data = request.json
-    print("here")
-    print(data)
     items = []
 
     for category in ("Tea Base", "Dairy", "Sweetener", "Sugar Level", "Ice Level"):
