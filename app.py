@@ -173,24 +173,29 @@ def logout():
     return redirect(url_for("home"))
 
 
-
-
 # katy's code
+
 
 @app.route("/customize")
 def customize():
     products = Ingredient.query.all()
     # hard coded categories please ensure the toppings is in one of these categories
-    categories = ['Tea Base', 'Dairy', 'Toppings', 'Sweetener', 'Sugar Level', 'Ice Level']
+    categories = [
+        "Tea Base",
+        "Dairy",
+        "Toppings",
+        "Sweetener",
+        "Sugar Level",
+        "Ice Level",
+    ]
     product_dict = {}
     for category in categories:
         product_dict[category] = [
             product for product in products if product.category == category
         ]
-    return render_template("customize1.html", products=product_dict, categories=categories)
-
-
-
+    return render_template(
+        "customize1.html", products=product_dict, categories=categories
+    )
 
 
 @app.route("/customize", methods=["POST"])
@@ -200,17 +205,18 @@ def create_drink():
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
-    existing_custom_drinks_count = Product.query.filter(Product.name.like(f"{base_name}%")).count()
+    existing_custom_drinks_count = Product.query.filter(
+        Product.name.like(f"{base_name}%")
+    ).count()
     name = f"{base_name}{existing_custom_drinks_count + 1}"
-
 
     # Create a new custom product
     product = Product(
         name=name,
         price=7.0,
         category="Custom",
-        description=' '.join(items),
-        quantity=1
+        description=", ".join(items),
+        quantity=1,
     )
 
     for ingredient_name in items:
@@ -231,7 +237,6 @@ def create_drink():
 # @app.route("/customize")
 # def customize():
 #     return render_template("customize1.html")
-
 
 
 # @app.route("/customize", methods=["POST"])
@@ -262,9 +267,6 @@ def create_drink():
 #     db.session.commit()
 
 #     return jsonify(product.to_dict()), 201
-
-
-
 
 
 @app.route("/cart", defaults={"order_id": None})
