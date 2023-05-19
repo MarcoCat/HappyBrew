@@ -776,6 +776,11 @@ footer {
   font-style: italic;
 }
 
+.ourteamContent p{
+    text-align: justify;
+    font-size: 85%;
+    margin: 0;
+}
 /* scroll bar */
 
 ::-webkit-scrollbar {
