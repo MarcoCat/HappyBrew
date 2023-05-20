@@ -205,6 +205,7 @@ def customize():
 
 
 @app.route("/customize", methods=["POST"])
+@login_required
 def create_drink():
     data = request.json
     items = []
