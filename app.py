@@ -164,12 +164,15 @@ def signup():
     return render_template("signup.html")
 
 
+
 @app.route("/dashboard")
-def test_login():
+def dashboard():
     if current_user.is_authenticated:
-        return render_template("dashboard.html", user=current_user)
+        orders = Order.query.filter_by(name=current_user.username).all()
+        return render_template("dashboard.html", user=current_user, orders=orders)
     else:
         return redirect(url_for("login"))
+    
 
 
 @app.route("/logout")

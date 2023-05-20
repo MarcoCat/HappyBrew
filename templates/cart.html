@@ -10,7 +10,7 @@
     <div class="orderdetail">
       {% for order in orders %}
       <section>
-        <h2>Order {{ order.id }}</h2>
+        <h2>Order Info</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address: {{ order.address }}</p>
         <form action="/update_quantity" method="POST">
