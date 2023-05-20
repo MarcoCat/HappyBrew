@@ -5,12 +5,13 @@
 
   <h1 class="cartTitle">Cart</h1>
   <p class="processWord">You are almost done !</p>
+  <p class="processNote">Before you add items into cart, it will show your previous order for your reference ~</p>
 
   <div class="cartPageLU">
     <div class="orderdetail">
       {% for order in orders %}
       <section>
-        <h2>Order Info</h2>
+        <h2>Order Detail</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address: {{ order.address }}</p>
         <form action="/update_quantity" method="POST">

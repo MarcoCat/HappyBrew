@@ -1,9 +1,8 @@
 {% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
 content %}
-<main>
-    <h1>
-        Login test page, you have successfully logged in as {{ user.username }}
-      </h1>
+<main class="dashboardPage">
+    <h1>Hello {{ user.username }}!</h1>
+    <h2>Your order history :</h2>
       <div class="cartPageLU">
         <div class="orderdetail">
           {% for order in orders %}
@@ -34,7 +33,7 @@ content %}
               </table>
              
             </form>
-            <p class="sumPrice">$ {{ "{:.2f}".format(order.total_price) }}</p>
+            <p class="sumPrice">Total price : $ {{ "{:.2f}".format(order.total_price) }}</p>
           </section>
           
           {% endfor %}

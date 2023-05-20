@@ -431,13 +431,18 @@ footer {
   margin-bottom: 60px;
 }
 
-.processWord {
+.processWord, .dashboardPage > h2{
   font-size: 35px;
   font-style: italic;
   color: #c1a390;
   text-align: center;
-  margin: 0px 0px 60px;
   font-weight: bold;
+  margin-bottom: 0px;
+}
+.processNote{
+    text-align: center;
+    margin: 1vh 0px 9vh;
+    font-style: italic;
 }
 
 .cartTable {
@@ -522,15 +527,16 @@ footer {
     font-family: 'Josefin Sans', sans-serif;
     margin: 2vh 0px 0px 0px;
     padding: 1vh !important;
-    background-color: #C1BC92;
-    color: #58624B;
+    background-color: #e3d6c1;
+    color: #22223b;
     border: 0px;
+    
 }
 
 .checkoutLink:hover{
-    background-color: #C1BC92;
+    background-color: #e3d6c1;
     color: #22223b;
-    box-shadow: 0px 0px 10px #C1BC92;
+    box-shadow: 0px 0px 10px #e3d6c1;
 }
 
 .backMenuLink:hover {
@@ -559,9 +565,20 @@ footer {
 
 
 
+/* dashboard */
 
+.dashboardPage h1{
+    padding-left:5vw;
+}
 
+.dashboardPage > h2{
+    margin-bottom: 5vh;
+    font-size: 2em;
+}
 
+.dashboardPage .sumPrice{
+    font-size: 1.3em;
+}
 
 
 
@@ -902,3 +919,5 @@ footer {
 ::-webkit-scrollbar-track:hover {
   background-color: #ddd;
 }
+
+
