@@ -547,6 +547,12 @@ footer {
   justify-content: center;
 }
 
+.cartPage aside{
+    text-align: center;
+    font-size: 2.5em;
+    padding-top: 10vh;
+    font-style: italic;
+}
 
 
 
