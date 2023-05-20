@@ -3,7 +3,7 @@
 <main>
   <div class="menucustomPage">
     <section class="menucustomNavBar">
-      <h1 class="menuTitile">Menu</h1>
+      <h1 class="menuTitile">Menu</h1>     
       {% for category in categories %}
       <h3><a href="#{{ category }}">| {{ category|capitalize }}</a></h3>
       {% endfor %}
@@ -45,16 +45,12 @@
       {% endfor %}
       <div class="orderForm">
         <label for="name">Name:</label>
-        <!-- <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}"{% endif %} /> -->
         <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}" readonly{% endif %} />
-
         <label for="address">Address:</label>
         <input id="address" type="text" placeholder="Enter your address" />
       </div>
       <button class="orderButton" type="button" onclick="submitOrder()">
       <input id="authStatus" type="hidden" value="{% if current_user.is_authenticated %}true{% else %}false{% endif %}">
-
-        
         Order
       </button>
     </section>
