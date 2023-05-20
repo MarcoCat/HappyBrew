@@ -56,7 +56,8 @@ main{
 
 .navColor{
     background-color: #58624B;
-    width: 4.5vw;
+    width: 4vw;
+    height: 3vh;
     border-radius: 0px 0px 50px 50px;
 
 }
@@ -96,17 +97,17 @@ main{
   justify-self: right;
 }
 
-.accountButton1, .accountButton2{
+.accountButton1, .accountButton2, .logoutButton{
     width: 4vw;
     height: 2.5vh;
     background-color:#C1BC92;
-    padding-top: 2vh;
+    padding-top: 1.8vh;
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
     color:white;
     font-weight:bold;
     letter-spacing: 1px;
-    font-size: 0.6em;
+    font-size: 0.8em;
     text-align: center;
 }
 
@@ -120,16 +121,20 @@ main{
 .accountButton1:hover{
     box-shadow: 0px 0px 10px #808E68;
     background-color: #808E68;
+    font-size: 1em;
 }
 .accountButton2 {
   background-color: #b69394;
   border-radius: 0px;
 }
 
-.accountButton2:hover {
-  box-shadow: 0px 0px 10px #9a6768;
-  background-color: #9a6768;
+.accountButton2:hover{
+  box-shadow: 0px 0px 10px #946c6e;
+  background-color: #946c6e;
+  font-size: 1em;
 }
+
+
 
 .cartIcon {
   grid-column: 3/4;
@@ -138,24 +143,7 @@ main{
 
 }
 
-.logoutButton{
-    width: 10vw;
-    text-align: center;
-    padding: 5px;
-    font-size: 13px;
-    color: white;
-    letter-spacing: 1px;
-    background-color: #58624B;
-    border-radius: 0px 0px 50px 50px;
-}
 
-
-.logoutButton:hover, .logoutButton:focus{
-    color:white;
-    font-style: italic;
-    font-weight:bold;
-    font-size: 15px;
-}
 
 header a {
   text-decoration: none;
