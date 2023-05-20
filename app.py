@@ -3,7 +3,8 @@ import json
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, jsonify, redirect, render_template, request, url_for, session
+
 from flask_login import (
     LoginManager,
     current_user,
@@ -131,7 +132,12 @@ def login():
 
         else:
             login_user(user)
+            session["username"] = user.username  # Replace with the appropriate attribute from your User model
+
+
             return redirect("dashboard")
+
+
 
     return render_template("login.html")
 
@@ -171,6 +177,7 @@ def test_login():
 @app.route("/logout")
 def logout():
     logout_user()
+    session.pop("username", None)
     return redirect(url_for("home"))
 
 

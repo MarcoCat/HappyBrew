@@ -45,7 +45,9 @@
       {% endfor %}
       <div class="orderForm">
         <label for="name">Name:</label>
-        <input id="name" type="text" placeholder="Enter your name" />
+        <!-- <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}"{% endif %} /> -->
+        <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}" readonly{% endif %} />
+
         <label for="address">Address:</label>
         <input id="address" type="text" placeholder="Enter your address" />
       </div>
@@ -137,4 +139,5 @@
     }
   }
 </script>
+
 {% endblock %}
