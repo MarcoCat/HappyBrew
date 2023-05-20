@@ -304,6 +304,7 @@ from flask import jsonify
 
 
 @app.route("/order", methods=["POST"])
+@login_required
 def create_order():
     try:
         data = json.loads(request.get_json())
