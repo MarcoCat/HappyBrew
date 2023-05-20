@@ -1,6 +1,8 @@
 {% extends "base.html" %} {% block title %}Cart{% endblock %} {% block content
 %}
 <main>
+  {% if current_user.is_authenticated %}
+
   <h1 class="cartTitle">Cart</h1>
   <p class="processWord">You are almost done !</p>
 
@@ -64,6 +66,13 @@
       </div>
     </section>
   </div>
+
+  
+  {% else %}
+    <aside>Please log in/ sign up first.</aside>
+  {% endif %}
+
+
 </main>
 
 {% endblock %}

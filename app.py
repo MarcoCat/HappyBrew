@@ -254,6 +254,9 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
+
+
+
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -266,7 +269,9 @@ def cart(order_id=None):
         order = db.session.query(Order).order_by(Order.id.desc()).first()
     order = [order] if order else []
     total = calculate_total(order)
-    return render_template("cart.html", orders=order, total=total)
+    return render_template("cart.html", orders=order, total=total, current_user=current_user)
+
+
 
 
 @app.route("/update_quantity", methods=["POST"])
