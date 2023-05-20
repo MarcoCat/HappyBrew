@@ -314,13 +314,14 @@ footer {
   cursor: pointer;
 }
 
-.count {
+.count{
   width: 30px;
   height: 30px;
   text-align: center;
-  border: 5px solid #58624b;
+  border: 4px solid #58624b;
   border-radius: 30%;
   margin: 0 5px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .addingredientButton {
@@ -403,6 +404,12 @@ footer {
   font-size: 1em;
 }
 
+
+
+
+
+
+
 /* cart  page */
 
 .cartPageLU {
@@ -451,6 +458,20 @@ footer {
   width: 15vw;
 }
 
+
+.quantityInput{
+    width: 5vw;
+    height: 3vh;
+    text-align: center;
+    border: 2px solid #a5b29c;
+    border-radius: 10%;
+    margin: 0 5px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+
+
 .sumArea {
   background-color: #e3d6c1;
   width: 25%;
@@ -479,14 +500,16 @@ footer {
   color: #58624b;
 }
 
-.checkoutLink,
-.backMenuLink {
+
+
+.checkoutLink, .backMenuLink {
   background-color: #58624b;
   color: white;
   text-align: center;
   margin: 0px 40px 10px;
-  padding: 5px 0px;
+  padding: 1.2vh 0px;
   text-decoration: none;
+  border: 0px;
 }
 
 .backMenuLink {
@@ -494,11 +517,53 @@ footer {
   color: #22223b;
 }
 
-.cartButton {
+
+.quantityUpdateB{
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 2vh 0px 0px 0px;
+    padding: 1vh !important;
+    background-color: #C1BC92;
+    color: #58624B;
+    border: 0px;
+}
+
+.checkoutLink:hover{
+    background-color: #C1BC92;
+    color: #22223b;
+    box-shadow: 0px 0px 10px #C1BC92;
+}
+
+.backMenuLink:hover {
+    background-color: #e4e2e0;
+    box-shadow: 0px 0px 10px #75614d7e;
+  
+  }
+
+  
+
+.quantityUpdateB:hover{
+    background-color: #58624b;
+    box-shadow: 0px 0px 10px #58624b;
+    color: white;
+}
+
+.cartButton{
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* signup page & login page */
 
