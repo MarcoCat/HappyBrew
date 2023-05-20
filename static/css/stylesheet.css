@@ -6,6 +6,7 @@ body{
     flex-direction: column;
     margin: 0px;
     color: #58624B;
+    padding-right: 1vw;
 }
 
 header{
@@ -96,23 +97,23 @@ main{
 }
 
 .accountButton1, .accountButton2{
-    width: 5vw;
-    height: 4vh;
+    width: 4vw;
+    height: 2.5vh;
     background-color:#C1BC92;
-    padding-top: 20px;
+    padding-top: 2vh;
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
     color:white;
     font-weight:bold;
     letter-spacing: 1px;
-    font-size: 0.8em;
+    font-size: 0.6em;
     text-align: center;
 }
 
 .accountButton2{
     text-align: left !important;
-    width: 7vw !important;
-    padding-left: 1vw;
+    width: 5vw !important;
+    padding-left: 0.5vw;
     
 }
 
@@ -133,7 +134,8 @@ main{
 .cartIcon {
   grid-column: 3/4;
   justify-self: right;
-  padding-right: 20px;
+  padding-right: 0.5vw;
+
 }
 
 .logoutButton{
