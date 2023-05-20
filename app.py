@@ -298,6 +298,8 @@ def checkout():
     return render_template("checkout.html")
 
 
+
+
 @app.route("/order")
 def order():
     menu = Product.query.all()
