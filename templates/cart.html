@@ -1,14 +1,17 @@
 {% extends "base.html" %} {% block title %}Cart{% endblock %} {% block content
 %}
-<main>
+<main class="cartPage">
+  {% if current_user.is_authenticated %}
+
   <h1 class="cartTitle">Cart</h1>
   <p class="processWord">You are almost done !</p>
+  <p class="processNote">Before you add items into cart, it will show your previous order for your reference ~</p>
 
   <div class="cartPageLU">
     <div class="orderdetail">
       {% for order in orders %}
       <section>
-        <h2>Order {{ order.id }}</h2>
+        <h2>Order Detail</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address: {{ order.address }}</p>
         <form action="/update_quantity" method="POST">
@@ -43,7 +46,7 @@
               {% endfor %}
             </tbody>
           </table>
-          <button type="submit">Update</button>
+          <button class="quantityUpdateB" type="submit">Update</button>
         </form>
       </section>
       {% endfor %}
@@ -64,6 +67,13 @@
       </div>
     </section>
   </div>
+
+  
+  {% else %}
+    <aside>Please log in/ sign up first.</aside>
+  {% endif %}
+
+
 </main>
 
 {% endblock %}

@@ -48,11 +48,18 @@
             <img
               src="{{ url_for('static', filename='image/cartPage/cartImage.png') }}"
               alt="cart image"
-              width="50"
-              height="50"
+              width="38"
+              height="38"
           /></a>
-          <a class="accountButton1" href="dashboard"> LOGIN</a>
-          <a class="accountButton2" href="signup"> SIGN UP </a>
+
+          {% if current_user.is_authenticated %}
+          <a class="accountButton1" href="dashboard">{{ current_user.username }}</a>
+          <a class="accountButton2" href="logout">Log Out</a>
+          {% else %}
+          <a class="accountButton1" href="dashboard">Log In</a>
+          <a class="accountButton2" href="signup">Sign Up</a>
+          {% endif %}
+
         </div>
     </div>
     
@@ -77,9 +84,12 @@
         <div class="navColor"></div>
         <div class="navColor"></div>
         <div class="navColor"></div>
+        <div class="navColor"></div>
+        <div class="navColor"></div>
+        <div class="navColor"></div>
+        <div class="navColor"></div>
+        <div class="navColor"></div>
         
-
-        <a class = "logoutButton" href="logout"> >> LogOut </a>
     </div>
       </header>
     

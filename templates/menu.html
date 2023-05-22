@@ -3,7 +3,7 @@
 <main>
   <div class="menucustomPage">
     <section class="menucustomNavBar">
-      <h1 class="menuTitile">Menu</h1>
+      <h1 class="menuTitile">Menu</h1>     
       {% for category in categories %}
       <h3><a href="#{{ category }}">| {{ category|capitalize }}</a></h3>
       {% endfor %}
@@ -45,11 +45,12 @@
       {% endfor %}
       <div class="orderForm">
         <label for="name">Name:</label>
-        <input id="name" type="text" placeholder="Enter your name" />
+        <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}" readonly{% endif %} />
         <label for="address">Address:</label>
         <input id="address" type="text" placeholder="Enter your address" />
       </div>
       <button class="orderButton" type="button" onclick="submitOrder()">
+      <input id="authStatus" type="hidden" value="{% if current_user.is_authenticated %}true{% else %}false{% endif %}">
         Order
       </button>
     </section>
@@ -112,29 +113,38 @@
     return JSON.stringify(orderSummary);
   }
 
+ 
   async function submitOrder() {
-    const order_summary = getOrderSummary();
+  const order_summary = getOrderSummary();
+  const authStatus = document.getElementById("authStatus").value;
 
-    try {
-      const response = await fetch("/order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(order_summary),
-      });
-
-      if (response.ok) {
-        alert("Thank you for your ordering!");
-        const data = await response.json();
-        window.location.href = data.location;
-      } else {
-        const errorData = await response.json();
-        alert(errorData.error);
-      }
-    } catch (error) {
-      console.error("Error ordering:", error);
-    }
+  if (authStatus === "false") {
+    alert("Login required. Please log in first.");
+    return;
   }
+
+  try {
+    const response = await fetch("/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order_summary),
+    });
+
+    if (response.ok) {
+      alert("Thank you for your ordering!");
+      const data = await response.json();
+      window.location.href = data.location;
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error);
+    }
+  } catch (error) {
+    console.error("Error ordering:", error);
+  }
+}
+
 </script>
+
 {% endblock %}

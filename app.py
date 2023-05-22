@@ -3,7 +3,8 @@ import json
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, jsonify, redirect, render_template, request, url_for, session
+
 from flask_login import (
     LoginManager,
     current_user,
@@ -131,6 +132,9 @@ def login():
 
         else:
             login_user(user)
+            session["username"] = user.username  # Replace with the appropriate attribute from your User model
+
+
             return redirect("dashboard")
 
     return render_template("login.html")
@@ -160,17 +164,21 @@ def signup():
     return render_template("signup.html")
 
 
+
 @app.route("/dashboard")
-def test_login():
+def dashboard():
     if current_user.is_authenticated:
-        return render_template("dashboard.html", user=current_user)
+        orders = Order.query.filter_by(name=current_user.username).all()
+        return render_template("dashboard.html", user=current_user, orders=orders)
     else:
         return redirect(url_for("login"))
+    
 
 
 @app.route("/logout")
 def logout():
     logout_user()
+    session.pop("username", None)
     return redirect(url_for("home"))
 
 
@@ -200,6 +208,7 @@ def customize():
 
 
 @app.route("/customize", methods=["POST"])
+@login_required
 def create_drink():
     data = request.json
     items = []
@@ -249,6 +258,9 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
+
+
+
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -261,7 +273,9 @@ def cart(order_id=None):
         order = db.session.query(Order).order_by(Order.id.desc()).first()
     order = [order] if order else []
     total = calculate_total(order)
-    return render_template("cart.html", orders=order, total=total)
+    return render_template("cart.html", orders=order, total=total, current_user=current_user)
+
+
 
 
 @app.route("/update_quantity", methods=["POST"])
@@ -284,6 +298,8 @@ def checkout():
     return render_template("checkout.html")
 
 
+
+
 @app.route("/order")
 def order():
     menu = Product.query.all()
@@ -294,6 +310,7 @@ from flask import jsonify
 
 
 @app.route("/order", methods=["POST"])
+@login_required
 def create_order():
     try:
         data = json.loads(request.get_json())

@@ -6,6 +6,7 @@ body{
     flex-direction: column;
     margin: 0px;
     color: #58624B;
+    padding-right: 1vw;
 }
 
 header{
@@ -55,7 +56,8 @@ main{
 
 .navColor{
     background-color: #58624B;
-    width: 4.5vw;
+    width: 4vw;
+    height: 3vh;
     border-radius: 0px 0px 50px 50px;
 
 }
@@ -95,11 +97,11 @@ main{
   justify-self: right;
 }
 
-.accountButton1, .accountButton2{
-    width: 5vw;
-    height: 4vh;
+.accountButton1, .accountButton2, .logoutButton{
+    width: 4vw;
+    height: 2.5vh;
     background-color:#C1BC92;
-    padding-top: 20px;
+    padding-top: 1.8vh;
     border-radius: 50px 0px 0px 50px;
     justify-self: right;
     color:white;
@@ -111,49 +113,37 @@ main{
 
 .accountButton2{
     text-align: left !important;
-    width: 7vw !important;
-    padding-left: 1vw;
+    width: 5vw !important;
+    padding-left: 0.5vw;
     
 }
 
 .accountButton1:hover{
     box-shadow: 0px 0px 10px #808E68;
     background-color: #808E68;
+    font-size: 1em;
 }
 .accountButton2 {
   background-color: #b69394;
   border-radius: 0px;
 }
 
-.accountButton2:hover {
-  box-shadow: 0px 0px 10px #9a6768;
-  background-color: #9a6768;
+.accountButton2:hover{
+  box-shadow: 0px 0px 10px #946c6e;
+  background-color: #946c6e;
+  font-size: 1em;
 }
+
+
 
 .cartIcon {
   grid-column: 3/4;
   justify-self: right;
-  padding-right: 20px;
-}
+  padding-right: 0.5vw;
 
-.logoutButton{
-    width: 10vw;
-    text-align: center;
-    padding: 5px;
-    font-size: 13px;
-    color: white;
-    letter-spacing: 1px;
-    background-color: #58624B;
-    border-radius: 0px 0px 50px 50px;
 }
 
 
-.logoutButton:hover, .logoutButton:focus{
-    color:white;
-    font-style: italic;
-    font-weight:bold;
-    font-size: 15px;
-}
 
 header a {
   text-decoration: none;
@@ -312,13 +302,14 @@ footer {
   cursor: pointer;
 }
 
-.count {
+.count{
   width: 30px;
   height: 30px;
   text-align: center;
-  border: 5px solid #58624b;
+  border: 4px solid #58624b;
   border-radius: 30%;
   margin: 0 5px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .addingredientButton {
@@ -398,8 +389,14 @@ footer {
   font-family: "Josefin Sans", sans-serif;
   margin: 0px 1vw 0px 1vw;
   justify-self: center;
-  font-size: 1.2em;
+  font-size: 1em;
 }
+
+
+
+
+
+
 
 /* cart  page */
 
@@ -422,13 +419,18 @@ footer {
   margin-bottom: 60px;
 }
 
-.processWord {
+.processWord, .dashboardPage > h2{
   font-size: 35px;
   font-style: italic;
   color: #c1a390;
   text-align: center;
-  margin: 0px 0px 60px;
   font-weight: bold;
+  margin-bottom: 0px;
+}
+.processNote{
+    text-align: center;
+    margin: 1vh 0px 9vh;
+    font-style: italic;
 }
 
 .cartTable {
@@ -448,6 +450,20 @@ footer {
 .cartTable td:first-child {
   width: 15vw;
 }
+
+
+.quantityInput{
+    width: 5vw;
+    height: 3vh;
+    text-align: center;
+    border: 2px solid #a5b29c;
+    border-radius: 10%;
+    margin: 0 5px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+
 
 .sumArea {
   background-color: #e3d6c1;
@@ -477,14 +493,16 @@ footer {
   color: #58624b;
 }
 
-.checkoutLink,
-.backMenuLink {
+
+
+.checkoutLink, .backMenuLink {
   background-color: #58624b;
   color: white;
   text-align: center;
   margin: 0px 40px 10px;
-  padding: 5px 0px;
+  padding: 1.2vh 0px;
   text-decoration: none;
+  border: 0px;
 }
 
 .backMenuLink {
@@ -492,11 +510,71 @@ footer {
   color: #22223b;
 }
 
-.cartButton {
+
+.quantityUpdateB{
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 2vh 0px 0px 0px;
+    padding: 1vh !important;
+    background-color: #e3d6c1;
+    color: #22223b;
+    border: 0px;
+    
+}
+
+.checkoutLink:hover{
+    background-color: #e3d6c1;
+    color: #22223b;
+    box-shadow: 0px 0px 10px #e3d6c1;
+}
+
+.backMenuLink:hover {
+    background-color: #e4e2e0;
+    box-shadow: 0px 0px 10px #75614d7e;
+  
+  }
+
+  
+
+.quantityUpdateB:hover{
+    background-color: #58624b;
+    box-shadow: 0px 0px 10px #58624b;
+    color: white;
+}
+
+.cartButton{
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+.cartPage aside{
+    text-align: center;
+    font-size: 2.5em;
+    padding-top: 10vh;
+    font-style: italic;
+}
+
+
+
+
+
+
+/* dashboard */
+
+.dashboardPage h1{
+    padding-left:5vw;
+}
+
+.dashboardPage > h2{
+    margin-bottom: 5vh;
+    font-size: 2em;
+}
+
+.dashboardPage .sumPrice{
+    font-size: 1.3em;
+}
+
+
 
 /* signup page & login page */
 
@@ -835,3 +913,5 @@ footer {
 ::-webkit-scrollbar-track:hover {
   background-color: #ddd;
 }
+
+

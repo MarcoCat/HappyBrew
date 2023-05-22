@@ -61,7 +61,10 @@ def test_login_successful(test_client):
     response = test_client.post("/login", data=login_user, follow_redirects=True)
     assert response.status_code == 200
     assert response.request.path == "/dashboard"
-    assert b"logged in as test4" in response.data
+    assert b"Hello test4!" in response.data
+    
+    
+    
 
 
 def test_login_incorrect_password(test_client):
