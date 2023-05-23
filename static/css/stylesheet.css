@@ -405,7 +405,7 @@ footer {
   justify-content: space-evenly;
 }
 
-.cartTitle {
+.cartTitle, .checkoutPage h1 {
   padding-left: 20px;
 }
 
