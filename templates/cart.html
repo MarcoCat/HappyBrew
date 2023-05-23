@@ -9,6 +9,7 @@
 
   <div class="cartPageLU">
     <div class="orderdetail">
+
       {% for order in orders %}
       <section>
         <h2>Order Detail</h2>
@@ -42,8 +43,20 @@
                   />
                 </td>
                 <td>{{ product_order.product.price }}</td>
+
+
+                <td>
+                  <form action="/delete_item" method="POST">
+                    <input type="hidden" name="product_id" value="{{ product_order.product_id }}">
+                    <input type="hidden" name="order_id" value="{{ product_order.order_id }}">
+                    <button class="deleteButton" type="submit">Delete</button>
+                  </form>
+                </td>
+              
+
               </tr>
               {% endfor %}
+               
             </tbody>
           </table>
           <button class="quantityUpdateB" type="submit">Update</button>
@@ -77,3 +90,5 @@
 </main>
 
 {% endblock %}
+
+

@@ -278,6 +278,30 @@ def cart(order_id=None):
 
 
 
+
+
+@app.route("/delete_item", methods=["POST"])
+def delete_item():
+    product_id = request.form.get("product_id")
+    order_id = request.form.get("order_id")
+
+    product_order = db.session.query(ProductsOrder).filter(
+        ProductsOrder.product_id == product_id,
+        ProductsOrder.order_id == order_id
+    ).first()
+
+    if product_order:
+        db.session.delete(product_order)
+        db.session.commit()
+
+    # Redirect to the cart page
+    return redirect("/cart")
+
+
+
+
+
+
 @app.route("/update_quantity", methods=["POST"])
 def update_quantity():
     order_id = request.form.get("order_id")
