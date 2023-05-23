@@ -511,7 +511,7 @@ footer {
 }
 
 
-.quantityUpdateB{
+.quantityUpdateB, .deleteButton{
     font-family: 'Josefin Sans', sans-serif;
     margin: 2vh 0px 0px 0px;
     padding: 1vh !important;
@@ -522,9 +522,9 @@ footer {
 }
 
 .checkoutLink:hover{
-    background-color: #e3d6c1;
-    color: #22223b;
-    box-shadow: 0px 0px 10px #e3d6c1;
+    background-color: #6a7955;
+    color: white;
+    box-shadow: 0px 0px 10px #6a7955;
 }
 
 .backMenuLink:hover {
@@ -535,7 +535,7 @@ footer {
 
   
 
-.quantityUpdateB:hover{
+.quantityUpdateB:hover, .deleteButton:hover{
     background-color: #58624b;
     box-shadow: 0px 0px 10px #58624b;
     color: white;
