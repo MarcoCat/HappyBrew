@@ -300,8 +300,6 @@ def delete_item():
 
 
 
-
-
 @app.route("/update_quantity", methods=["POST"])
 def update_quantity():
     order_id = request.form.get("order_id")
@@ -309,12 +307,21 @@ def update_quantity():
 
     product_orders = db.session.query(ProductsOrder).filter_by(order_id=order_id).all()
     for i, product_order in enumerate(product_orders):
-        product_order.quantity = int(quantities[i])
+        quantity = quantities[i]
+        if quantity == '':
+            quantity = 1
+        else:
+            quantity = int(quantity)
+            if quantity < 1:
+                quantity = 1
+        product_order.quantity = quantity
 
     db.session.commit()
 
     # Redirect to the cart page
     return redirect("/cart")
+
+
 
 
 @app.route("/checkout")

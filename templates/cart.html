@@ -5,7 +5,6 @@
 
   <h1 class="cartTitle">Cart</h1>
   <p class="processWord">You are almost done !</p>
-  <p class="processNote">Before you add items into cart, it will show your previous order for your reference ~</p>
 
   <div class="cartPageLU">
     <div class="orderdetail">
@@ -35,6 +34,8 @@
                     type="number"
                     name="quantity[]"
                     value="{{ product_order.quantity }}"
+                    min="1" 
+                    oninput="validity.valid||(value='');" 
                   />
                   <input
                     type="hidden"
