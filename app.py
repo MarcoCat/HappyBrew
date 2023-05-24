@@ -279,8 +279,6 @@ def cart(order_id=None):
 def delete_item():
     product_id = request.form.get("product_id")
     order_id = request.form.get("order_id")
-    print(product_id, order_id)
-    print("HERE")
 
     product_order = (
         db.session.query(ProductsOrder)
