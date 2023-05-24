@@ -1,10 +1,11 @@
-{% extends "base.html" %} {% block title %}Cart{% endblock %} {% block content
-%}
+{% extends "base.html" %}
+{% block title %}Cart{% endblock %}
+{% block content %}
 <main class="cartPage">
   {% if current_user.is_authenticated %}
 
   <h1 class="cartTitle">Cart</h1>
-  <p class="processWord">You are almost done !</p>
+  <p class="processWord">You are almost done!</p>
 
   <div class="cartPageLU">
     <div class="orderdetail">
@@ -45,24 +46,21 @@
                   />
                 </td>
                 <td>{{ product_order.product.price }}</td>
-
-
-                <td>
-                  <form action="/delete_item" method="POST">
-                    <input type="hidden" name="product_id" value="{{ product_order.product_id }}">
-                    <input type="hidden" name="order_id" value="{{ product_order.order_id }}">
-                    <button class="deleteButton" type="submit">Delete</button>
-                  </form>
-                </td>
-              
-
               </tr>
               {% endfor %}
-               
             </tbody>
           </table>
           <button class="quantityUpdateB" type="submit">Update Quantity</button>
         </form>
+
+        {% for product_order in order.products %}
+        <form action="/delete_item" method="POST">
+          <input type="hidden" name="order_id" value="{{ order.id }}">
+          <input type="hidden" name="product_id" value="{{ product_order.product_id }}">
+          <button class="deleteButton" type="submit">Delete</button>
+        </form>
+        {% endfor %}
+
       </section>
       {% endfor %}
     </div>
@@ -83,14 +81,9 @@
     </section>
   </div>
 
-  
   {% else %}
     <aside>Please log in/ sign up first.</aside>
   {% endif %}
-
-
 </main>
 
 {% endblock %}
-
-
