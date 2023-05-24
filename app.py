@@ -353,7 +353,7 @@ def create_order():
         return jsonify({"error": "No name provided"}), 400
 
     if not data["address"]:
-        return jsonify({"error": "No address provided"}), 400
+        return jsonify({"error": "No address/note provided"}), 400
 
     products = []
     for category in data["products"]:
