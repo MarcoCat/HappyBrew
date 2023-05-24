@@ -13,6 +13,8 @@
         <h2>Order Detail</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address: {{ order.address }}</p>
+        
+        <div class="cartForm">
         <form action="/update_quantity" method="POST">
           <input type="hidden" name="order_id" value="{{ order.id }}" />
           <table class="cartTable">
@@ -21,7 +23,6 @@
                 <th>Item</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -51,20 +52,27 @@
           <button class="quantityUpdateB" type="submit">Update Quantity</button>
         </form>
 
+        <div class="deleteFlex">
+          <p></p>
         {% for product_order in order.products %}
-        <form action="/delete_item" method="POST">
-          <input type="hidden" name="order_id" value="{{ order.id }}" />
-          <input
-            type="hidden"
-            name="product_id"
-            value="{{ product_order.product_id }}"
-          />
-          <button class="deleteButton" type="submit">Delete</button>
-        </form>
+
+          <form action="/delete_item" method="POST">
+            <input type="hidden" name="order_id" value="{{ order.id }}" />
+            <input
+              type="hidden"
+              name="product_id"
+              value="{{ product_order.product_id }}"
+            />
+            <button class="deleteButton" type="submit">Delete</button>
+          </form>
+          
+          {% endfor %}
+        </div>
+        </div>
+        </section>
         {% endfor %}
-      </section>
-      {% endfor %}
-    </div>
+      </div>
+    
 
     <section class="sumArea">
       <img
