@@ -36,6 +36,7 @@ class Order(db.Model):
     completed = db.Column(db.Boolean, default=False)
     products = db.relationship("ProductsOrder", back_populates="order")
 
+
     @property
     def total_price(self):
         if not self.products:
@@ -79,6 +80,8 @@ class ProductsOrder(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     product = db.relationship("Product")
     order = db.relationship("Order", back_populates="products")
+
+
 
 
 class User(db.Model, UserMixin):
