@@ -1,6 +1,5 @@
-{% extends "base.html" %}
-{% block title %}Cart{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Cart{% endblock %} {% block content
+%}
 <main class="cartPage">
   {% if current_user.is_authenticated %}
 
@@ -9,7 +8,6 @@
 
   <div class="cartPageLU">
     <div class="orderdetail">
-
       {% for order in orders %}
       <section>
         <h2>Order Detail</h2>
@@ -36,8 +34,8 @@
                     type="number"
                     name="quantity[]"
                     value="{{ product_order.quantity }}"
-                    min="1" 
-                    oninput="validity.valid||(value='');" 
+                    min="1"
+                    oninput="validity.valid||(value='');"
                   />
                   <input
                     type="hidden"
@@ -55,12 +53,15 @@
 
         {% for product_order in order.products %}
         <form action="/delete_item" method="POST">
-          <input type="hidden" name="order_id" value="{{ order.id }}">
-          <input type="hidden" name="product_id" value="{{ product_order.product_id }}">
+          <input type="hidden" name="order_id" value="{{ order.id }}" />
+          <input
+            type="hidden"
+            name="product_id"
+            value="{{ product_order.product_id }}"
+          />
           <button class="deleteButton" type="submit">Delete</button>
         </form>
         {% endfor %}
-
       </section>
       {% endfor %}
     </div>
@@ -82,7 +83,7 @@
   </div>
 
   {% else %}
-    <aside>Please log in/ sign up first.</aside>
+  <aside>Please log in/ sign up first.</aside>
   {% endif %}
 </main>
 
