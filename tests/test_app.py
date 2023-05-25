@@ -1,4 +1,4 @@
-from app import app, db
+from app import Order, ProductsOrder, app, db
 from models import Product, User
 
 
@@ -62,9 +62,6 @@ def test_login_successful(test_client):
     assert response.status_code == 200
     assert response.request.path == "/dashboard"
     assert b"Hello test4!" in response.data
-    
-    
-    
 
 
 def test_login_incorrect_password(test_client):
@@ -112,3 +109,30 @@ def test_products(test_client):
     assert apple_juice.category == "Fruit"
     assert apple_juice.description == "Fresh apple juice"
     assert apple_juice.quantity == 2
+
+
+def test_update_quantity(test_client):
+    order = Order(name="Test Order", address="Test Address")
+    product_orders = [
+        ProductsOrder(product_id=1, quantity=3),
+        ProductsOrder(product_id=2, quantity=4),
+        ProductsOrder(product_id=3, quantity=7),
+    ]
+    order.products = product_orders
+
+    db.session.add(order)
+    db.session.commit()
+
+    response = test_client.post(
+        "/update_quantity",
+        data={"order_id": "1", "quantity[]": ["2", "3", ""]},
+    )
+
+    assert response.status_code == 302
+    assert response.location == "/cart"
+
+    updated_order = Order.query.get(1)
+
+    assert updated_order.products[0].quantity == 2
+    assert updated_order.products[1].quantity == 3
+    assert updated_order.products[2].quantity == 1
