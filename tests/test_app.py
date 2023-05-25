@@ -131,7 +131,7 @@ def test_update_quantity(test_client):
     assert response.status_code == 302
     assert response.location == "/cart"
 
-    updated_order = Order.query.get(1)
+    updated_order = db.session.get(Order, 1)
 
     assert updated_order.products[0].quantity == 2
     assert updated_order.products[1].quantity == 3
