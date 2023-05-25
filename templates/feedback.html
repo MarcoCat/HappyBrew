@@ -19,37 +19,5 @@ content %}
   </form>
 </main>
 
-<script>
-  function clearTextArea() {
-    document.getElementById("feedback-textarea").value = "";
-  }
 
-  async function submitFeedback(event) {
-    event.preventDefault();
-    const message = document.getElementById("feedback-textarea").value;
-
-    if (!message.trim()) {
-      alert("Please enter a message.");
-      return;
-    }
-
-    const feedback = {
-      message: message,
-    };
-
-    try {
-      const response = await fetch("/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(feedback),
-      });
-      clearTextArea();
-      alert("Thank you for your feedback!");
-    } catch (error) {
-      console.error("Error saving feedback:", error);
-    }
-  }
-</script>
 {% endblock %}

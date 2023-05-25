@@ -46,8 +46,8 @@
       <div class="orderForm">
         <label for="name">Name:</label>
         <input id="name" type="text" placeholder="Enter your name" {% if session.get('username') %}value="{{ session['username'] }}" readonly{% endif %} />
-        <label for="address">Address:</label>
-        <input id="address" type="text" placeholder="Enter your address" />
+        <label for="address">Address/Note:</label>
+        <input id="address" type="text" placeholder="type here..." />
       </div>
       <button class="orderButton" type="button" onclick="submitOrder()">
       <input id="authStatus" type="hidden" value="{% if current_user.is_authenticated %}true{% else %}false{% endif %}">
@@ -56,95 +56,5 @@
     </section>
   </div>
 </main>
-
-<script>
-  function subtractOne(button) {
-    var input = button.nextElementSibling;
-    var value = parseInt(input.value);
-    if (value >= 1) {
-      input.value = value - 1;
-    }
-  }
-
-  function addOne(button) {
-    var input = button.previousElementSibling;
-    var value = parseInt(input.value);
-    input.value = value + 1;
-  }
-
-  function getOrderSummary() {
-    var orderSummary = {};
-
-    var name = document.getElementById("name").value;
-    var address = document.getElementById("address").value;
-    orderSummary.name = name;
-    orderSummary.address = address;
-    orderSummary.products = {};
-
-    var categories = document
-      .getElementsByClassName("menuItem")[0]
-      .getElementsByTagName("h2");
-
-    for (var i = 0; i < categories.length; i++) {
-      var category = categories[i];
-      var categoryName = category.id;
-      var itemsContainer = category.nextElementSibling;
-      var items = itemsContainer.querySelectorAll(".itemType li");
-
-      for (var j = 0; j < items.length; j++) {
-        var item = items[j];
-        var itemName = item.getElementsByTagName("h3")[0].textContent;
-        var countInput = item.getElementsByClassName("count")[0];
-        var itemCount = parseInt(countInput.value);
-
-        if (itemCount > 0) {
-          if (!orderSummary.products[categoryName]) {
-            orderSummary.products[categoryName] = [];
-          }
-
-          orderSummary.products[categoryName].push({
-            name: itemName,
-            count: itemCount,
-          });
-        }
-      }
-    }
-
-    return JSON.stringify(orderSummary);
-  }
-
- 
-  async function submitOrder() {
-  const order_summary = getOrderSummary();
-  const authStatus = document.getElementById("authStatus").value;
-
-  if (authStatus === "false") {
-    alert("Login required. Please log in first.");
-    return;
-  }
-
-  try {
-    const response = await fetch("/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order_summary),
-    });
-
-    if (response.ok) {
-      alert("Thank you for your ordering!");
-      const data = await response.json();
-      window.location.href = data.location;
-    } else {
-      const errorData = await response.json();
-      alert(errorData.error);
-    }
-  } catch (error) {
-    console.error("Error ordering:", error);
-  }
-}
-
-</script>
 
 {% endblock %}
