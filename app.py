@@ -318,9 +318,37 @@ def update_quantity():
     return redirect("/cart")
 
 
+
+@app.route('/cart', methods=['POST'])
+def checkoutOrder():
+    order_id = request.form.get('order_id')
+    
+    # Retrieve the order from the database
+    order = Order.query.get(order_id)
+
+    # Update the 'completed' column to True
+    order.completed = True
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect to the cart page or any other desired page
+    return redirect('/checkout')
+
+
+
+
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
+
+
+
+
+
+
+
+
 
 
 @app.route("/order")
