@@ -136,3 +136,34 @@ def test_update_quantity(test_client):
     assert updated_order.products[0].quantity == 2
     assert updated_order.products[1].quantity == 3
     assert updated_order.products[2].quantity == 1
+
+
+def test_delete_item(test_client):
+    order = Order(name="Test Order", address="Test Address")
+    product_order = ProductsOrder(product_id=1, quantity=3)
+    order.products.append(product_order)
+
+    db.session.add(order)
+    db.session.commit()
+
+    initial_product_order = (
+        db.session.query(ProductsOrder)
+        .filter_by(product_id=1, order_id=order.id)
+        .first()
+    )
+    assert initial_product_order is not None
+
+    response = test_client.post(
+        "/delete_item",
+        data={"product_id": "1", "order_id": str(order.id)},
+    )
+
+    assert response.status_code == 302
+    assert response.location == "/cart"
+
+    deleted_product_order = (
+        db.session.query(ProductsOrder)
+        .filter_by(product_id=1, order_id=order.id)
+        .first()
+    )
+    assert deleted_product_order is None
