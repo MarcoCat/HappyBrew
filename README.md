@@ -28,3 +28,7 @@ To run the application, please follow these steps:
 - Chiao-Jhu(Katy) Chan
 
 - Carmen Su
+
+- Daniel Khavin
+
+- Armandeep Pannu
