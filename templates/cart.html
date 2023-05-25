@@ -84,7 +84,6 @@
       <h3>Total price:</h3>
       <p class="sumPrice">$ {{ "{:.2f}".format(total) }}</p>
       <div class="cartButton">
-        <!-- <a class="checkoutLink" href="checkout">Ready to Checkout!</a> -->
         {% for order in orders %}
         <form action="/cart" method="POST">
           <input type="hidden" name="order_id" value="{{ order.id }}" />
@@ -94,8 +93,6 @@
           <input type="hidden" name="order_id" value="{{ order.id }}" />
           <button class="cancelButton" type="submit">Cancel</button>
         </form>
-
-
         {% endfor %}
         <a class="backMenuLink" href="menu">Back to menu</a>
 

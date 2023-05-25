@@ -267,12 +267,15 @@ def cart(order_id=None):
     if order_id:
         order = db.session.get(Order, order_id)
     else:
-        order = db.session.query(Order).order_by(Order.id.desc()).first()
+        order = db.session.query(Order).filter(Order.completed == False).order_by(Order.id.desc()).first()
+
     order = [order] if order else []
     total = calculate_total(order)
     return render_template(
         "cart.html", orders=order, total=total, current_user=current_user
     )
+
+
 
 
 @app.route("/delete_item", methods=["POST"])
@@ -352,11 +355,6 @@ def cancel_order():
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
-
-
-
-
-
 
 
 
