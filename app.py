@@ -1,8 +1,9 @@
 import csv
+import json
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_login import (
     LoginManager,
     current_user,
@@ -130,6 +131,12 @@ def login():
 
         else:
             login_user(user)
+            session[
+                "username"
+            ] = (
+                user.username
+            )  # Replace with the appropriate attribute from your User model
+
             return redirect("dashboard")
 
     return render_template("login.html")
@@ -160,9 +167,10 @@ def signup():
 
 
 @app.route("/dashboard")
-def test_login():
+def dashboard():
     if current_user.is_authenticated:
-        return render_template("dashboard.html", user=current_user)
+        orders = Order.query.filter_by(name=current_user.username).all()
+        return render_template("dashboard.html", user=current_user, orders=orders)
     else:
         return redirect(url_for("login"))
 
@@ -170,47 +178,71 @@ def test_login():
 @app.route("/logout")
 def logout():
     logout_user()
+    session.pop("username", None)
     return redirect(url_for("home"))
 
 
-
-
 # katy's code
+
 
 @app.route("/customize")
 def customize():
     products = Ingredient.query.all()
     # hard coded categories please ensure the toppings is in one of these categories
-    categories = ['Tea Base', 'Dairy', 'Toppings', 'Sweetener', 'Sugar Level', 'Ice Level']
+    categories = [
+        "Tea Base",
+        "Dairy",
+        "Toppings",
+        "Sweetener",
+        "Sugar Level",
+        "Ice Level",
+    ]
     product_dict = {}
     for category in categories:
         product_dict[category] = [
             product for product in products if product.category == category
         ]
-    return render_template("customize1.html", products=product_dict, categories=categories)
-
-
-
+    return render_template(
+        "customize1.html", products=product_dict, categories=categories
+    )
 
 
 @app.route("/customize", methods=["POST"])
+@login_required
 def create_drink():
     data = request.json
-    items = data.get("item")
+    items = []
+
+    for category in ("Tea Base", "Dairy", "Sweetener", "Sugar Level", "Ice Level"):
+        if category not in data or len(data[category]) != 1:
+            return (
+                jsonify(
+                    {"error": f"Category: '{category}' must have exactly one item"}
+                ),
+                400,
+            )
+        items.extend(data[category])
+
+    if "Toppings" in data:
+        if len(data["Toppings"]) > 3:
+            return jsonify({"error": "Category 'Toppings' must have 0-3 items"}), 400
+        else:
+            items.extend(data["Toppings"])
 
     # Generate a unique name for the custom drink
     base_name = "Custom"
-    existing_custom_drinks_count = Product.query.filter(Product.name.like(f"{base_name}%")).count()
+    existing_custom_drinks_count = Product.query.filter(
+        Product.name.like(f"{base_name}%")
+    ).count()
     name = f"{base_name}{existing_custom_drinks_count + 1}"
-
 
     # Create a new custom product
     product = Product(
         name=name,
         price=7.0,
         category="Custom",
-        description=' '.join(items),
-        quantity=1
+        description=", ".join(items),
+        quantity=1,
     )
 
     for ingredient_name in items:
@@ -226,47 +258,6 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
-# marco's code
-
-# @app.route("/customize")
-# def customize():
-#     return render_template("customize1.html")
-
-
-
-# @app.route("/customize", methods=["POST"])
-# def create_drink():
-
-#     # sample json
-#     # {"name": "Good Drink", "ingredients": ["Aloe Vera", "Grass Jelly"], "description":"drink desc"}
-#     data = request.json
-#     name = data.get("name")
-#     ingredient_names = data.get("ingredients")
-#     description = data.get("description")
-
-#     if Product.query.filter_by(name=name).first():
-#         return jsonify({"error": "Product name already exists"}), 400
-
-#     product = Product(
-#         name=name, description=description, price=7.00, category="Custom", quantity=1
-#     )
-
-#     for ingredient_name in ingredient_names:
-#         ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
-#         if ingredient is None:
-#             return jsonify({"error": f"Ingredient '{ingredient_name}' not found"}), 400
-
-#         product.ingredients.append(ingredient)
-
-#     db.session.add(product)
-#     db.session.commit()
-
-#     return jsonify(product.to_dict()), 201
-
-
-
-
-
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -274,13 +265,57 @@ def cart(order_id=None):
         return sum(order.total_price for order in orders)
 
     if order_id:
-        orders = [db.session.get(Order, order_id)]
+        order = db.session.get(Order, order_id)
     else:
-        orders = Order.query.all()
-    if not orders:
-        return "Order not found", 404
-    total = calculate_total(orders)
-    return render_template("cart.html", orders=orders, total=total)
+        order = db.session.query(Order).order_by(Order.id.desc()).first()
+    order = [order] if order else []
+    total = calculate_total(order)
+    return render_template(
+        "cart.html", orders=order, total=total, current_user=current_user
+    )
+
+
+@app.route("/delete_item", methods=["POST"])
+def delete_item():
+    product_id = request.form.get("product_id")
+    order_id = request.form.get("order_id")
+
+    product_order = (
+        db.session.query(ProductsOrder)
+        .filter(
+            ProductsOrder.product_id == product_id, ProductsOrder.order_id == order_id
+        )
+        .first()
+    )
+
+    if product_order:
+        db.session.delete(product_order)
+        db.session.commit()
+
+    # Redirect to the cart page
+    return redirect("/cart")
+
+
+@app.route("/update_quantity", methods=["POST"])
+def update_quantity():
+    order_id = request.form.get("order_id")
+    quantities = request.form.getlist("quantity[]")
+
+    product_orders = db.session.query(ProductsOrder).filter_by(order_id=order_id).all()
+    for i, product_order in enumerate(product_orders):
+        quantity = quantities[i]
+        if quantity == "":
+            quantity = 1
+        else:
+            quantity = int(quantity)
+            if quantity < 1:
+                quantity = 1
+        product_order.quantity = quantity
+
+    db.session.commit()
+
+    # Redirect to the cart page
+    return redirect("/cart")
 
 
 @app.route("/checkout")
@@ -294,57 +329,61 @@ def order():
     return render_template("order.html", menu=menu)
 
 
+from flask import jsonify
+
+
 @app.route("/order", methods=["POST"])
+@login_required
 def create_order():
-    form_data = request.form.to_dict()
-    data = {"name": form_data["name"], "address": form_data["address"], "products": []}
-    for i in range(len(form_data) // 2 - 1):
-        is_used = False
-        for product in data["products"]:
-            if product["name"] == form_data[f"products[{i}][name]"]:
-                product["quantity"] += int(form_data[f"products[{i}][quantity]"])
-                is_used = True
-                break
-        if not is_used:
-            product = {
-                "name": form_data[f"products[{i}][name]"],
-                "quantity": int(form_data[f"products[{i}][quantity]"]),
-            }
-            data["products"].append(product)
+    try:
+        data = json.loads(request.get_json())
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
+    except:
+        return jsonify({"error": "Invalid JSON"}), 400
 
     for key in ("name", "address", "products"):
         if key not in data:
-            return f"The JSON is missing: {key}", 400
+            return jsonify({"error": f"The JSON is missing: {key}"}), 400
 
-    for product in data["products"]:
-        if not db.session.get(Product, product["name"]):
-            return f"The product {product['name']} does not exist", 400
+    if not data["products"]:
+        return jsonify({"error": "No products provided"}), 400
+
+    if not data["name"]:
+        return jsonify({"error": "No name provided"}), 400
+
+    if not data["address"]:
+        return jsonify({"error": "No address/note provided"}), 400
+
+    products = []
+    for category in data["products"]:
+        for product in data["products"][category]:
+            current_product = (
+                db.session.query(Product).filter_by(name=product["name"]).first()
+            )
+            if not current_product:
+                return (
+                    jsonify({"error": f"The product {product['name']} does not exist"}),
+                    404,
+                )
+            products.append({"product": current_product, "count": product["count"]})
 
     order = Order(
         name=data["name"],
         address=data["address"],
     )
 
-    for product in data["products"]:
+    for product in products:
         association = ProductsOrder(
-            product=db.session.get(Product, product["name"]),
+            product=product["product"],
             order=order,
-            quantity=product["quantity"],
+            quantity=product["count"],
         )
         db.session.add(association)
     db.session.add(order)
     db.session.commit()
 
-    return redirect(url_for("cart"))
-
-
-@app.route("/order/<int:order_id>", methods=["GET"])
-def get_order(order_id):
-    order = db.session.get(Order, order_id)
-    if not order:
-        return "Order not found", 404
-    order_json = order.to_dict()
-    return jsonify(order_json)
+    return jsonify({"location": url_for("cart")})
 
 
 @app.route("/feedback")
