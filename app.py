@@ -337,6 +337,17 @@ def checkoutOrder():
 
 
 
+@app.route("/cancel", methods=["POST"])
+def cancel_order():
+    order_id = request.form.get("order_id")
+
+    order = Order.query.get(order_id)
+    db.session.delete(order)
+    db.session.commit()
+
+    return redirect("/cart")
+
+
 
 @app.route("/checkout")
 def checkout():

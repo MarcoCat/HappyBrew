@@ -34,7 +34,7 @@ class Order(db.Model):
     name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     completed = db.Column(db.Boolean, default=False)
-    products = db.relationship("ProductsOrder", back_populates="order")
+    products = db.relationship("ProductsOrder", back_populates="order", cascade="all, delete-orphan")
 
 
     @property
