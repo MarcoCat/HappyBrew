@@ -4,8 +4,7 @@
   {% if current_user.is_authenticated %}
 
   <h1 class="cartTitle">Cart</h1>
-  <p class="processWord">You are almost done !</p>
-  <p class="processNote">Before you add items into cart, it will show your previous order for your reference ~</p>
+  <p class="processWord">You are almost done!</p>
 
   <div class="cartPageLU">
     <div class="orderdetail">
@@ -14,6 +13,8 @@
         <h2>Order Detail</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address: {{ order.address }}</p>
+        
+        <div class="cartForm">
         <form action="/update_quantity" method="POST">
           <input type="hidden" name="order_id" value="{{ order.id }}" />
           <table class="cartTable">
@@ -34,6 +35,8 @@
                     type="number"
                     name="quantity[]"
                     value="{{ product_order.quantity }}"
+                    min="1"
+                    oninput="validity.valid||(value='');"
                   />
                   <input
                     type="hidden"
@@ -46,11 +49,30 @@
               {% endfor %}
             </tbody>
           </table>
-          <button class="quantityUpdateB" type="submit">Update</button>
+          <button class="quantityUpdateB" type="submit">Update Quantity</button>
         </form>
-      </section>
-      {% endfor %}
-    </div>
+
+        <div class="deleteFlex">
+          <p></p>
+        {% for product_order in order.products %}
+
+          <form action="/delete_item" method="POST">
+            <input type="hidden" name="order_id" value="{{ order.id }}" />
+            <input
+              type="hidden"
+              name="product_id"
+              value="{{ product_order.product_id }}"
+            />
+            <button class="deleteButton" type="submit">Delete</button>
+          </form>
+          
+          {% endfor %}
+        </div>
+        </div>
+        </section>
+        {% endfor %}
+      </div>
+    
 
     <section class="sumArea">
       <img
@@ -68,12 +90,9 @@
     </section>
   </div>
 
-  
   {% else %}
-    <aside>Please log in/ sign up first.</aside>
+  <aside>Please log in/ sign up first.</aside>
   {% endif %}
-
-
 </main>
 
 {% endblock %}

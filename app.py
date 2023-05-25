@@ -3,8 +3,7 @@ import json
 import os
 from pathlib import Path
 
-from flask import Flask, jsonify, redirect, render_template, request, url_for, session
-
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_login import (
     LoginManager,
     current_user,
@@ -132,8 +131,11 @@ def login():
 
         else:
             login_user(user)
-            session["username"] = user.username  # Replace with the appropriate attribute from your User model
-
+            session[
+                "username"
+            ] = (
+                user.username
+            )  # Replace with the appropriate attribute from your User model
 
             return redirect("dashboard")
 
@@ -164,7 +166,6 @@ def signup():
     return render_template("signup.html")
 
 
-
 @app.route("/dashboard")
 def dashboard():
     if current_user.is_authenticated:
@@ -172,7 +173,6 @@ def dashboard():
         return render_template("dashboard.html", user=current_user, orders=orders)
     else:
         return redirect(url_for("login"))
-    
 
 
 @app.route("/logout")
@@ -258,9 +258,6 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
-
-
-
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -273,9 +270,30 @@ def cart(order_id=None):
         order = db.session.query(Order).order_by(Order.id.desc()).first()
     order = [order] if order else []
     total = calculate_total(order)
-    return render_template("cart.html", orders=order, total=total, current_user=current_user)
+    return render_template(
+        "cart.html", orders=order, total=total, current_user=current_user
+    )
 
 
+@app.route("/delete_item", methods=["POST"])
+def delete_item():
+    product_id = request.form.get("product_id")
+    order_id = request.form.get("order_id")
+
+    product_order = (
+        db.session.query(ProductsOrder)
+        .filter(
+            ProductsOrder.product_id == product_id, ProductsOrder.order_id == order_id
+        )
+        .first()
+    )
+
+    if product_order:
+        db.session.delete(product_order)
+        db.session.commit()
+
+    # Redirect to the cart page
+    return redirect("/cart")
 
 
 @app.route("/update_quantity", methods=["POST"])
@@ -285,7 +303,14 @@ def update_quantity():
 
     product_orders = db.session.query(ProductsOrder).filter_by(order_id=order_id).all()
     for i, product_order in enumerate(product_orders):
-        product_order.quantity = int(quantities[i])
+        quantity = quantities[i]
+        if quantity == "":
+            quantity = 1
+        else:
+            quantity = int(quantity)
+            if quantity < 1:
+                quantity = 1
+        product_order.quantity = quantity
 
     db.session.commit()
 
@@ -296,8 +321,6 @@ def update_quantity():
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
-
-
 
 
 @app.route("/order")

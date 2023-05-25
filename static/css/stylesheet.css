@@ -405,7 +405,7 @@ footer {
   justify-content: space-evenly;
 }
 
-.cartTitle {
+.cartTitle, .checkoutPage h1 {
   padding-left: 20px;
 }
 
@@ -425,7 +425,7 @@ footer {
   color: #c1a390;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 0px;
+  margin-bottom: 9vh;
 }
 .processNote{
     text-align: center;
@@ -461,7 +461,6 @@ footer {
     margin: 0 5px;
     font-family: 'Josefin Sans', sans-serif;
 }
-
 
 
 
@@ -511,7 +510,7 @@ footer {
 }
 
 
-.quantityUpdateB{
+.quantityUpdateB, .deleteButton{
     font-family: 'Josefin Sans', sans-serif;
     margin: 2vh 0px 0px 0px;
     padding: 1vh !important;
@@ -522,9 +521,9 @@ footer {
 }
 
 .checkoutLink:hover{
-    background-color: #e3d6c1;
-    color: #22223b;
-    box-shadow: 0px 0px 10px #e3d6c1;
+    background-color: #6a7955;
+    color: white;
+    box-shadow: 0px 0px 10px #6a7955;
 }
 
 .backMenuLink:hover {
@@ -535,7 +534,7 @@ footer {
 
   
 
-.quantityUpdateB:hover{
+.quantityUpdateB:hover, .deleteButton:hover{
     background-color: #58624b;
     box-shadow: 0px 0px 10px #58624b;
     color: white;
@@ -553,6 +552,35 @@ footer {
     padding-top: 10vh;
     font-style: italic;
 }
+
+
+
+.cartForm{
+    display: flex;
+}
+
+.deleteFlex{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.deleteFlex p{
+    height: 6vh;
+    border-top: 2px;
+    border-bottom: 2px;
+    margin: 0px;
+    padding: 1px;
+}
+
+.deleteButton{
+
+    height: 6vh;
+    border-top: 2px;
+    border-bottom: 2px;
+    margin: 2px;
+    border-radius: 40%;
+} 
 
 
 
