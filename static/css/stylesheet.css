@@ -330,8 +330,8 @@ footer a{
 
 .addingredientButton {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 1vw;
+  height: 1vw;
   background-color: white;
   border-radius: 50%;
   cursor: pointer;
