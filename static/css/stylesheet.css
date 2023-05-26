@@ -288,11 +288,13 @@ footer a{
   text-align: center;
   padding: 0px;
   flex-wrap: wrap;
+  gap: 1vw;
 }
 
 .itemType li {
   flex: 1 0 calc(20% - 10px);
   margin-bottom: 5vh;
+  
 }
 
 .itemType img {
