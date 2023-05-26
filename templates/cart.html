@@ -87,11 +87,11 @@
         {% for order in orders %}
         <form action="/cart" method="POST">
           <input type="hidden" name="order_id" value="{{ order.id }}" />
-          <button class="checkoutButton" type="submit">Checkout</button>
+          <button class="checkoutCancelLink" type="submit">To Checkout</button>
         </form>
         <form action="/cancel" method="POST">
           <input type="hidden" name="order_id" value="{{ order.id }}" />
-          <button class="cancelButton" type="submit">Cancel</button>
+          <button class="checkoutCancelLink" type="submit">Cancel Order</button>
         </form>
         {% endfor %}
         <a class="backMenuLink" href="menu">Back to menu</a>
