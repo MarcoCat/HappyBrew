@@ -149,7 +149,31 @@ footer {
   text-align: center;
   margin-top: auto;
   padding-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
+footer h3{
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+footer p{
+  grid-column: 1/2;
+  grid-row: 2/3;
+  text-align: left !important;
+}
+footer div {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+
+
+footer a{
+  text-decoration: none;
+}
+
+
+
 
 /* home page */
 
@@ -254,11 +278,13 @@ footer {
   text-align: center;
   padding: 0px;
   flex-wrap: wrap;
+  gap: 1vw;
 }
 
 .itemType li {
   flex: 1 0 calc(20% - 10px);
   margin-bottom: 5vh;
+  
 }
 
 .itemType img {
@@ -304,8 +330,8 @@ footer {
 
 .addingredientButton {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 1vw;
+  height: 1vw;
   background-color: white;
   border-radius: 50%;
   cursor: pointer;
@@ -475,15 +501,18 @@ footer {
   color: #58624b;
 }
 
-.checkoutLink,
-.backMenuLink {
+
+
+.checkoutCancelLink, .backMenuLink {
   background-color: #58624b;
   color: white;
+  font-family: 'Josefin Sans', sans-serif;
   text-align: center;
   margin: 0px 40px 10px;
-  padding: 1.2vh 0px;
+  padding: 1.2vh 5vw;
   text-decoration: none;
   border: 0px;
+  font-size: 1.1em;
 }
 
 .backMenuLink {
@@ -501,10 +530,10 @@ footer {
   border: 0px;
 }
 
-.checkoutLink:hover {
-  background-color: #6a7955;
-  color: white;
-  box-shadow: 0px 0px 10px #6a7955;
+.checkoutCancelLink:hover{
+    background-color: #6a7955;
+    color: white;
+    box-shadow: 0px 0px 10px #6a7955;
 }
 
 .backMenuLink:hover {
@@ -523,6 +552,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .cartPage aside {
@@ -549,13 +579,18 @@ footer {
   padding: 1px;
 }
 
-.deleteButton {
-  height: 6vh;
-  border-top: 2px;
-  border-bottom: 2px;
-  margin: 2px;
-  border-radius: 40%;
-}
+.deleteButton{
+    height: 6vh;
+    border-top: 2px;
+    border-bottom: 2px;
+    margin: 2px;
+    border-radius: 40%;
+} 
+
+
+
+
+
 
 /* dashboard */
 

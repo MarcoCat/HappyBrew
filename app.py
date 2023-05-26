@@ -168,12 +168,12 @@ def signup():
 
     return render_template("signup.html")
 
+    
 
 @app.route("/dashboard")
 def dashboard():
     if current_user.is_authenticated:
-        # Retrieve orders associated with the current user
-        orders = Order.query.filter_by(name=current_user.username).all()
+        orders = Order.query.filter_by(name=current_user.username, completed=True).all()
         return render_template("dashboard.html", user=current_user, orders=orders)
     else:
         return redirect(url_for("login"))
@@ -184,6 +184,8 @@ def logout():
     logout_user()
     session.pop("username", None)
     return redirect(url_for("home"))
+
+
 
 
 @app.route("/customize")
@@ -271,6 +273,7 @@ def create_drink():
     return jsonify({"url": url_for("menu")})
 
 
+
 @app.route("/cart", defaults={"order_id": None})
 @app.route("/cart/<int:order_id>")
 def cart(order_id=None):
@@ -281,7 +284,11 @@ def cart(order_id=None):
         order = db.session.get(Order, order_id)
     else:
         order = db.session.query(Order).order_by(Order.id.desc()).first()
-    order = [order] if order else []
+
+        if order and order.completed:
+            order = None
+
+    order = [order] if order and not order.completed else []
     total = calculate_total(order)
     return render_template(
         "cart.html", orders=order, total=total, current_user=current_user
@@ -338,9 +345,43 @@ def update_quantity():
     return redirect("/cart")
 
 
+
+@app.route('/cart', methods=['POST'])
+def checkoutOrder():
+    order_id = request.form.get('order_id')
+    
+    # Retrieve the order from the database
+    order = Order.query.get(order_id)
+
+    # Update the 'completed' column to True
+    order.completed = True
+
+    # Commit the changes to the database
+    db.session.commit()
+
+    # Redirect to the cart page or any other desired page
+    return redirect('/checkout')
+
+
+
+@app.route("/cancel", methods=["POST"])
+def cancel_order():
+    order_id = request.form.get("order_id")
+
+    order = Order.query.get(order_id)
+    db.session.delete(order)
+    db.session.commit()
+
+    return redirect("/cart")
+
+
+
 @app.route("/checkout")
 def checkout():
     return render_template("checkout.html")
+
+
+
 
 
 @app.route("/order")
