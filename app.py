@@ -25,10 +25,12 @@ from models import (
 
 
 def create_db(product_file, ingredient_file):
+    # Create all database tables
     with app.app_context():
         db.create_all()
         print("Create all tables successfully.")
 
+        # Populate products from CSV file
         with open(product_file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",", quotechar='"')
             next(reader)
@@ -44,6 +46,7 @@ def create_db(product_file, ingredient_file):
         db.session.commit()
         print("Successfully created all products.")
 
+        # Populate ingredients from CSV file
         with open(ingredient_file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",", quotechar='"')
             next(reader)
@@ -74,6 +77,7 @@ login_manager = LoginManager(app)
 app.instance_path = str(Path(".").resolve())
 db.init_app(app)
 
+# Create database and populate with initial data if it doesn't exist
 if not os.path.isfile(f"{DB_NAME}.db") and DB_NAME == "store":
     create_db("products.csv", "ingredients.csv")
 
@@ -96,10 +100,12 @@ def home():
 
 @app.route("/menu")
 def menu():
+    # Retrieve all products from the database
     products = Product.query.all()
     categories = sorted(list(set([product.category for product in products])))
     product_dict = {}
     for category in categories:
+        # Group products by category
         product_dict[category] = [
             product for product in products if product.category == category
         ]
@@ -119,6 +125,7 @@ def contact():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        # Retrieve the username and password from the form data
         username = request.form["username"]
         password = request.form["password"]
         user = User.query.filter_by(username=username).first()
@@ -131,11 +138,7 @@ def login():
 
         else:
             login_user(user)
-            session[
-                "username"
-            ] = (
-                user.username
-            )  # Replace with the appropriate attribute from your User model
+            session["username"] = user.username
 
             return redirect("dashboard")
 
@@ -145,7 +148,7 @@ def login():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        # extract user data from form
+        # Extract user data from the form
         username = request.form["username"]
         password = request.form["password"]
         confirm_password = request.form["confirm_password"]
@@ -187,8 +190,10 @@ def logout():
 
 @app.route("/customize")
 def customize():
+    # Retrieve all ingredients from the database
     products = Ingredient.query.all()
-    # hard coded categories please ensure the toppings is in one of these categories
+
+    # Define the categories for the products
     categories = [
         "Tea Base",
         "Dairy",
@@ -197,11 +202,18 @@ def customize():
         "Sugar Level",
         "Ice Level",
     ]
+
+    # Create a dictionary to store products categorized by their respective category
     product_dict = {}
+
+    # Loop through each category
     for category in categories:
+        # Filter the products based on the current category
         product_dict[category] = [
             product for product in products if product.category == category
         ]
+
+    # Render the template 'customize1.html' and pass the product dictionary and categories as variables
     return render_template(
         "customize1.html", products=product_dict, categories=categories
     )
@@ -213,6 +225,7 @@ def create_drink():
     data = request.json
     items = []
 
+    # Loop through each category and validate the selected items
     for category in ("Tea Base", "Dairy", "Sweetener", "Sugar Level", "Ice Level"):
         if category not in data or len(data[category]) != 1:
             return (
@@ -223,6 +236,7 @@ def create_drink():
             )
         items.extend(data[category])
 
+    # Validate the 'Toppings' category if present
     if "Toppings" in data:
         if len(data["Toppings"]) > 3:
             return jsonify({"error": "Category 'Toppings' must have 0-3 items"}), 400
@@ -245,6 +259,7 @@ def create_drink():
         quantity=1,
     )
 
+    # Add the selected ingredients to the custom product
     for ingredient_name in items:
         ingredient = Ingredient.query.filter_by(name=ingredient_name).first()
         if ingredient is None:
@@ -282,9 +297,11 @@ def cart(order_id=None):
 
 @app.route("/delete_item", methods=["POST"])
 def delete_item():
+    # Get the product_id and order_id from the form data
     product_id = request.form.get("product_id")
     order_id = request.form.get("order_id")
 
+    # Query the database for the ProductsOrder entry with the matching product_id and order_id
     product_order = (
         db.session.query(ProductsOrder)
         .filter(
@@ -293,6 +310,7 @@ def delete_item():
         .first()
     )
 
+    # If the ProductsOrder entry exists, delete it from the database
     if product_order:
         db.session.delete(product_order)
         db.session.commit()
@@ -303,10 +321,14 @@ def delete_item():
 
 @app.route("/update_quantity", methods=["POST"])
 def update_quantity():
+    # Retrieve the order ID and quantities from the form data
     order_id = request.form.get("order_id")
     quantities = request.form.getlist("quantity[]")
 
+    # Retrieve all product orders associated with the given order ID
     product_orders = db.session.query(ProductsOrder).filter_by(order_id=order_id).all()
+
+    # Update the quantity for each product order
     for i, product_order in enumerate(product_orders):
         quantity = quantities[i]
         if quantity == "":
@@ -368,38 +390,42 @@ def order():
     return render_template("order.html", menu=menu)
 
 
-from flask import jsonify
-
-
 @app.route("/order", methods=["POST"])
 @login_required
 def create_order():
     try:
+        # Parse the JSON data from the request
         data = json.loads(request.get_json())
         if not data:
             return jsonify({"error": "No data provided"}), 400
     except:
         return jsonify({"error": "Invalid JSON"}), 400
 
+    # Check if the required keys are present in the JSON data
     for key in ("name", "address", "products"):
         if key not in data:
             return jsonify({"error": f"The JSON is missing: {key}"}), 400
 
+    # Check if the products list is empty
     if not data["products"]:
         return jsonify({"error": "No products provided"}), 400
 
+    # Check if the name is provided
     if not data["name"]:
         return jsonify({"error": "No name provided"}), 400
 
+    # Check if the address/note is provided
     if not data["address"]:
         return jsonify({"error": "No address/note provided"}), 400
 
     products = []
     for category in data["products"]:
         for product in data["products"][category]:
+            # Retrieve the current product from the database
             current_product = (
                 db.session.query(Product).filter_by(name=product["name"]).first()
             )
+            # Check if the product exists
             if not current_product:
                 return (
                     jsonify({"error": f"The product {product['name']} does not exist"}),
@@ -407,11 +433,13 @@ def create_order():
                 )
             products.append({"product": current_product, "count": product["count"]})
 
+    # Create a new order with the provided name and address
     order = Order(
         name=data["name"],
         address=data["address"],
     )
 
+    # Associate the products with the order and set the quantities
     for product in products:
         association = ProductsOrder(
             product=product["product"],

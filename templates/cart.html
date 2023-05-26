@@ -13,66 +13,67 @@
         <h2>Order Detail</h2>
         <p>Name: {{ order.name }}</p>
         <p>Address/Note: {{ order.address }}</p>
-        
+
         <div class="cartForm">
-        <form action="/update_quantity" method="POST">
-          <input type="hidden" name="order_id" value="{{ order.id }}" />
-          <table class="cartTable">
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for product_order in order.products %}
-              <tr>
-                <td>{{ product_order.product.name }}</td>
-                <td>
-                  <input
-                    class="quantityInput"
-                    type="number"
-                    name="quantity[]"
-                    value="{{ product_order.quantity }}"
-                    min="1"
-                    oninput="validity.valid||(value='');"
-                  />
-                  <input
-                    type="hidden"
-                    name="product_order_id[]"
-                    value="{{ product_order.id }}"
-                  />
-                </td>
-                <td>{{ product_order.product.price }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <button class="quantityUpdateB" type="submit">Update Quantity</button>
-        </form>
-
-        <div class="deleteFlex">
-          <p></p>
-        {% for product_order in order.products %}
-
-          <form action="/delete_item" method="POST">
+          <form action="/update_quantity" method="POST">
             <input type="hidden" name="order_id" value="{{ order.id }}" />
-            <input
-              type="hidden"
-              name="product_id"
-              value="{{ product_order.product_id }}"
-            />
-            <button class="deleteButton" type="submit">Delete</button>
+            <table class="cartTable">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product_order in order.products %}
+                <tr>
+                  <td>{{ product_order.product.name }}</td>
+                  <td>
+                    <input
+                      class="quantityInput"
+                      type="number"
+                      name="quantity[]"
+                      value="{{ product_order.quantity }}"
+                      min="1"
+                      oninput="validity.valid||(value='');"
+                    />
+                    <input
+                      type="hidden"
+                      name="product_order_id[]"
+                      value="{{ product_order.id }}"
+                    />
+                  </td>
+                  <td>{{ product_order.product.price }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button class="quantityUpdateB" type="submit">
+              Update Quantity
+            </button>
           </form>
-          
-          {% endfor %}
+
+          <div class="deleteFlex">
+            <p></p>
+            {% for product_order in order.products %}
+
+            <form action="/delete_item" method="POST">
+              <input type="hidden" name="order_id" value="{{ order.id }}" />
+              <input
+                type="hidden"
+                name="product_id"
+                value="{{ product_order.product_id }}"
+              />
+              <button class="deleteButton" type="submit">Delete</button>
+            </form>
+
+            {% endfor %}
+          </div>
         </div>
-        </div>
-        </section>
-        {% endfor %}
-      </div>
-    
+      </section>
+      {% endfor %}
+    </div>
 
     <section class="sumArea">
       <img
